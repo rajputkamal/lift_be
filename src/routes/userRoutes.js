@@ -1,10 +1,11 @@
 import express from "express";
-import { updateProfile } from "../controllers/userController.js";
+
+import { getProfile, updateProfile } from "../controllers/userController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// PUT /api/user/update
 router.put("/update", protect, updateProfile);
+router.get("/profile", protect, getProfile);
 
 export default router;
