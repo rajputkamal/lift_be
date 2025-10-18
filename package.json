@@ -18,6 +18,7 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.19.1",
+    "node-cache": "^5.1.2",
     "twilio": "^5.10.3"
   },
   "devDependencies": {

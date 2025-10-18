@@ -1,7 +1,11 @@
-import Otp from "../models/otpModel.js";
 import User from "../models/userModel.js";
 import { generateToken } from "../../utils/generateToken.js";
 import { sendOtpOnUserNumber } from "../../utils/otp.js";
+import {
+  storeOtpInCache,
+  deleteOtpFromCache,
+  getOtpFromCache,
+} from "../../utils/otpCache.js";
 
 const generateOtpCode = () =>
   Math.floor(1000 + Math.random() * 9000).toString();
@@ -13,13 +17,8 @@ export const sendOtp = async (req, res) => {
       return res.status(400).json({ message: "Phone number is required" });
 
     const otp = generateOtpCode();
-    const expiresAt = new Date(Date.now() + 3 * 60 * 1000); // expires in 3 mins
 
-    await Otp.findOneAndUpdate(
-      { phoneNumber },
-      { otp, expiresAt },
-      { upsert: true, new: true }
-    );
+    storeOtpInCache(phoneNumber, otp);
 
     await sendOtpOnUserNumber(phoneNumber, otp);
     res.status(200).json({ message: "OTP sent successfully" });
@@ -37,21 +36,21 @@ export const verifyOtp = async (req, res) => {
         .status(400)
         .json({ message: "Phone number and OTP are required" });
 
-    const otpDoc = await Otp.findOne({ phoneNumber });
-    if (!otpDoc) return res.status(400).json({ message: "OTP not found" });
+    const cachedOtp = getOtpFromCache(phoneNumber);
+    if (!cachedOtp) {
+      return res.status(400).json({ message: "OTP expired or not found" });
+    }
 
-    if (otpDoc.otp !== otp)
+    if (cachedOtp !== otp) {
       return res.status(400).json({ message: "Invalid OTP" });
+    }
 
-    if (otpDoc.expiresAt < new Date())
-      return res.status(400).json({ message: "OTP expired" });
+    deleteOtpFromCache(phoneNumber);
 
     let user = await User.findOne({ phoneNumber });
     if (!user) {
       user = await User.create({ phoneNumber });
     }
-
-    await Otp.deleteOne({ phoneNumber });
 
     const token = generateToken(user._id, phoneNumber);
 
