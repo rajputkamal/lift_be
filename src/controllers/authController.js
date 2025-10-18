@@ -1,6 +1,7 @@
 import Otp from "../models/otpModel.js";
 import User from "../models/userModel.js";
 import { generateToken } from "../../utils/generateToken.js";
+import { sendOtpOnUserNumber } from "../../utils/otp.js";
 
 const generateOtpCode = () =>
   Math.floor(1000 + Math.random() * 9000).toString();
@@ -20,8 +21,8 @@ export const sendOtp = async (req, res) => {
       { upsert: true, new: true }
     );
 
-    //TODO::For now, just return OTP in response (in production, send via SMS)
-    res.status(200).json({ message: "OTP sent successfully", otp });
+    await sendOtpOnUserNumber(phoneNumber, otp);
+    res.status(200).json({ message: "OTP sent successfully" });
   } catch (error) {
     console.error("Send OTP Error:", error);
     res.status(500).json({ message: "Internal Server Error" });
@@ -52,7 +53,7 @@ export const verifyOtp = async (req, res) => {
 
     await Otp.deleteOne({ phoneNumber });
 
-    const token = generateToken(user._id);
+    const token = generateToken(user._id, phoneNumber);
 
     res.status(200).json({
       message: "OTP verified successfully",
