@@ -1,14 +1,11 @@
 import User from "../models/userModel.js";
 import { generateToken } from "../../utils/generateToken.js";
-import { sendOtpOnUserNumber } from "../../utils/otp.js";
+import { generateOtpCode, sendOtp2Factor } from "../../utils/otp.js";
 import {
   storeOtpInCache,
   deleteOtpFromCache,
   getOtpFromCache,
 } from "../../utils/otpCache.js";
-
-const generateOtpCode = () =>
-  Math.floor(1000 + Math.random() * 9000).toString();
 
 export const sendOtp = async (req, res) => {
   try {
@@ -20,7 +17,13 @@ export const sendOtp = async (req, res) => {
 
     storeOtpInCache(phoneNumber, otp);
 
-    await sendOtpOnUserNumber(phoneNumber, otp);
+    const result = await sendOtp2Factor(phoneNumber, otp);
+
+    if (!result || result.Status !== "Success") {
+      res
+        .status(500)
+        .json({ message: "Failed to send OTP. Please try again." });
+    }
     res.status(200).json({ message: "OTP sent successfully" });
   } catch (error) {
     console.error("Send OTP Error:", error);
