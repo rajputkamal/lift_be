@@ -53,6 +53,12 @@ const rideSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    expiresAt: {
+      type: Date,
+      required: true,
+      index: true,
+      expires: 0, // TTL index to auto-delete expired rides
+    },
   },
   { timestamps: true }
 );
