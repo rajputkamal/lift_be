@@ -1,3 +1,5 @@
+import jwt from "jsonwebtoken";
+
 import User from "../models/userModel.js";
 import { generateToken } from "../../utils/generateToken.js";
 import { generateOtpCode, sendOtp2Factor } from "../../utils/otp.js";
@@ -6,12 +8,26 @@ import {
   deleteOtpFromCache,
   getOtpFromCache,
 } from "../../utils/otpCache.js";
+import {
+  TEST_PHONE_NUMBER,
+  TEST_OTP,
+  TEST_USER,
+} from "../config/testAccount.js";
 
 export const sendOtp = async (req, res) => {
   try {
     const { phoneNumber } = req.body;
     if (!phoneNumber)
       return res.status(400).json({ message: "Phone number is required" });
+
+    // TEST NUMBER FLOW FOR TESTERS
+    if (phoneNumber === TEST_PHONE_NUMBER) {
+      storeOtpInCache(phoneNumber, TEST_OTP);
+
+      return res.status(200).json({
+        message: "OTP sent successfully (test number)",
+      });
+    }
 
     const otp = generateOtpCode();
 
@@ -38,6 +54,29 @@ export const verifyOtp = async (req, res) => {
       return res
         .status(400)
         .json({ message: "Phone number and OTP are required" });
+
+    // TEST NUMBER FLOW FOR TESTERS
+    if (phoneNumber === TEST_PHONE_NUMBER && otp === TEST_OTP) {
+      const dummyToken = jwt.sign(
+        {
+          userId: "test-user-id",
+          phoneNumber: TEST_PHONE_NUMBER,
+          role: "tester",
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: "7d" }
+      );
+
+      return res.status(200).json({
+        message: "OTP verified successfully (test account)",
+        token: dummyToken,
+        user: {
+          id: "test-user-id",
+          name: TEST_USER.name,
+          phoneNumber: TEST_USER.phoneNumber,
+        },
+      });
+    }
 
     const cachedOtp = getOtpFromCache(phoneNumber);
     if (!cachedOtp) {
