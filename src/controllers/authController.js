@@ -1,5 +1,3 @@
-import jwt from "jsonwebtoken";
-
 import User from "../models/userModel.js";
 import { generateToken } from "../../utils/generateToken.js";
 import { generateOtpCode, sendOtp2Factor } from "../../utils/otp.js";
@@ -11,7 +9,7 @@ import {
 import {
   TEST_PHONE_NUMBER,
   TEST_OTP,
-  TEST_USER,
+  TEST_USER_ID,
 } from "../config/testAccount.js";
 
 export const sendOtp = async (req, res) => {
@@ -57,23 +55,25 @@ export const verifyOtp = async (req, res) => {
 
     // TEST NUMBER FLOW FOR TESTERS
     if (phoneNumber === TEST_PHONE_NUMBER && otp === TEST_OTP) {
-      const dummyToken = jwt.sign(
-        {
-          userId: "test-user-id",
+      let user = await User.findById(TEST_USER_ID);
+
+      if (!user) {
+        user = await User.create({
+          _id: TEST_USER_ID,
           phoneNumber: TEST_PHONE_NUMBER,
-          role: "tester",
-        },
-        process.env.JWT_SECRET,
-        { expiresIn: "7d" }
-      );
+          name: "John Doe",
+        });
+      }
+
+      const token = generateToken(user._id, user.phoneNumber);
 
       return res.status(200).json({
         message: "OTP verified successfully (test account)",
-        token: dummyToken,
+        token,
         user: {
-          id: "test-user-id",
-          name: TEST_USER.name,
-          phoneNumber: TEST_USER.phoneNumber,
+          id: user._id,
+          phoneNumber: user.phoneNumber,
+          name: user.name,
         },
       });
     }
