@@ -25,7 +25,7 @@ export const sendOtp = async (req, res) => {
       storeOtpInCache(phoneNumber, TEST_OTP);
 
       return res.status(200).json({
-        message: "OTP sent successfully (test number)",
+        message: "OTP sent successfully",
       });
     }
 
