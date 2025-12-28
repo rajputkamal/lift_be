@@ -18,14 +18,6 @@ export const updateProfile = async (req, res) => {
       user.name = name.trim();
     }
 
-    if (vehicleType !== undefined) {
-      const allowedTypes = ["car", "bike"];
-      if (!allowedTypes.includes(vehicleType)) {
-        return res.status(400).json({ message: "Invalid vehicle type" });
-      }
-      user.vehicleType = vehicleType;
-    }
-
     if (vehicleNumber !== undefined) {
       user.vehicleNumber = vehicleNumber
         ? vehicleNumber.trim().toUpperCase()
@@ -38,7 +30,6 @@ export const updateProfile = async (req, res) => {
       {
         $set: {
           userName: user.name,
-          vehicleType: user.vehicleType,
           vehicleNumber: user.vehicleNumber,
         },
       }
