@@ -11,6 +11,17 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    vehicleType: {
+      type: String,
+      enum: ["car", "bike"],
+      default: null,
+    },
+    vehicleNumber: {
+      type: String,
+      default: null,
+      uppercase: true,
+      trim: true,
+    },
   },
   { timestamps: true }
 );

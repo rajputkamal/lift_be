@@ -28,6 +28,8 @@ export const postRide = async (req, res) => {
       userName: user.name,
       userNumber: user.phoneNumber,
       userImage: user.image || "",
+      vehicleType: user.vehicleType,
+      vehicleNumber: user.vehicleNumber,
       origin,
       destination,
       originCoords,

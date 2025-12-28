@@ -15,6 +15,13 @@ const rideSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    vehicleType: {
+      type: String,
+      enum: ["car", "bike"],
+    },
+    vehicleNumber: {
+      type: String,
+    },
     userImage: {
       type: String,
       default: "",

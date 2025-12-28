@@ -1,27 +1,60 @@
 import User from "../models/userModel.js";
+import { Ride } from "../models/rideModel.js";
 
 export const updateProfile = async (req, res) => {
   try {
     const userId = req.user.userId;
-    const { name } = req.body;
-
-    if (!name) {
-      return res.status(400).json({ message: "Name is required" });
-    }
+    const { name, vehicleType, vehicleNumber } = req.body;
 
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    user.name = name;
+    if (name !== undefined) {
+      if (!name.trim()) {
+        return res.status(400).json({ message: "Name cannot be empty" });
+      }
+      user.name = name.trim();
+    }
+
+    if (vehicleType !== undefined) {
+      const allowedTypes = ["car", "bike"];
+      if (!allowedTypes.includes(vehicleType)) {
+        return res.status(400).json({ message: "Invalid vehicle type" });
+      }
+      user.vehicleType = vehicleType;
+    }
+
+    if (vehicleNumber !== undefined) {
+      user.vehicleNumber = vehicleNumber
+        ? vehicleNumber.trim().toUpperCase()
+        : null;
+    }
+
     await user.save();
+    await Ride.updateMany(
+      { userId: user._id },
+      {
+        $set: {
+          userName: user.name,
+          vehicleType: user.vehicleType,
+          vehicleNumber: user.vehicleNumber,
+        },
+      }
+    );
 
     res.status(200).json({
       message: "Profile updated successfully",
-      user: { name: user.name, number: user.number },
+      user: {
+        name: user.name,
+        phoneNumber: user.phoneNumber,
+        vehicleType: user.vehicleType,
+        vehicleNumber: user.vehicleNumber,
+      },
     });
   } catch (error) {
+    console.error("Error updating profile:", error);
     res.status(500).json({ message: "Error updating profile", error });
   }
 };
