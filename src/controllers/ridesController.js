@@ -13,6 +13,7 @@ export const postRide = async (req, res) => {
       destinationCoords,
       time,
       seatsAvailable,
+      vehicleType,
     } = req.body;
 
     const user = await User.findById(req.user.userId);
@@ -28,8 +29,8 @@ export const postRide = async (req, res) => {
       userName: user.name,
       userNumber: user.phoneNumber,
       userImage: user.image || "",
-      vehicleType: user.vehicleType,
       vehicleNumber: user.vehicleNumber,
+      vehicleType,
       origin,
       destination,
       originCoords,
