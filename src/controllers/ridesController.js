@@ -2,7 +2,6 @@ import moment from "moment-timezone";
 
 import { Ride } from "../models/rideModel.js";
 import User from "../models/userModel.js";
-import { calculatePrice } from "../../utils/calculatePrice.js";
 
 export const postRide = async (req, res) => {
   try {
@@ -11,6 +10,8 @@ export const postRide = async (req, res) => {
       destination,
       originCoords,
       destinationCoords,
+      price,
+      distance,
       time,
       seatsAvailable,
       vehicleType,
@@ -19,10 +20,12 @@ export const postRide = async (req, res) => {
     const user = await User.findById(req.user.userId);
     if (!user) return res.status(404).json({ message: "User not found" });
 
-    const { distance, price } = calculatePrice(originCoords, destinationCoords);
-
-    // Set expiry to today's midnight
-    const expiresAt = moment().tz("Asia/Kolkata").endOf("day").toDate();
+    // Set expiry after 7 days
+    const expiresAt = moment()
+      .tz("Asia/Kolkata")
+      .add(7, "days")
+      .endOf("day")
+      .toDate();
 
     const newRide = await Ride.create({
       userId: user._id,
