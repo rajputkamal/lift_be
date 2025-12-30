@@ -4,7 +4,7 @@ import { Ride } from "../models/rideModel.js";
 export const updateProfile = async (req, res) => {
   try {
     const userId = req.user.userId;
-    const { name, vehicleType, vehicleNumber } = req.body;
+    const { name, vehicleNumber } = req.body;
 
     const user = await User.findById(userId);
     if (!user) {
@@ -40,7 +40,6 @@ export const updateProfile = async (req, res) => {
       user: {
         name: user.name,
         phoneNumber: user.phoneNumber,
-        vehicleType: user.vehicleType,
         vehicleNumber: user.vehicleNumber,
       },
     });
