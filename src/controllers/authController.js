@@ -1,11 +1,9 @@
 import User from "../models/userModel.js";
 import { generateToken } from "../../utils/generateToken.js";
-import { generateOtpCode, sendOtp2Factor } from "../../utils/otp.js";
 import {
-  storeOtpInCache,
-  deleteOtpFromCache,
-  getOtpFromCache,
-} from "../../utils/otpCache.js";
+  sendMessageCentralOtp,
+  validateMessageCentralOtp,
+} from "../../utils/otp.js";
 import {
   TEST_PHONE_NUMBER,
   TEST_OTP,
@@ -20,25 +18,25 @@ export const sendOtp = async (req, res) => {
 
     // TEST NUMBER FLOW FOR TESTERS
     if (phoneNumber === TEST_PHONE_NUMBER) {
-      storeOtpInCache(phoneNumber, TEST_OTP);
-
       return res.status(200).json({
         message: "OTP sent successfully",
       });
     }
 
-    const otp = generateOtpCode();
+    const result = await sendMessageCentralOtp(phoneNumber);
 
-    storeOtpInCache(phoneNumber, otp);
+    console.log("result of OTP", result);
 
-    const result = await sendOtp2Factor(phoneNumber, otp);
-
-    if (!result || result.Status !== "Success") {
+    if (
+      !result ||
+      result.message !== "SUCCESS" ||
+      result.responseCode !== 200
+    ) {
       res
         .status(500)
         .json({ message: "Failed to send OTP. Please try again." });
     }
-    res.status(200).json({ message: "OTP sent successfully" });
+    res.status(200).json({ message: "OTP sent successfully", verificationId: result.data.verificationId  });
   } catch (error) {
     console.error("Send OTP Error:", error);
     res.status(500).json({ message: "Internal Server Error" });
@@ -47,7 +45,7 @@ export const sendOtp = async (req, res) => {
 
 export const verifyOtp = async (req, res) => {
   try {
-    const { phoneNumber, otp } = req.body;
+    const { phoneNumber, otp, verificationId } = req.body;
     if (!phoneNumber || !otp)
       return res
         .status(400)
@@ -78,16 +76,18 @@ export const verifyOtp = async (req, res) => {
       });
     }
 
-    const cachedOtp = getOtpFromCache(phoneNumber);
-    if (!cachedOtp) {
-      return res.status(400).json({ message: "OTP expired or not found" });
-    }
+    const result = await validateMessageCentralOtp(
+      phoneNumber,
+      verificationId,
+      otp
+    );
 
-    if (cachedOtp !== otp) {
+    console.log("result from API", result);
+
+
+    if(!result || result.responseCode !== 200){
       return res.status(400).json({ message: "Invalid OTP" });
     }
-
-    deleteOtpFromCache(phoneNumber);
 
     let user = await User.findOne({ phoneNumber });
     if (!user) {
