@@ -42,8 +42,8 @@ export const sendMessageCentralOtp = async (phoneNumber) => {
 
 export const validateMessageCentralOtp = async (
   phoneNumber,
-  verificationId,
-  otp
+  otp,
+  verificationId
 ) => {
   const authToken = getCachedMcToken();
   const response = await fetch(

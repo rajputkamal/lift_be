@@ -25,8 +25,6 @@ export const sendOtp = async (req, res) => {
 
     const result = await sendMessageCentralOtp(phoneNumber);
 
-    console.log("result of OTP", result);
-
     if (
       !result ||
       result.message !== "SUCCESS" ||
@@ -36,7 +34,10 @@ export const sendOtp = async (req, res) => {
         .status(500)
         .json({ message: "Failed to send OTP. Please try again." });
     }
-    res.status(200).json({ message: "OTP sent successfully", verificationId: result.data.verificationId  });
+    res.status(200).json({
+      message: "OTP sent successfully",
+      verificationId: result.data.verificationId,
+    });
   } catch (error) {
     console.error("Send OTP Error:", error);
     res.status(500).json({ message: "Internal Server Error" });
@@ -78,14 +79,11 @@ export const verifyOtp = async (req, res) => {
 
     const result = await validateMessageCentralOtp(
       phoneNumber,
-      verificationId,
-      otp
+      otp,
+      verificationId
     );
 
-    console.log("result from API", result);
-
-
-    if(!result || result.responseCode !== 200){
+    if (!result || result.responseCode !== 200) {
       return res.status(400).json({ message: "Invalid OTP" });
     }
 
