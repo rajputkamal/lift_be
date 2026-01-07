@@ -1,26 +1,61 @@
 import dotenv from "dotenv";
+import { getCachedMcToken, setCachedMcToken } from "./mcAuthCache.js";
 
 dotenv.config();
 
-export const generateOtpCode = () =>
-  Math.floor(1000 + Math.random() * 9000).toString();
+const MESSAGE_CENTRAL_BASE_URL = "https://cpaas.messagecentral.com";
+const COUNTRY_CODE = 91;
 
-export const sendOtp2Factor = async (phoneNumber, otp) => {
-  // 2_FACTOR_URL = "https://2factor.in/API/V1/:api_key/SMS/:phone_number/:otp_value/:otp_template_name"
-
-  const numberWithCountry = `+91${phoneNumber}`;
-
-  try {
-    const response = await fetch(
-      `https://2factor.in/API/V1/${process.env.TWO_FACTOR_API_KEY}/SMS/${numberWithCountry}/${otp}/${process.env.TWO_FACTOR_TEMPLATE_NAME}`
-    );
-
-    const result = await response.json();
-    return result;
-  } catch (error) {
-    console.error(
-      "We are facing an error while sending OTP via 2Factor. Please try again.",
-      error
-    );
+const generateMessageCentralAuthToken = async () => {
+  const token = getCachedMcToken();
+  if (token) {
+    return token;
   }
+
+  const response = await fetch(`
+  ${MESSAGE_CENTRAL_BASE_URL}/auth/v1/
+authentication/token?customerId=${process.env.MESSAGE_CENTRAL_CUSTOMER_ID}&key=${process.env.MESSAGE_CENTRAL_BASE64_KEY}&scope=NEW&country=${COUNTRY_CODE}`);
+
+  const data = await response.json();
+  if (data.token) {
+    setCachedMcToken(data.token);
+    return data.token;
+  }
+};
+
+export const sendMessageCentralOtp = async (phoneNumber) => {
+  const authToken = await generateMessageCentralAuthToken();
+  const response = await fetch(
+    `${MESSAGE_CENTRAL_BASE_URL}/verification/v3/send?countryCode=${COUNTRY_CODE}&flowType=SMS&mobileNumber=${phoneNumber}`,
+    {
+      method: "POST",
+      headers: {
+        authToken,
+        accept: "*/*",
+      },
+    }
+  );
+
+  const data = await response.json();
+  return data;
+};
+
+export const validateMessageCentralOtp = async (
+  phoneNumber,
+  otp,
+  verificationId
+) => {
+  const authToken = getCachedMcToken();
+  const response = await fetch(
+    `${MESSAGE_CENTRAL_BASE_URL}/verification/v3/validateOtp?countryCode=${COUNTRY_CODE}&mobileNumber=${phoneNumber}&verificationId=${verificationId}&customerId=${process.env.MESSAGE_CENTRAL_CUSTOMER_ID}&code=${otp}`,
+    {
+      headers: {
+        authToken,
+        accept: "*/*",
+      },
+    }
+  );
+
+  const data = await response.json();
+  return data;
 };

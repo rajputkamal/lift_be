@@ -21,12 +21,8 @@ export const postRide = async (req, res) => {
     const user = await User.findById(req.user.userId);
     if (!user) return res.status(404).json({ message: "User not found" });
 
-    // Set expiry after 7 days
-    const expiresAt = moment()
-      .tz("Asia/Kolkata")
-      .add(7, "days")
-      .endOf("day")
-      .toDate();
+    // Set expiry today's midnight
+    const expiresAt = moment().tz("Asia/Kolkata").endOf("day").toDate();
 
     const newRide = await Ride.create({
       userId: user._id,
