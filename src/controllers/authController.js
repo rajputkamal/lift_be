@@ -108,3 +108,22 @@ export const verifyOtp = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+export const validate = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+
+    const user = await User.findById(userId).select("_id");
+
+    if (!user) {
+      return res.status(401).json({ isUserExists: false });
+    }
+
+    res.status(200).json({
+      isUserExists: true,
+    });
+  } catch (errror) {
+    console.error("Validate Error: ", errror);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
