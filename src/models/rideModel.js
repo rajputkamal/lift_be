@@ -6,6 +6,7 @@ const rideSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
+      index: true,
     },
     userName: {
       type: String,
@@ -15,16 +16,17 @@ const rideSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    vehicleType: {
-      type: String,
-      enum: ["car", "bike"],
-    },
-    vehicleNumber: {
-      type: String,
-    },
     userImage: {
       type: String,
       default: "",
+    },
+    vehicleType: {
+      type: String,
+      enum: ["car", "bike"],
+      index: true,
+    },
+    vehicleNumber: {
+      type: String,
     },
     origin: {
       type: String,
@@ -50,7 +52,7 @@ const rideSchema = new mongoose.Schema(
       type: Number,
       required: true,
       min: 1,
-      max: 6,
+      max: 4,
     },
     distance: {
       type: Number,
@@ -60,14 +62,18 @@ const rideSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    expiresAt: {
-      type: Date,
-      required: true,
+    status: {
+      type: String,
+      enum: ["ACTIVE", "COMPLETED"],
+      default: "ACTIVE",
       index: true,
-      expires: 0, // TTL index to auto-delete expired rides
+    },
+    cleanupAt: {
+      type: Date,
+      index: { expireAfterSeconds: 0 }, // 🧹 TTL cleanup
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export const Ride = mongoose.model("Ride", rideSchema);

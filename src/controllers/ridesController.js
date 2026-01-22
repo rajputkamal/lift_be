@@ -22,7 +22,7 @@ export const postRide = async (req, res) => {
     if (!user) return res.status(404).json({ message: "User not found" });
 
     // Set expiry today's midnight
-    const expiresAt = moment().tz("Asia/Kolkata").endOf("day").toDate();
+    const cleanupAt = moment().tz("Asia/Kolkata").endOf("day").toDate();
 
     const newRide = await Ride.create({
       userId: user._id,
@@ -39,8 +39,20 @@ export const postRide = async (req, res) => {
       seatsAvailable,
       distance,
       price,
-      expiresAt,
+      status: "ACTIVE",
+      cleanupAt: null,
+      // expiresAt,
     });
+
+    await User.updateOne(
+      { _id: user._id },
+      {
+        $inc: {
+          "rideSummary.activeRides": 1,
+          "rideSummary.totalRides": 1,
+        },
+      },
+    );
 
     res.status(201).json({
       success: true,
@@ -53,16 +65,52 @@ export const postRide = async (req, res) => {
   }
 };
 
-export const getAllRides = async (_, res) => {
+// GET /rides/available?vehicleType=car
+export const getAvailableRides = async (req, res) => {
   try {
-    const rides = await Ride.find().sort({ createdAt: -1 });
-    res.status(200).json({
-      success: true,
-      rides,
-    });
+    const { vehicleType } = req.query;
+    const userId = req.user.userId;
+
+    const filter = {
+      status: "ACTIVE",
+      userId: { $ne: userId },
+    };
+
+    if (vehicleType) {
+      filter.vehicleType = vehicleType;
+    }
+
+    const rides = await Ride.find(filter).sort({ createdAt: -1 });
+
+    res.json({ success: true, rides });
   } catch (error) {
-    console.error("Error fetching rides:", error);
-    res.status(500).json({ success: false, message: "Error fetching rides" });
+    console.error(error);
+    res.status(500).json({ message: "Failed to fetch available rides" });
+  }
+};
+
+// GET /rides/my?tab=active
+// GET /rides/my?tab=completed
+export const getMyRides = async (req, res) => {
+  try {
+    const { tab } = req.query;
+    const userId = req.user.userId;
+
+    let filter = { userId };
+
+    if (tab === "active") {
+      filter.status = "ACTIVE";
+    }
+
+    if (tab === "completed") {
+      filter.status = "COMPLETED";
+    }
+
+    const rides = await Ride.find(filter).sort({ createdAt: -1 });
+
+    res.json({ success: true, rides });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch my rides" });
   }
 };
 
@@ -94,6 +142,20 @@ export const deleteRide = async (req, res) => {
 
     await Ride.findByIdAndDelete(rideId);
 
+    if (ride.status === "ACTIVE") {
+      await User.updateOne(
+        {
+          _id: userId,
+          "rideSummary.activeRides": { $gt: 0 },
+        },
+        {
+          $inc: {
+            "rideSummary.activeRides": -1,
+          },
+        },
+      );
+    }
+
     res.status(200).json({
       success: true,
       message: "Ride deleted successfully",
@@ -120,6 +182,7 @@ export const editRide = async (req, res) => {
       time,
       seatsAvailable,
       vehicleType,
+      action,
     } = req.body;
 
     const userId = req.user.userId;
@@ -144,8 +207,13 @@ export const editRide = async (req, res) => {
     };
 
     Object.keys(updateData).forEach(
-      (key) => updateData[key] === undefined && delete updateData[key]
+      (key) => updateData[key] === undefined && delete updateData[key],
     );
+
+    if (action && action === "repost") {
+      updateData.status = "ACTIVE";
+      updateData.cleanupAt = null;
+    }
 
     const updatedRide = await Ride.findOneAndUpdate(
       {
@@ -153,7 +221,7 @@ export const editRide = async (req, res) => {
         userId,
       },
       { $set: updateData },
-      { new: true }
+      { new: true },
     );
 
     if (!updatedRide) {
@@ -165,7 +233,10 @@ export const editRide = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Ride updated successfully",
+      message:
+        action === "repost"
+          ? "Ride reposted successfully"
+          : "Ride updated successfully",
       data: updatedRide,
     });
   } catch (error) {

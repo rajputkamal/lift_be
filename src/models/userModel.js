@@ -1,5 +1,14 @@
 import mongoose from "mongoose";
 
+const rideSummarySchema = new mongoose.Schema(
+  {
+    activeRides: { type: Number, default: 0, min: 0 },
+    completedRides: { type: Number, default: 0, min: 0 },
+    totalRides: { type: Number, default: 0, min: 0 },
+  },
+  { _id: false },
+);
+
 const userSchema = new mongoose.Schema(
   {
     phoneNumber: {
@@ -22,8 +31,12 @@ const userSchema = new mongoose.Schema(
       uppercase: true,
       trim: true,
     },
+    rideSummary: {
+      type: rideSummarySchema,
+      default: () => ({}),
+    },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export default mongoose.model("User", userSchema);

@@ -2,7 +2,8 @@ import express from "express";
 
 import {
   postRide,
-  getAllRides,
+  getAvailableRides,
+  getMyRides,
   deleteRide,
   editRide,
 } from "../controllers/ridesController.js";
@@ -10,8 +11,9 @@ import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
+router.get("/available", protect, getAvailableRides);
+router.get("/my", protect, getMyRides);
 router.post("/", protect, postRide);
-router.get("/", protect, getAllRides);
 router.delete("/", protect, deleteRide);
 router.put("/", protect, editRide);
 
