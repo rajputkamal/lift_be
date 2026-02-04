@@ -1,9 +1,7 @@
 import mongoose from "mongoose";
 import User from "../src/models/userModel.js";
 
-const MONGO_URI =
-  "mongodb+srv://liftapp_user:OkTLGazECpY0FPA3@cluster0.wif1jv4.mongodb.net/rides?retryWrites=true&w=majority&appName=Cluster0";
-
+const MONGO_URI = ""; // please add from .env file when there is need to run this file.
 async function runMigration() {
   try {
     await mongoose.connect(MONGO_URI);
