@@ -5,3 +5,13 @@ export const generateToken = (userId, phoneNumber) => {
     expiresIn: "7d",
   });
 };
+
+export const generateFoodieToken = (restaurantIdId, name, email, phone) => {
+  return jwt.sign(
+    { restaurantIdId, name, email, phone },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: "7d",
+    },
+  );
+};
