@@ -68,7 +68,6 @@ export async function createRestaurant(req, res) {
 }
 
 export const getRestaurantDetails = async (req, res) => {
-  console.log("reuqest------>", req.params);
   try {
     const { restaurantId } = req.params;
     const { table } = req.query;
@@ -78,8 +77,6 @@ export const getRestaurantDetails = async (req, res) => {
     }
 
     const restaurant = await Restaurant.findById(restaurantId).lean();
-
-    console.log("restuaant find", restaurant);
 
     if (!restaurant || !restaurant.isActive) {
       return res.status(404).json({ message: "Restaurant not found" });
@@ -93,11 +90,7 @@ export const getRestaurantDetails = async (req, res) => {
       restaurantId: restaurantId,
     }).lean();
 
-    console.log("relations", relations);
-
     const categoryIds = relations.map((r) => r.categoryId);
-
-    console.log;
 
     const categories = await Category.find({
       _id: { $in: categoryIds },
@@ -118,7 +111,6 @@ export const getRestaurantDetails = async (req, res) => {
       categories,
     });
   } catch (err) {
-    console.log("going to catch block");
     res.status(500).json({ message: err.message });
   }
 };

@@ -32,7 +32,7 @@ const restaurantSchema = new mongoose.Schema(
 
     vegType: {
       type: String,
-      enum: ["veg", "non-veg", "egg"],
+      enum: ["veg", "non-veg", "egg", "both"],
       required: true,
     },
 
@@ -45,6 +45,5 @@ const restaurantSchema = new mongoose.Schema(
     timestamps: true,
   },
 );
-
 
 export default mongoose.model("Restaurant", restaurantSchema);

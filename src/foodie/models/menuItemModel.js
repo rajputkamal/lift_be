@@ -43,8 +43,19 @@ const menuItemSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+
+    tags: {
+      type: [String],
+      default: [],
+    },
   },
   { timestamps: true },
 );
+
+menuItemSchema.index({
+  name: "text",
+  description: "text",
+  tags: "text",
+});
 
 export default mongoose.model("MenuItem", menuItemSchema);
