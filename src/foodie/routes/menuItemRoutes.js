@@ -8,6 +8,6 @@ import { protect } from "../../middleware/authMiddleware.js";
 const router = express.Router();
 
 router.post("/v1/menu-items", protect, createMenuItem);
-router.get("/v1/menu-items/search", protect, searchMenuItems);
+router.get("/v1/menu-items/search", searchMenuItems);
 
 export default router;
