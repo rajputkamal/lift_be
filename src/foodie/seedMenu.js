@@ -4,12 +4,15 @@ import Category from "./models/categoryModel.js";
 import MenuItem from "./models/menuItemModel.js";
 import connectDB from "../config/db.js";
 import RestaurantCategory from "./models/restaurantCategoryModel.js";
+import Order from "./models/orderModel.js";
 
 const RESTAURANT_ID = "699193d0071f372082d92079";
 
 const restaurantObjectId = new mongoose.Types.ObjectId(RESTAURANT_ID);
 
-connectDB();
+// Ensure DB is connected before seeding
+// connectDB returns a promise
+// We'll call it from inside `seed()` to await the connection.
 
 const data = [
   {
@@ -170,9 +173,14 @@ const seed = async () => {
   try {
     console.log("🌱 Seeding data...");
 
+    await connectDB();
+
     await Category.deleteMany({});
     await MenuItem.deleteMany({});
     await RestaurantCategory.deleteMany({});
+
+    // Note: we do NOT delete existing orders to avoid removing real data.
+    // We'll insert demo orders below to populate analytics.
 
     for (const cat of data) {
       const category = await Category.create({ name: cat.name });
@@ -195,8 +203,71 @@ const seed = async () => {
       await MenuItem.insertMany(items);
     }
 
-    console.log("✅ Data seeded successfully!");
-    process.exit();
+    console.log("✅ Menu data seeded successfully!");
+
+    // Create demo orders to populate analytics
+    const allItems = await MenuItem.find({
+      restaurantId: restaurantObjectId,
+    }).lean();
+    if (allItems.length === 0) {
+      console.log("No menu items found to create demo orders.");
+      process.exit(0);
+    }
+
+    const getRandomItem = () =>
+      allItems[Math.floor(Math.random() * allItems.length)];
+
+    const demoOrders = [];
+    const ORDERS_TO_CREATE = 120;
+
+    for (let i = 0; i < ORDERS_TO_CREATE; i++) {
+      const itemsCount = Math.floor(Math.random() * 3) + 1; // 1-3 items
+      const orderItems = [];
+
+      for (let j = 0; j < itemsCount; j++) {
+        const menu = getRandomItem();
+        const quantity = Math.random() < 0.8 ? 1 : 2;
+        const isUpsell = Math.random() < 0.3; // 30% of items are upsell
+
+        let sourceItemId = null;
+        if (isUpsell) {
+          // 50% chance to link to another item in the same order if exists
+          if (orderItems.length > 0 && Math.random() < 0.5) {
+            sourceItemId =
+              orderItems[Math.floor(Math.random() * orderItems.length)].itemId;
+          } else {
+            // otherwise link to a random item
+            sourceItemId = getRandomItem()._id.toString();
+          }
+        }
+
+        orderItems.push({
+          itemId: menu._id.toString(),
+          name: menu.name,
+          quantity,
+          price: menu.price,
+          addedVia: isUpsell ? "upsell" : "chat",
+          ...(sourceItemId ? { sourceItemId } : {}),
+        });
+      }
+
+      const totalAmount = orderItems.reduce(
+        (sum, it) => sum + it.price * it.quantity,
+        0,
+      );
+
+      demoOrders.push({
+        restaurantId: RESTAURANT_ID,
+        sessionId: `demo-session-${i}-${Date.now()}`,
+        items: orderItems,
+        totalAmount,
+      });
+    }
+
+    await Order.insertMany(demoOrders);
+
+    console.log(`✅ Inserted ${demoOrders.length} demo orders for analytics.`);
+    process.exit(0);
   } catch (err) {
     console.error(err);
     process.exit(1);

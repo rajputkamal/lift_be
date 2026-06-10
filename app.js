@@ -11,6 +11,8 @@ import ridesRoutes from "./src/routes/ridesRoutes.js";
 import restaurantRoutes from "./src/foodie/routes/restaurantRoutes.js";
 import categoryRoutes from "./src/foodie/routes/categoryRoutes.js";
 import menuItemRoutes from "./src/foodie/routes/menuItemRoutes.js";
+import orderRoutes from "./src/foodie/routes/orderRoutes.js";
+import analyticsRoutes from "./src/foodie/routes/analyticsRoutes.js";
 
 dotenv.config();
 connectDB();
@@ -27,5 +29,7 @@ app.use("/api/ride", ridesRoutes);
 app.use("/api/foodie", restaurantRoutes);
 app.use("/api/foodie", categoryRoutes);
 app.use("/api/foodie", menuItemRoutes);
+app.use("/api/foodie", orderRoutes);
+app.use("/api/foodie", analyticsRoutes);
 
 export default app;
