@@ -211,7 +211,7 @@ const seed = async () => {
         name: item,
         description: `${item} - delicious Indian dish`,
         price: getPrice(),
-        vegType: "veg",
+        vegType: cat.name === "Non-Veg" ? "non-veg" : "veg",
         image: `https://source.unsplash.com/300x300/?${item}`,
       }));
 
