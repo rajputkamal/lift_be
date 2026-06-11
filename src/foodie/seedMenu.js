@@ -165,6 +165,21 @@ const data = [
       "Family Combo",
     ],
   },
+  {
+    name: "Non-Veg",
+    items: [
+      "Chicken Biryani",
+      "Butter Chicken",
+      "Chicken 65",
+      "Mutton Rogan Josh",
+      "Fish Fry",
+      "Prawn Curry",
+      "Chicken Korma",
+      "Keema Paratha",
+      "Chicken Manchurian",
+      "Grilled Chicken",
+    ],
+  },
 ];
 
 const getPrice = () => Math.floor(Math.random() * 200) + 20;
