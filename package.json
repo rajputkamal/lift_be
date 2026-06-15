@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "create:restaurant": "node src/foodie/createRestaurant.js"
   },
   "engines": {
     "node": "18.x"

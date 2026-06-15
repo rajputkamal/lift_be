@@ -102,7 +102,7 @@ export const getRestaurantDetails = async (req, res) => {
       restaurant: {
         id: restaurant._id,
         name: restaurant.name,
-        logo: restaurant.logo,
+        logo: restaurant.logoUrl,
         address: restaurant.address,
         phone: restaurant.phone,
         vegType: restaurant.vegType,

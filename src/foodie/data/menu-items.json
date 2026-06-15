@@ -1,0 +1,2451 @@
+[
+  {
+    "categoryName": "Soups & Beverages",
+    "items": [
+      {
+        "name": "Sweet Corn Masala Soup",
+        "description": "Sweet corn soup with Indian spices",
+        "price": 189,
+        "vegType": "veg",
+        "tags": ["soup"],
+        "keywords": ["sweet corn", "corn soup", "soup", "hot soup", "starter"]
+      },
+      {
+        "name": "Hot N Sour Soup",
+        "description": "Spicy and tangy vegetable soup",
+        "price": 189,
+        "vegType": "veg",
+        "tags": ["soup"],
+        "keywords": [
+          "hot and sour",
+          "soup",
+          "spicy soup",
+          "chinese soup",
+          "starter"
+        ]
+      },
+      {
+        "name": "Tomato Chatpata Soup",
+        "description": "Tangy tomato soup",
+        "price": 189,
+        "vegType": "veg",
+        "tags": ["soup"],
+        "keywords": ["tomato soup", "chatpata", "soup", "starter", "hot soup"]
+      },
+      {
+        "name": "Lemon Coriander Soup",
+        "description": "Fresh lemon and coriander flavored soup",
+        "price": 189,
+        "vegType": "veg",
+        "tags": ["soup"],
+        "keywords": [
+          "lemon coriander",
+          "soup",
+          "starter",
+          "healthy soup",
+          "hot soup"
+        ]
+      },
+      {
+        "name": "Veg Manchau Soup",
+        "description": "Popular Indo-Chinese vegetable soup",
+        "price": 189,
+        "vegType": "veg",
+        "tags": ["soup", "indo-chinese"],
+        "keywords": [
+          "manchow",
+          "veg manchow",
+          "soup",
+          "indo chinese",
+          "chinese soup"
+        ]
+      },
+      {
+        "name": "Vegetables Soup",
+        "description": "Mixed vegetable soup",
+        "price": 189,
+        "vegType": "veg",
+        "tags": ["soup"],
+        "keywords": [
+          "vegetable soup",
+          "veg soup",
+          "healthy soup",
+          "starter",
+          "soup"
+        ]
+      },
+      {
+        "name": "Cream Of Broccoli Soup",
+        "description": "Creamy broccoli soup",
+        "price": 229,
+        "vegType": "veg",
+        "tags": ["soup", "creamy"],
+        "keywords": [
+          "broccoli soup",
+          "cream soup",
+          "healthy soup",
+          "creamy soup",
+          "soup"
+        ]
+      },
+      {
+        "name": "Cream Of Mushroom Soup",
+        "description": "Creamy mushroom soup",
+        "price": 229,
+        "vegType": "veg",
+        "tags": ["soup", "creamy"],
+        "keywords": [
+          "mushroom soup",
+          "cream soup",
+          "creamy soup",
+          "soup",
+          "starter"
+        ]
+      },
+      {
+        "name": "Thukpa Veg Noodle Soup",
+        "description": "Vegetable noodle soup",
+        "price": 239,
+        "vegType": "veg",
+        "tags": ["soup", "noodles"],
+        "keywords": [
+          "thukpa",
+          "veg noodle soup",
+          "noodle soup",
+          "tibetan soup",
+          "soup"
+        ]
+      },
+      {
+        "name": "Special Tomato Shorba (Soup)",
+        "description": "Special Indian style tomato shorba",
+        "price": 239,
+        "vegType": "veg",
+        "tags": ["soup", "shorba"],
+        "keywords": [
+          "tomato shorba",
+          "shorba",
+          "indian soup",
+          "tomato soup",
+          "starter"
+        ]
+      },
+      {
+        "name": "Plain Coke",
+        "description": "Chilled Coca Cola",
+        "price": 99,
+        "vegType": "veg",
+        "tags": ["beverage", "cold-drink"],
+        "keywords": ["coke", "cola", "coca cola", "soft drink", "cold drink"]
+      },
+      {
+        "name": "Plain Sprite",
+        "description": "Chilled Sprite",
+        "price": 99,
+        "vegType": "veg",
+        "tags": ["beverage", "cold-drink"],
+        "keywords": [
+          "sprite",
+          "soft drink",
+          "cold drink",
+          "lemon soda",
+          "beverage"
+        ]
+      },
+      {
+        "name": "Plain Lime Water",
+        "description": "Refreshing lime water",
+        "price": 99,
+        "vegType": "veg",
+        "tags": ["beverage"],
+        "keywords": [
+          "lime water",
+          "fresh lime",
+          "nimbu pani",
+          "refreshing drink",
+          "beverage"
+        ]
+      },
+      {
+        "name": "Butter Milk",
+        "description": "Traditional chilled buttermilk",
+        "price": 120,
+        "vegType": "veg",
+        "tags": ["beverage", "buttermilk"],
+        "keywords": [
+          "buttermilk",
+          "chaas",
+          "butter milk",
+          "summer drink",
+          "cooling drink"
+        ]
+      },
+      {
+        "name": "Sweet Lassi",
+        "description": "Sweet yogurt based drink",
+        "price": 169,
+        "vegType": "veg",
+        "tags": ["beverage", "lassi"],
+        "keywords": [
+          "lassi",
+          "sweet lassi",
+          "curd drink",
+          "yogurt drink",
+          "traditional drink"
+        ]
+      },
+      {
+        "name": "Masala Coke",
+        "description": "Masala flavored Coke",
+        "price": 169,
+        "vegType": "veg",
+        "tags": ["beverage", "cold-drink"],
+        "keywords": ["masala coke", "coke", "cola", "soft drink", "cold drink"]
+      },
+      {
+        "name": "Masala Sprite",
+        "description": "Masala flavored Sprite",
+        "price": 169,
+        "vegType": "veg",
+        "tags": ["beverage", "cold-drink"],
+        "keywords": [
+          "masala sprite",
+          "sprite",
+          "soft drink",
+          "cold drink",
+          "beverage"
+        ]
+      },
+      {
+        "name": "Jal Jeera",
+        "description": "Traditional Indian cumin drink",
+        "price": 169,
+        "vegType": "veg",
+        "tags": ["beverage", "indian"],
+        "keywords": [
+          "jal jeera",
+          "indian drink",
+          "cumin drink",
+          "summer drink",
+          "refreshing"
+        ]
+      },
+      {
+        "name": "Fresh Lime With Mint",
+        "description": "Fresh lime drink with mint",
+        "price": 169,
+        "vegType": "veg",
+        "tags": ["beverage", "lime"],
+        "keywords": [
+          "lime mint",
+          "fresh lime",
+          "mint drink",
+          "refreshing drink",
+          "cooler"
+        ]
+      },
+      {
+        "name": "Strawberry Lemonade",
+        "description": "Strawberry flavored lemonade",
+        "price": 199,
+        "vegType": "veg",
+        "tags": ["beverage", "lemonade"],
+        "keywords": [
+          "strawberry lemonade",
+          "lemonade",
+          "fruit drink",
+          "cooler",
+          "mocktail"
+        ]
+      },
+      {
+        "name": "Mint Mojito",
+        "description": "Refreshing mint mojito",
+        "price": 199,
+        "vegType": "veg",
+        "tags": ["beverage", "mojito"],
+        "keywords": [
+          "mint mojito",
+          "mojito",
+          "mint drink",
+          "cooler",
+          "mocktail"
+        ]
+      },
+      {
+        "name": "Blue Lagoon",
+        "description": "Blue lagoon mocktail",
+        "price": 199,
+        "vegType": "veg",
+        "tags": ["beverage", "mocktail"],
+        "keywords": [
+          "blue lagoon",
+          "mocktail",
+          "cooler",
+          "summer drink",
+          "cold beverage"
+        ]
+      },
+      {
+        "name": "Kiwi Cooler",
+        "description": "Kiwi flavored cooler",
+        "price": 199,
+        "vegType": "veg",
+        "tags": ["beverage", "mocktail"],
+        "keywords": [
+          "kiwi cooler",
+          "kiwi drink",
+          "cooler",
+          "mocktail",
+          "cold beverage"
+        ]
+      },
+      {
+        "name": "Fruit Punch",
+        "description": "Mixed fruit punch",
+        "price": 229,
+        "vegType": "veg",
+        "tags": ["beverage", "mocktail"],
+        "keywords": [
+          "fruit punch",
+          "mixed fruit",
+          "mocktail",
+          "fruit drink",
+          "cold beverage"
+        ]
+      }
+    ]
+  },
+  {
+    "categoryName": "Nidhi's Chaap, Tikka, Kababs & Platers",
+    "items": [
+      {
+        "name": "Nidhi's Gold Cottage Cheese Paneer",
+        "description": "Chef special premium paneer starter",
+        "price": 475,
+        "vegType": "veg",
+        "tags": ["starter", "paneer", "tandoor"],
+        "keywords": [
+          "paneer",
+          "cottage cheese",
+          "starter",
+          "tandoori",
+          "special paneer"
+        ]
+      },
+      {
+        "name": "Tandoori Soya Chaap (Spicy)",
+        "description": "Spicy tandoori style soya chaap",
+        "price": 450,
+        "vegType": "veg",
+        "tags": ["starter", "soya-chaap", "spicy"],
+        "keywords": [
+          "soya chaap",
+          "tandoori chaap",
+          "spicy chaap",
+          "starter",
+          "protein"
+        ]
+      },
+      {
+        "name": "Amritsari Soya Chaap (Spicy)",
+        "description": "Amritsari style spicy soya chaap",
+        "price": 450,
+        "vegType": "veg",
+        "tags": ["starter", "soya-chaap", "spicy"],
+        "keywords": [
+          "amritsari chaap",
+          "soya chaap",
+          "spicy",
+          "punjabi starter",
+          "starter"
+        ]
+      },
+      {
+        "name": "Malai Soya Chaap",
+        "description": "Creamy malai marinated soya chaap",
+        "price": 450,
+        "vegType": "veg",
+        "tags": ["starter", "soya-chaap", "creamy"],
+        "keywords": [
+          "malai chaap",
+          "soya chaap",
+          "creamy starter",
+          "chaap",
+          "tandoori"
+        ]
+      },
+      {
+        "name": "Alishan Paneer Tikka",
+        "description": "Royal style paneer tikka",
+        "price": 450,
+        "vegType": "veg",
+        "tags": ["starter", "paneer", "tikka"],
+        "keywords": [
+          "paneer tikka",
+          "royal paneer",
+          "grilled paneer",
+          "starter",
+          "tandoori"
+        ]
+      },
+      {
+        "name": "Paneer Tikka (Spicy)",
+        "description": "Classic spicy paneer tikka",
+        "price": 400,
+        "vegType": "veg",
+        "tags": ["starter", "paneer", "spicy"],
+        "keywords": [
+          "paneer tikka",
+          "spicy paneer",
+          "starter",
+          "grilled paneer",
+          "tandoori"
+        ]
+      },
+      {
+        "name": "Paneer Achari Tikka (Spicy)",
+        "description": "Pickle flavored spicy paneer tikka",
+        "price": 400,
+        "vegType": "veg",
+        "tags": ["starter", "paneer", "achari"],
+        "keywords": [
+          "achari paneer",
+          "pickle paneer",
+          "paneer tikka",
+          "spicy starter",
+          "tandoori"
+        ]
+      },
+      {
+        "name": "Paneer Haryali Tikka",
+        "description": "Green herb marinated paneer tikka",
+        "price": 400,
+        "vegType": "veg",
+        "tags": ["starter", "paneer", "haryali"],
+        "keywords": [
+          "haryali paneer",
+          "green tikka",
+          "paneer tikka",
+          "mint paneer",
+          "starter"
+        ]
+      },
+      {
+        "name": "Malai Paneer Tikka",
+        "description": "Creamy paneer tikka with rich malai marinade",
+        "price": 400,
+        "vegType": "veg",
+        "tags": ["starter", "paneer", "creamy"],
+        "keywords": [
+          "malai paneer",
+          "paneer tikka",
+          "creamy paneer",
+          "starter",
+          "tandoori"
+        ]
+      },
+      {
+        "name": "Malai Broccoli",
+        "description": "Broccoli marinated in creamy malai spices",
+        "price": 450,
+        "vegType": "veg",
+        "tags": ["starter", "broccoli", "creamy"],
+        "keywords": [
+          "broccoli",
+          "malai broccoli",
+          "healthy starter",
+          "tandoori broccoli",
+          "starter"
+        ]
+      },
+      {
+        "name": "Mushroom Achari Tikka",
+        "description": "Pickle flavored mushroom tikka",
+        "price": 450,
+        "vegType": "veg",
+        "tags": ["starter", "mushroom", "achari"],
+        "keywords": [
+          "mushroom tikka",
+          "achari mushroom",
+          "starter",
+          "grilled mushroom",
+          "tandoori"
+        ]
+      },
+      {
+        "name": "Stuffed Mushrooms",
+        "description": "Special stuffed mushrooms cooked in tandoor",
+        "price": 450,
+        "vegType": "veg",
+        "tags": ["starter", "mushroom"],
+        "keywords": [
+          "stuffed mushroom",
+          "mushroom starter",
+          "grilled mushroom",
+          "starter",
+          "tandoori"
+        ]
+      },
+      {
+        "name": "Veg Subz Bahar",
+        "description": "Assorted vegetable tandoori starter",
+        "price": 425,
+        "vegType": "veg",
+        "tags": ["starter", "vegetable"],
+        "keywords": [
+          "veg starter",
+          "mixed vegetables",
+          "tandoori vegetables",
+          "starter",
+          "veg platter"
+        ]
+      },
+      {
+        "name": "Tandoori Bharwa Aloo",
+        "description": "Stuffed potatoes cooked in tandoor",
+        "price": 425,
+        "vegType": "veg",
+        "tags": ["starter", "potato", "tandoor"],
+        "keywords": [
+          "bharwa aloo",
+          "stuffed potato",
+          "tandoori aloo",
+          "starter",
+          "potato starter"
+        ]
+      },
+      {
+        "name": "Hara Bhara Kabab",
+        "description": "Popular spinach and vegetable kabab",
+        "price": 425,
+        "vegType": "veg",
+        "tags": ["starter", "kabab"],
+        "keywords": [
+          "hara bhara kabab",
+          "veg kabab",
+          "spinach kabab",
+          "starter",
+          "healthy"
+        ]
+      },
+      {
+        "name": "Dahi Ka Kabab",
+        "description": "Crispy yogurt based kabab",
+        "price": 425,
+        "vegType": "veg",
+        "tags": ["starter", "kabab", "yogurt"],
+        "keywords": [
+          "dahi kabab",
+          "yogurt kabab",
+          "starter",
+          "veg kabab",
+          "crispy kabab"
+        ]
+      },
+      {
+        "name": "Dahi Ke Sholey",
+        "description": "Stuffed yogurt rolls with crispy coating",
+        "price": 425,
+        "vegType": "veg",
+        "tags": ["starter", "yogurt"],
+        "keywords": [
+          "dahi ke sholey",
+          "dahi starter",
+          "crispy rolls",
+          "yogurt starter",
+          "veg starter"
+        ]
+      },
+      {
+        "name": "Kabab Platter (10 Pcs)",
+        "description": "Assorted veg kabab platter",
+        "price": 699,
+        "vegType": "veg",
+        "tags": ["platter", "kabab"],
+        "keywords": [
+          "kabab platter",
+          "veg platter",
+          "mixed kababs",
+          "starter platter",
+          "sharing platter"
+        ]
+      },
+      {
+        "name": "Tandoori Paneer Platter (10 Pcs)",
+        "description": "Assorted tandoori paneer platter",
+        "price": 799,
+        "vegType": "veg",
+        "tags": ["platter", "paneer"],
+        "keywords": [
+          "paneer platter",
+          "tandoori paneer",
+          "starter platter",
+          "sharing platter",
+          "paneer lovers"
+        ]
+      },
+      {
+        "name": "Veg Starter Platter (16 Pcs)",
+        "description": "Large assortment of vegetarian starters",
+        "price": 999,
+        "vegType": "veg",
+        "tags": ["platter", "starter"],
+        "keywords": [
+          "veg platter",
+          "starter platter",
+          "party platter",
+          "mixed starters",
+          "sharing platter"
+        ]
+      }
+    ]
+  },
+  {
+    "categoryName": "Indo-Chinese",
+    "items": [
+      {
+        "name": "French Fries (Plain)",
+        "description": "Crispy golden french fries",
+        "price": 285,
+        "vegType": "veg",
+        "tags": ["snack", "fries"],
+        "keywords": [
+          "french fries",
+          "plain fries",
+          "potato fries",
+          "crispy fries",
+          "starter"
+        ]
+      },
+      {
+        "name": "French Fries (Masala)",
+        "description": "Crispy fries tossed with Indian spices",
+        "price": 285,
+        "vegType": "veg",
+        "tags": ["snack", "fries"],
+        "keywords": [
+          "masala fries",
+          "french fries",
+          "spicy fries",
+          "potato fries",
+          "starter"
+        ]
+      },
+      {
+        "name": "Chilli Garlic Noodles",
+        "description": "Noodles tossed with chilli garlic sauce",
+        "price": 340,
+        "vegType": "veg",
+        "tags": ["noodles", "indo-chinese"],
+        "keywords": [
+          "chilli garlic noodles",
+          "noodles",
+          "spicy noodles",
+          "chinese",
+          "garlic noodles"
+        ]
+      },
+      {
+        "name": "Hakka Noodles",
+        "description": "Classic Indo-Chinese hakka noodles",
+        "price": 340,
+        "vegType": "veg",
+        "tags": ["noodles", "indo-chinese"],
+        "keywords": [
+          "hakka noodles",
+          "noodles",
+          "chinese noodles",
+          "veg noodles",
+          "indo chinese"
+        ]
+      },
+      {
+        "name": "Schezwan Noodles",
+        "description": "Spicy schezwan flavored noodles",
+        "price": 340,
+        "vegType": "veg",
+        "tags": ["noodles", "indo-chinese"],
+        "keywords": [
+          "schezwan noodles",
+          "spicy noodles",
+          "chinese noodles",
+          "noodles",
+          "indo chinese"
+        ]
+      },
+      {
+        "name": "Veg Chowmein",
+        "description": "Stir fried vegetable chowmein",
+        "price": 350,
+        "vegType": "veg",
+        "tags": ["noodles", "indo-chinese"],
+        "keywords": [
+          "veg chowmein",
+          "chowmein",
+          "noodles",
+          "chinese",
+          "veg noodles"
+        ]
+      },
+      {
+        "name": "Veg Manchurian (Dry)",
+        "description": "Vegetable manchurian served dry",
+        "price": 380,
+        "vegType": "veg",
+        "tags": ["manchurian", "indo-chinese"],
+        "keywords": [
+          "veg manchurian",
+          "dry manchurian",
+          "manchurian balls",
+          "starter",
+          "chinese"
+        ]
+      },
+      {
+        "name": "Veg Manchurian (Wet)",
+        "description": "Vegetable manchurian in flavorful gravy",
+        "price": 380,
+        "vegType": "veg",
+        "tags": ["manchurian", "indo-chinese"],
+        "keywords": [
+          "veg manchurian",
+          "gravy manchurian",
+          "wet manchurian",
+          "chinese",
+          "indo chinese"
+        ]
+      },
+      {
+        "name": "Gobhi Manchurian (Dry)",
+        "description": "Crispy cauliflower manchurian",
+        "price": 380,
+        "vegType": "veg",
+        "tags": ["manchurian", "gobhi"],
+        "keywords": [
+          "gobhi manchurian",
+          "cauliflower manchurian",
+          "dry manchurian",
+          "starter",
+          "chinese"
+        ]
+      },
+      {
+        "name": "Gobhi Manchurian (Wet)",
+        "description": "Cauliflower manchurian in gravy",
+        "price": 380,
+        "vegType": "veg",
+        "tags": ["manchurian", "gobhi"],
+        "keywords": [
+          "gobhi manchurian",
+          "wet manchurian",
+          "cauliflower gravy",
+          "indo chinese",
+          "chinese"
+        ]
+      },
+      {
+        "name": "Crispy Corn",
+        "description": "Golden fried crispy corn kernels",
+        "price": 380,
+        "vegType": "veg",
+        "tags": ["starter", "corn"],
+        "keywords": [
+          "crispy corn",
+          "corn starter",
+          "fried corn",
+          "snack",
+          "starter"
+        ]
+      },
+      {
+        "name": "Peanut Masala Chaat (Spicy)",
+        "description": "Spicy masala peanuts tossed with vegetables",
+        "price": 380,
+        "vegType": "veg",
+        "tags": ["chaat", "peanut"],
+        "keywords": [
+          "peanut masala",
+          "masala peanuts",
+          "spicy snack",
+          "chaat",
+          "starter"
+        ]
+      },
+      {
+        "name": "Honey Chilli Potato",
+        "description": "Crispy potatoes coated in honey chilli sauce",
+        "price": 390,
+        "vegType": "veg",
+        "tags": ["starter", "potato"],
+        "keywords": [
+          "honey chilli potato",
+          "crispy potato",
+          "sweet spicy potato",
+          "starter",
+          "indo chinese"
+        ]
+      },
+      {
+        "name": "Spring Rolls",
+        "description": "Crispy vegetable spring rolls",
+        "price": 390,
+        "vegType": "veg",
+        "tags": ["starter", "rolls"],
+        "keywords": [
+          "spring roll",
+          "veg roll",
+          "crispy rolls",
+          "starter",
+          "chinese"
+        ]
+      },
+      {
+        "name": "Cheese Balls",
+        "description": "Crispy fried cheese balls",
+        "price": 390,
+        "vegType": "veg",
+        "tags": ["starter", "cheese"],
+        "keywords": [
+          "cheese balls",
+          "fried cheese",
+          "starter",
+          "snack",
+          "crispy"
+        ]
+      },
+      {
+        "name": "Paneer 65",
+        "description": "Spicy South Indian style paneer starter",
+        "price": 390,
+        "vegType": "veg",
+        "tags": ["paneer", "starter"],
+        "keywords": [
+          "paneer 65",
+          "spicy paneer",
+          "starter",
+          "paneer snack",
+          "south indian"
+        ]
+      },
+      {
+        "name": "Gobhi 65",
+        "description": "Spicy cauliflower 65 starter",
+        "price": 390,
+        "vegType": "veg",
+        "tags": ["gobhi", "starter"],
+        "keywords": [
+          "gobhi 65",
+          "cauliflower 65",
+          "starter",
+          "spicy gobhi",
+          "snack"
+        ]
+      },
+      {
+        "name": "Chilli Paneer (Dry)",
+        "description": "Spicy chilli paneer served dry",
+        "price": 425,
+        "vegType": "veg",
+        "tags": ["paneer", "indo-chinese"],
+        "keywords": [
+          "chilli paneer",
+          "dry chilli paneer",
+          "paneer starter",
+          "chinese",
+          "spicy paneer"
+        ]
+      },
+      {
+        "name": "Chilli Paneer (Wet)",
+        "description": "Paneer cubes tossed in chilli gravy",
+        "price": 425,
+        "vegType": "veg",
+        "tags": ["paneer", "indo-chinese"],
+        "keywords": [
+          "chilli paneer",
+          "wet chilli paneer",
+          "paneer gravy",
+          "indo chinese",
+          "chinese"
+        ]
+      },
+      {
+        "name": "Chilli Mushroom (Dry)",
+        "description": "Spicy mushroom tossed with sauces",
+        "price": 425,
+        "vegType": "veg",
+        "tags": ["mushroom", "indo-chinese"],
+        "keywords": [
+          "chilli mushroom",
+          "dry mushroom",
+          "mushroom starter",
+          "chinese",
+          "spicy mushroom"
+        ]
+      },
+      {
+        "name": "Chilli Mushroom (Wet)",
+        "description": "Mushroom cooked in chilli gravy",
+        "price": 425,
+        "vegType": "veg",
+        "tags": ["mushroom", "indo-chinese"],
+        "keywords": [
+          "chilli mushroom",
+          "mushroom gravy",
+          "wet mushroom",
+          "indo chinese",
+          "chinese"
+        ]
+      },
+      {
+        "name": "Golden Fried Baby Corn",
+        "description": "Crispy fried baby corn starter",
+        "price": 425,
+        "vegType": "veg",
+        "tags": ["baby-corn", "starter"],
+        "keywords": [
+          "baby corn",
+          "fried baby corn",
+          "crispy corn",
+          "starter",
+          "indo chinese"
+        ]
+      },
+      {
+        "name": "Crispy Mushrooms",
+        "description": "Crunchy fried mushrooms",
+        "price": 425,
+        "vegType": "veg",
+        "tags": ["mushroom", "starter"],
+        "keywords": [
+          "crispy mushrooms",
+          "fried mushroom",
+          "starter",
+          "mushroom snack",
+          "crispy"
+        ]
+      }
+    ]
+  },
+  {
+    "categoryName": "Pasta & Momos",
+    "items": [
+      {
+        "name": "Veg Momos (Steamed)",
+        "description": "Soft steamed vegetable momos served with spicy chutney",
+        "price": 225,
+        "vegType": "veg",
+        "tags": ["momos", "steamed"],
+        "keywords": [
+          "veg momos",
+          "steamed momos",
+          "dumplings",
+          "vegetable momos",
+          "tibetan"
+        ]
+      },
+      {
+        "name": "Veg Momos (Fried)",
+        "description": "Crispy fried vegetable momos",
+        "price": 249,
+        "vegType": "veg",
+        "tags": ["momos", "fried"],
+        "keywords": [
+          "fried momos",
+          "veg momos",
+          "crispy momos",
+          "dumplings",
+          "starter"
+        ]
+      },
+      {
+        "name": "Veg Momos (Tandoori)",
+        "description": "Tandoori style momos coated with spicy marinade",
+        "price": 389,
+        "vegType": "veg",
+        "tags": ["momos", "tandoori"],
+        "keywords": [
+          "tandoori momos",
+          "veg momos",
+          "spicy momos",
+          "grilled momos",
+          "starter"
+        ]
+      },
+      {
+        "name": "Mix Veg Frankie",
+        "description": "Stuffed wrap with mixed vegetables and sauces",
+        "price": 140,
+        "vegType": "veg",
+        "tags": ["frankie", "wrap"],
+        "keywords": [
+          "veg frankie",
+          "vegetable wrap",
+          "roll",
+          "street food",
+          "quick bite"
+        ]
+      },
+      {
+        "name": "Paneer Frankie",
+        "description": "Soft wrap stuffed with paneer and vegetables",
+        "price": 170,
+        "vegType": "veg",
+        "tags": ["frankie", "paneer", "wrap"],
+        "keywords": [
+          "paneer frankie",
+          "paneer roll",
+          "wrap",
+          "street food",
+          "quick bite"
+        ]
+      },
+      {
+        "name": "Red Sauce Pasta",
+        "description": "Pasta tossed in rich tomato based red sauce",
+        "price": 350,
+        "vegType": "veg",
+        "tags": ["pasta", "italian"],
+        "keywords": [
+          "red sauce pasta",
+          "tomato pasta",
+          "italian pasta",
+          "pasta",
+          "veg pasta"
+        ]
+      },
+      {
+        "name": "White Sauce Pasta",
+        "description": "Creamy white sauce pasta with vegetables",
+        "price": 350,
+        "vegType": "veg",
+        "tags": ["pasta", "italian", "creamy"],
+        "keywords": [
+          "white sauce pasta",
+          "alfredo pasta",
+          "creamy pasta",
+          "italian pasta",
+          "veg pasta"
+        ]
+      }
+    ]
+  },
+  {
+    "categoryName": "Paneer & Kofte Ka Swad",
+    "items": [
+      {
+        "name": "Paneer Makhani (Zero Spicy)",
+        "description": "Rich buttery paneer curry with mild sweetness and zero spice",
+        "price": 450,
+        "vegType": "veg",
+        "tags": ["paneer", "curry", "north-indian"],
+        "keywords": [
+          "paneer makhani",
+          "butter paneer",
+          "mild paneer",
+          "paneer curry",
+          "zero spicy"
+        ]
+      },
+      {
+        "name": "Palak Paneer (Mid Spicy)",
+        "description": "Fresh spinach gravy cooked with soft paneer cubes",
+        "price": 450,
+        "vegType": "veg",
+        "tags": ["paneer", "palak", "curry"],
+        "keywords": [
+          "palak paneer",
+          "spinach paneer",
+          "paneer curry",
+          "healthy curry",
+          "mid spicy"
+        ]
+      },
+      {
+        "name": "Paneer Butter Masala (Mid Spicy)",
+        "description": "Classic creamy tomato gravy with paneer cubes",
+        "price": 450,
+        "vegType": "veg",
+        "tags": ["paneer", "curry", "popular"],
+        "keywords": [
+          "paneer butter masala",
+          "butter paneer",
+          "paneer curry",
+          "north indian",
+          "mid spicy"
+        ]
+      },
+      {
+        "name": "Paneer Hyderabadi (Very Spicy)",
+        "description": "Spicy Hyderabadi style paneer curry",
+        "price": 460,
+        "vegType": "veg",
+        "tags": ["paneer", "hyderabadi", "spicy"],
+        "keywords": [
+          "paneer hyderabadi",
+          "spicy paneer",
+          "hyderabadi curry",
+          "paneer curry",
+          "very spicy"
+        ]
+      },
+      {
+        "name": "Paneer Punjabi (Mid Spicy)",
+        "description": "Traditional Punjabi style paneer gravy",
+        "price": 460,
+        "vegType": "veg",
+        "tags": ["paneer", "punjabi", "curry"],
+        "keywords": [
+          "paneer punjabi",
+          "punjabi paneer",
+          "paneer curry",
+          "north indian",
+          "mid spicy"
+        ]
+      },
+      {
+        "name": "Paneer Do Pyaza (Mid Spicy)",
+        "description": "Paneer cooked with double onions and aromatic spices",
+        "price": 460,
+        "vegType": "veg",
+        "tags": ["paneer", "onion", "curry"],
+        "keywords": [
+          "paneer do pyaza",
+          "onion paneer",
+          "paneer curry",
+          "north indian",
+          "mid spicy"
+        ]
+      },
+      {
+        "name": "Paneer Lababdar (Mid Spicy)",
+        "description": "Creamy rich paneer gravy with tomatoes and spices",
+        "price": 470,
+        "vegType": "veg",
+        "tags": ["paneer", "lababdar", "curry"],
+        "keywords": [
+          "paneer lababdar",
+          "lababdar paneer",
+          "creamy paneer",
+          "paneer curry",
+          "mid spicy"
+        ]
+      },
+      {
+        "name": "Shahi Paneer (Zero Spicy)",
+        "description": "Royal paneer curry made with cream and cashew gravy",
+        "price": 480,
+        "vegType": "veg",
+        "tags": ["paneer", "shahi", "curry"],
+        "keywords": [
+          "shahi paneer",
+          "royal paneer",
+          "cashew gravy",
+          "paneer curry",
+          "zero spicy"
+        ]
+      },
+      {
+        "name": "Paneer Bhurji (Mid Spicy)",
+        "description": "Scrambled paneer cooked with onions and spices",
+        "price": 480,
+        "vegType": "veg",
+        "tags": ["paneer", "bhurji"],
+        "keywords": [
+          "paneer bhurji",
+          "scrambled paneer",
+          "paneer masala",
+          "north indian",
+          "mid spicy"
+        ]
+      },
+      {
+        "name": "Stuffed Bharwa Aloo Dum (Mid Spicy)",
+        "description": "Stuffed potatoes cooked in rich dum style gravy",
+        "price": 480,
+        "vegType": "veg",
+        "tags": ["aloo", "stuffed", "curry"],
+        "keywords": [
+          "bharwa aloo",
+          "stuffed potato",
+          "dum aloo",
+          "potato curry",
+          "mid spicy"
+        ]
+      },
+      {
+        "name": "Stuffed Capsicum",
+        "description": "Bell peppers stuffed with flavorful vegetable filling",
+        "price": 480,
+        "vegType": "veg",
+        "tags": ["capsicum", "stuffed"],
+        "keywords": [
+          "stuffed capsicum",
+          "bharwa shimla mirch",
+          "capsicum curry",
+          "vegetable curry",
+          "mid spicy"
+        ]
+      },
+      {
+        "name": "Stuffed Tomato",
+        "description": "Tomatoes stuffed with savory filling and spices",
+        "price": 480,
+        "vegType": "veg",
+        "tags": ["tomato", "stuffed"],
+        "keywords": [
+          "stuffed tomato",
+          "bharwa tomato",
+          "tomato curry",
+          "vegetable curry",
+          "mid spicy"
+        ]
+      },
+      {
+        "name": "Paneer Tikka Masala (Spicy)",
+        "description": "Tandoori paneer tikka cooked in spicy masala gravy",
+        "price": 480,
+        "vegType": "veg",
+        "tags": ["paneer", "tikka", "curry"],
+        "keywords": [
+          "paneer tikka masala",
+          "tikka gravy",
+          "spicy paneer",
+          "paneer curry",
+          "north indian"
+        ]
+      },
+      {
+        "name": "Paneer Kaju Curry (Spicy)",
+        "description": "Paneer cooked in rich cashew nut gravy",
+        "price": 480,
+        "vegType": "veg",
+        "tags": ["paneer", "kaju", "curry"],
+        "keywords": [
+          "paneer kaju curry",
+          "cashew paneer",
+          "paneer curry",
+          "rich gravy",
+          "spicy"
+        ]
+      },
+      {
+        "name": "Kaju Curry (Spicy)",
+        "description": "Premium cashew nut curry with aromatic spices",
+        "price": 490,
+        "vegType": "veg",
+        "tags": ["kaju", "curry"],
+        "keywords": [
+          "kaju curry",
+          "cashew curry",
+          "rich curry",
+          "north indian",
+          "spicy"
+        ]
+      },
+      {
+        "name": "Nargisi Kofta (Mid Spicy)",
+        "description": "Soft koftas served in flavorful gravy",
+        "price": 470,
+        "vegType": "veg",
+        "tags": ["kofta", "curry"],
+        "keywords": [
+          "nargisi kofta",
+          "kofta curry",
+          "veg kofta",
+          "north indian",
+          "mid spicy"
+        ]
+      },
+      {
+        "name": "Malai Kofta (Zero Spicy)",
+        "description": "Creamy kofta curry with rich cashew gravy",
+        "price": 470,
+        "vegType": "veg",
+        "tags": ["kofta", "malai", "curry"],
+        "keywords": [
+          "malai kofta",
+          "creamy kofta",
+          "kofta curry",
+          "north indian",
+          "zero spicy"
+        ]
+      },
+      {
+        "name": "Palak Kofta (Mid Spicy)",
+        "description": "Spinach based koftas cooked in flavorful gravy",
+        "price": 470,
+        "vegType": "veg",
+        "tags": ["kofta", "palak", "curry"],
+        "keywords": [
+          "palak kofta",
+          "spinach kofta",
+          "kofta curry",
+          "healthy curry",
+          "mid spicy"
+        ]
+      }
+    ]
+  },
+  {
+    "categoryName": "Nidhi's Desi Curries (Non Paneer)",
+    "items": [
+      {
+        "name": "Jeera Aloo (Dry)",
+        "description": "Classic dry potato preparation with cumin seeds and spices",
+        "price": 380,
+        "vegType": "veg",
+        "tags": ["aloo", "dry-curry"],
+        "keywords": [
+          "jeera aloo",
+          "potato curry",
+          "dry aloo",
+          "cumin potato",
+          "north indian"
+        ]
+      },
+      {
+        "name": "Aloo Gobhi Matar",
+        "description": "Potatoes, cauliflower and green peas cooked in traditional spices",
+        "price": 380,
+        "vegType": "veg",
+        "tags": ["aloo", "gobhi", "matar"],
+        "keywords": [
+          "aloo gobhi matar",
+          "cauliflower curry",
+          "potato curry",
+          "peas curry",
+          "veg curry"
+        ]
+      },
+      {
+        "name": "Aloo Jeera Dhaniya",
+        "description": "Potatoes flavored with cumin and fresh coriander",
+        "price": 380,
+        "vegType": "veg",
+        "tags": ["aloo", "dry-curry"],
+        "keywords": [
+          "aloo jeera",
+          "dhaniya aloo",
+          "potato curry",
+          "coriander potato",
+          "dry curry"
+        ]
+      },
+      {
+        "name": "Veg Kadhai",
+        "description": "Mixed vegetables cooked in rich kadhai masala",
+        "price": 430,
+        "vegType": "veg",
+        "tags": ["veg-curry", "kadhai"],
+        "keywords": [
+          "veg kadhai",
+          "mixed veg curry",
+          "kadhai vegetables",
+          "north indian",
+          "vegetable curry"
+        ]
+      },
+      {
+        "name": "Kadhai Mushroom",
+        "description": "Fresh mushrooms cooked in spicy kadhai gravy",
+        "price": 430,
+        "vegType": "veg",
+        "tags": ["mushroom", "kadhai"],
+        "keywords": [
+          "kadhai mushroom",
+          "mushroom curry",
+          "mushroom masala",
+          "north indian",
+          "veg curry"
+        ]
+      },
+      {
+        "name": "Masala Mushroom (Spicy)",
+        "description": "Spicy mushroom curry prepared with aromatic spices",
+        "price": 430,
+        "vegType": "veg",
+        "tags": ["mushroom", "spicy"],
+        "keywords": [
+          "masala mushroom",
+          "spicy mushroom",
+          "mushroom curry",
+          "veg curry",
+          "north indian"
+        ]
+      },
+      {
+        "name": "Baingan Bharta",
+        "description": "Roasted eggplant mashed and cooked with traditional spices",
+        "price": 430,
+        "vegType": "veg",
+        "tags": ["baingan", "bharta"],
+        "keywords": [
+          "baingan bharta",
+          "eggplant curry",
+          "roasted brinjal",
+          "north indian",
+          "veg curry"
+        ]
+      },
+      {
+        "name": "Bhindi Masala",
+        "description": "Okra cooked with onions and flavorful spices",
+        "price": 430,
+        "vegType": "veg",
+        "tags": ["bhindi", "okra"],
+        "keywords": [
+          "bhindi masala",
+          "okra curry",
+          "ladies finger",
+          "veg curry",
+          "north indian"
+        ]
+      },
+      {
+        "name": "Palak-e-Lehsuni",
+        "description": "Spinach curry flavored with roasted garlic",
+        "price": 430,
+        "vegType": "veg",
+        "tags": ["palak", "garlic"],
+        "keywords": [
+          "palak lehsuni",
+          "garlic spinach",
+          "spinach curry",
+          "healthy curry",
+          "veg curry"
+        ]
+      },
+      {
+        "name": "Palak Corn",
+        "description": "Sweet corn cooked in creamy spinach gravy",
+        "price": 430,
+        "vegType": "veg",
+        "tags": ["palak", "corn"],
+        "keywords": [
+          "palak corn",
+          "spinach corn",
+          "corn curry",
+          "healthy curry",
+          "veg curry"
+        ]
+      },
+      {
+        "name": "Methi Chaman",
+        "description": "Fenugreek based rich curry with aromatic spices",
+        "price": 430,
+        "vegType": "veg",
+        "tags": ["methi", "specialty"],
+        "keywords": [
+          "methi chaman",
+          "fenugreek curry",
+          "kashmiri curry",
+          "veg curry",
+          "north indian"
+        ]
+      },
+      {
+        "name": "Aloo Dum Kashmiri",
+        "description": "Traditional Kashmiri dum aloo cooked in rich gravy",
+        "price": 430,
+        "vegType": "veg",
+        "tags": ["aloo", "kashmiri"],
+        "keywords": [
+          "dum aloo",
+          "kashmiri aloo",
+          "potato curry",
+          "north indian",
+          "veg curry"
+        ]
+      },
+      {
+        "name": "Methi Matar Malai",
+        "description": "Creamy curry made with fenugreek leaves and green peas",
+        "price": 450,
+        "vegType": "veg",
+        "tags": ["methi", "matar", "creamy"],
+        "keywords": [
+          "methi matar malai",
+          "peas curry",
+          "creamy curry",
+          "north indian",
+          "veg curry"
+        ]
+      },
+      {
+        "name": "Pahadi Veg Khurchan",
+        "description": "Mountain style mixed vegetable preparation with spices",
+        "price": 450,
+        "vegType": "veg",
+        "tags": ["veg-curry", "specialty"],
+        "keywords": [
+          "veg khurchan",
+          "pahadi veg",
+          "mixed vegetable",
+          "north indian",
+          "special curry"
+        ]
+      },
+      {
+        "name": "Soya Chaap Tikka Masala (Spicy)",
+        "description": "Grilled soya chaap cooked in spicy tikka masala gravy",
+        "price": 450,
+        "vegType": "veg",
+        "tags": ["soya-chaap", "spicy"],
+        "keywords": [
+          "soya chaap",
+          "chaap masala",
+          "tikka masala",
+          "protein rich",
+          "spicy curry"
+        ]
+      },
+      {
+        "name": "Sarson Ka Saag (Spicy)",
+        "description": "Traditional Punjabi mustard greens curry",
+        "price": 450,
+        "vegType": "veg",
+        "tags": ["sarson", "punjabi"],
+        "keywords": [
+          "sarson ka saag",
+          "mustard greens",
+          "punjabi curry",
+          "north indian",
+          "traditional"
+        ]
+      },
+      {
+        "name": "Special Veg Handi (Spicy)",
+        "description": "Chef special mixed vegetables cooked in handi style gravy",
+        "price": 450,
+        "vegType": "veg",
+        "tags": ["veg-curry", "special"],
+        "keywords": [
+          "veg handi",
+          "mixed vegetable",
+          "special curry",
+          "north indian",
+          "chef special"
+        ]
+      },
+      {
+        "name": "Masala Baby Corn",
+        "description": "Baby corn cooked in spicy masala gravy",
+        "price": 450,
+        "vegType": "veg",
+        "tags": ["baby-corn", "spicy"],
+        "keywords": [
+          "baby corn masala",
+          "baby corn curry",
+          "spicy corn",
+          "veg curry",
+          "north indian"
+        ]
+      }
+    ]
+  },
+  {
+    "categoryName": "Dal, Thalis & Combos",
+    "items": [
+      {
+        "name": "Dal Plain",
+        "description": "Simple home-style yellow dal",
+        "price": 325,
+        "vegType": "veg",
+        "tags": ["dal", "north-indian"],
+        "keywords": [
+          "dal plain",
+          "simple dal",
+          "yellow dal",
+          "lentils",
+          "comfort food"
+        ]
+      },
+      {
+        "name": "Dal with Jeera Tadka",
+        "description": "Dal tempered with cumin and aromatic spices",
+        "price": 325,
+        "vegType": "veg",
+        "tags": ["dal", "jeera"],
+        "keywords": [
+          "jeera dal",
+          "dal tadka",
+          "cumin dal",
+          "lentils",
+          "north indian"
+        ]
+      },
+      {
+        "name": "Dal Fry",
+        "description": "Traditional dal cooked with onions and spices",
+        "price": 325,
+        "vegType": "veg",
+        "tags": ["dal"],
+        "keywords": [
+          "dal fry",
+          "fried dal",
+          "lentils curry",
+          "dal",
+          "north indian"
+        ]
+      },
+      {
+        "name": "Dal Tadka",
+        "description": "Classic dal tempered with garlic and spices",
+        "price": 325,
+        "vegType": "veg",
+        "tags": ["dal", "tadka"],
+        "keywords": [
+          "dal tadka",
+          "tadka dal",
+          "lentils",
+          "north indian",
+          "comfort food"
+        ]
+      },
+      {
+        "name": "Dal Makhani",
+        "description": "Creamy black lentils slow cooked with butter",
+        "price": 350,
+        "vegType": "veg",
+        "tags": ["dal", "makhani"],
+        "keywords": [
+          "dal makhani",
+          "black dal",
+          "creamy dal",
+          "punjabi dal",
+          "north indian"
+        ]
+      },
+      {
+        "name": "Dal Punjabi",
+        "description": "Punjabi style rich and flavorful dal",
+        "price": 350,
+        "vegType": "veg",
+        "tags": ["dal", "punjabi"],
+        "keywords": [
+          "punjabi dal",
+          "dal curry",
+          "lentils",
+          "north indian",
+          "punjabi food"
+        ]
+      },
+      {
+        "name": "Palak Dal",
+        "description": "Nutritious spinach and lentil curry",
+        "price": 350,
+        "vegType": "veg",
+        "tags": ["dal", "palak"],
+        "keywords": [
+          "palak dal",
+          "spinach dal",
+          "healthy dal",
+          "lentils",
+          "north indian"
+        ]
+      },
+      {
+        "name": "Handi Dal (Smoky Flavor)",
+        "description": "Special smoky flavored dal cooked in handi style",
+        "price": 399,
+        "vegType": "veg",
+        "tags": ["dal", "special"],
+        "keywords": [
+          "handi dal",
+          "smoky dal",
+          "special dal",
+          "lentils",
+          "chef special"
+        ]
+      },
+      {
+        "name": "Dal Khichdi",
+        "description": "Comforting rice and lentil preparation",
+        "price": 349,
+        "vegType": "veg",
+        "tags": ["khichdi", "dal"],
+        "keywords": [
+          "dal khichdi",
+          "khichdi",
+          "rice and dal",
+          "comfort food",
+          "healthy meal"
+        ]
+      },
+      {
+        "name": "Nidhi's Special Thali",
+        "description": "Complete premium thali with assorted curries, dal, rice and breads",
+        "price": 325,
+        "vegType": "veg",
+        "tags": ["thali", "combo", "special"],
+        "keywords": [
+          "special thali",
+          "veg thali",
+          "complete meal",
+          "combo",
+          "nidhi special"
+        ]
+      },
+      {
+        "name": "Nidhi's Regular Thali",
+        "description": "Balanced thali with daily favorites",
+        "price": 250,
+        "vegType": "veg",
+        "tags": ["thali", "combo"],
+        "keywords": [
+          "regular thali",
+          "veg thali",
+          "meal combo",
+          "lunch combo",
+          "dinner combo"
+        ]
+      },
+      {
+        "name": "Nidhi's Simple Thali",
+        "description": "Simple and affordable home-style thali",
+        "price": 225,
+        "vegType": "veg",
+        "tags": ["thali", "combo"],
+        "keywords": [
+          "simple thali",
+          "budget meal",
+          "veg thali",
+          "meal combo",
+          "home style"
+        ]
+      },
+      {
+        "name": "Paneer Butter Masala with 4 Fulka",
+        "description": "Paneer butter masala served with four fresh fulkas",
+        "price": 269,
+        "vegType": "veg",
+        "tags": ["combo", "paneer"],
+        "keywords": [
+          "paneer combo",
+          "paneer butter masala",
+          "fulka",
+          "meal combo",
+          "north indian"
+        ]
+      },
+      {
+        "name": "Chole/Dal with Chawal",
+        "description": "Choice of chole or dal served with steamed rice",
+        "price": 269,
+        "vegType": "veg",
+        "tags": ["combo", "rice"],
+        "keywords": [
+          "chole chawal",
+          "dal chawal",
+          "rice combo",
+          "comfort food",
+          "north indian"
+        ]
+      },
+      {
+        "name": "Litti Chokha",
+        "description": "Traditional Bihar specialty with roasted litti and chokha",
+        "price": 399,
+        "vegType": "veg",
+        "tags": ["bihari", "special"],
+        "keywords": [
+          "litti chokha",
+          "bihar food",
+          "traditional meal",
+          "bihari cuisine",
+          "special dish"
+        ]
+      },
+      {
+        "name": "Sarson Ka Saag with Makki/Missi Roti (2)",
+        "description": "Traditional Punjabi sarson ka saag served with two rotis",
+        "price": 399,
+        "vegType": "veg",
+        "tags": ["punjabi", "combo"],
+        "keywords": [
+          "sarson ka saag",
+          "makki roti",
+          "missi roti",
+          "punjabi food",
+          "traditional combo"
+        ]
+      }
+    ]
+  },
+  {
+    "categoryName": "Biryani/Rice/Pulao",
+    "items": [
+      {
+        "name": "Plain Rice",
+        "description": "Steamed basmati rice",
+        "price": 200,
+        "vegType": "veg",
+        "tags": ["rice"],
+        "keywords": ["plain rice", "steamed rice", "basmati rice", "rice"]
+      },
+      {
+        "name": "Curd Rice",
+        "description": "South Indian style rice mixed with fresh curd",
+        "price": 249,
+        "vegType": "veg",
+        "tags": ["rice", "south-indian"],
+        "keywords": ["curd rice", "yogurt rice", "south indian rice", "rice"]
+      },
+      {
+        "name": "Jeera Rice",
+        "description": "Basmati rice flavored with cumin seeds",
+        "price": 249,
+        "vegType": "veg",
+        "tags": ["rice", "jeera"],
+        "keywords": ["jeera rice", "cumin rice", "rice", "basmati rice"]
+      },
+      {
+        "name": "Veg Fried Rice",
+        "description": "Vegetable fried rice tossed with sauces and vegetables",
+        "price": 289,
+        "vegType": "veg",
+        "tags": ["fried-rice", "indo-chinese"],
+        "keywords": [
+          "veg fried rice",
+          "fried rice",
+          "vegetable rice",
+          "chinese rice"
+        ]
+      },
+      {
+        "name": "Chilli Garlic Rice",
+        "description": "Rice tossed with chilli garlic flavors",
+        "price": 289,
+        "vegType": "veg",
+        "tags": ["fried-rice", "spicy"],
+        "keywords": [
+          "chilli garlic rice",
+          "garlic rice",
+          "spicy rice",
+          "fried rice"
+        ]
+      },
+      {
+        "name": "Schezwan Fried Rice (Spicy)",
+        "description": "Spicy schezwan flavored fried rice",
+        "price": 289,
+        "vegType": "veg",
+        "tags": ["fried-rice", "schezwan"],
+        "keywords": [
+          "schezwan rice",
+          "fried rice",
+          "spicy rice",
+          "chinese rice"
+        ]
+      },
+      {
+        "name": "Veg Pulao",
+        "description": "Aromatic basmati rice cooked with vegetables",
+        "price": 350,
+        "vegType": "veg",
+        "tags": ["pulao"],
+        "keywords": ["veg pulao", "vegetable pulao", "rice", "basmati pulao"]
+      },
+      {
+        "name": "Paneer Fried Rice",
+        "description": "Fried rice loaded with paneer cubes",
+        "price": 375,
+        "vegType": "veg",
+        "tags": ["fried-rice", "paneer"],
+        "keywords": ["paneer fried rice", "paneer rice", "fried rice", "rice"]
+      },
+      {
+        "name": "Paneer Tikka Pulao",
+        "description": "Flavorful pulao with tandoori paneer tikka",
+        "price": 375,
+        "vegType": "veg",
+        "tags": ["pulao", "paneer"],
+        "keywords": [
+          "paneer tikka pulao",
+          "paneer pulao",
+          "rice",
+          "paneer rice"
+        ]
+      },
+      {
+        "name": "Veg Biryani (North Indian Style)",
+        "description": "Traditional North Indian vegetable biryani",
+        "price": 379,
+        "vegType": "veg",
+        "tags": ["biryani"],
+        "keywords": ["veg biryani", "north indian biryani", "biryani", "rice"]
+      },
+      {
+        "name": "Kaju Pulao",
+        "description": "Rich pulao prepared with premium cashews",
+        "price": 399,
+        "vegType": "veg",
+        "tags": ["pulao", "kaju"],
+        "keywords": ["kaju pulao", "cashew pulao", "rice", "premium pulao"]
+      },
+      {
+        "name": "Corn Kaju Pulao",
+        "description": "Sweet corn and cashew pulao",
+        "price": 399,
+        "vegType": "veg",
+        "tags": ["pulao", "corn", "kaju"],
+        "keywords": ["corn kaju pulao", "cashew pulao", "corn rice", "rice"]
+      },
+      {
+        "name": "Mushroom Biryani",
+        "description": "Fragrant biryani cooked with fresh mushrooms",
+        "price": 399,
+        "vegType": "veg",
+        "tags": ["biryani", "mushroom"],
+        "keywords": ["mushroom biryani", "veg biryani", "rice", "mushroom rice"]
+      },
+      {
+        "name": "Soya Chaap Biryani",
+        "description": "Protein-rich biryani with flavorful soya chaap",
+        "price": 399,
+        "vegType": "veg",
+        "tags": ["biryani", "soya-chaap"],
+        "keywords": [
+          "soya chaap biryani",
+          "chaap biryani",
+          "veg biryani",
+          "rice"
+        ]
+      },
+      {
+        "name": "Kashmiri Pulao (Sweet in Flavor)",
+        "description": "Sweet flavored pulao with dry fruits and nuts",
+        "price": 399,
+        "vegType": "veg",
+        "tags": ["pulao", "kashmiri"],
+        "keywords": [
+          "kashmiri pulao",
+          "sweet pulao",
+          "rice",
+          "dry fruits pulao"
+        ]
+      },
+      {
+        "name": "Kaju Paneer Biryani",
+        "description": "Premium biryani with paneer and cashews",
+        "price": 439,
+        "vegType": "veg",
+        "tags": ["biryani", "paneer", "kaju"],
+        "keywords": [
+          "kaju paneer biryani",
+          "paneer biryani",
+          "premium biryani",
+          "rice"
+        ]
+      },
+      {
+        "name": "Handi Special Biryani",
+        "description": "Chef special dum-style biryani cooked in handi",
+        "price": 499,
+        "vegType": "veg",
+        "tags": ["biryani", "special"],
+        "keywords": [
+          "handi biryani",
+          "special biryani",
+          "dum biryani",
+          "chef special"
+        ]
+      },
+      {
+        "name": "Handi Special Biryani (For 4 Persons)",
+        "description": "Family pack handi special biryani for four people",
+        "price": 899,
+        "vegType": "veg",
+        "tags": ["biryani", "family-pack"],
+        "keywords": [
+          "family biryani",
+          "handi biryani",
+          "party pack",
+          "group meal"
+        ]
+      }
+    ]
+  },
+  {
+    "categoryName": "Nidhi's Rotis & Raita",
+    "items": [
+      {
+        "name": "Tawa Fulka (Plain)",
+        "description": "Soft whole wheat fulka cooked on tawa",
+        "price": 40,
+        "vegType": "veg",
+        "tags": ["bread", "roti"],
+        "keywords": ["fulka", "plain roti", "tawa roti", "wheat bread"]
+      },
+      {
+        "name": "Tawa Fulka (Butter)",
+        "description": "Soft fulka topped with butter",
+        "price": 45,
+        "vegType": "veg",
+        "tags": ["bread", "butter"],
+        "keywords": ["butter fulka", "butter roti", "tawa roti", "bread"]
+      },
+      {
+        "name": "Tandoori Roti (Plain)",
+        "description": "Traditional clay oven baked roti",
+        "price": 50,
+        "vegType": "veg",
+        "tags": ["bread", "tandoor"],
+        "keywords": ["tandoori roti", "plain roti", "bread", "north indian"]
+      },
+      {
+        "name": "Tandoori Roti (Butter)",
+        "description": "Tandoori roti finished with butter",
+        "price": 55,
+        "vegType": "veg",
+        "tags": ["bread", "butter"],
+        "keywords": ["butter tandoori roti", "roti", "bread", "north indian"]
+      },
+      {
+        "name": "Plain Paratha",
+        "description": "Layered whole wheat paratha",
+        "price": 50,
+        "vegType": "veg",
+        "tags": ["bread", "paratha"],
+        "keywords": ["plain paratha", "paratha", "bread", "north indian"]
+      },
+      {
+        "name": "Missi Roti",
+        "description": "Traditional gram flour and wheat flour roti",
+        "price": 70,
+        "vegType": "veg",
+        "tags": ["bread", "missi-roti"],
+        "keywords": ["missi roti", "besan roti", "punjabi bread", "bread"]
+      },
+      {
+        "name": "Makki Ki Roti",
+        "description": "Traditional corn flour flatbread",
+        "price": 70,
+        "vegType": "veg",
+        "tags": ["bread", "punjabi"],
+        "keywords": ["makki ki roti", "corn roti", "punjabi bread", "bread"]
+      },
+      {
+        "name": "Laccha Paratha",
+        "description": "Multi-layered flaky paratha",
+        "price": 70,
+        "vegType": "veg",
+        "tags": ["bread", "paratha"],
+        "keywords": [
+          "laccha paratha",
+          "layered paratha",
+          "bread",
+          "north indian"
+        ]
+      },
+      {
+        "name": "Lahsuni Missi Roti",
+        "description": "Missi roti flavored with garlic",
+        "price": 79,
+        "vegType": "veg",
+        "tags": ["bread", "garlic"],
+        "keywords": [
+          "garlic missi roti",
+          "lahsuni roti",
+          "bread",
+          "garlic bread"
+        ]
+      },
+      {
+        "name": "Naan (Plain)",
+        "description": "Soft tandoor baked naan",
+        "price": 70,
+        "vegType": "veg",
+        "tags": ["bread", "naan"],
+        "keywords": [
+          "plain naan",
+          "naan bread",
+          "tandoor bread",
+          "north indian"
+        ]
+      },
+      {
+        "name": "Naan (Butter)",
+        "description": "Soft naan topped with butter",
+        "price": 75,
+        "vegType": "veg",
+        "tags": ["bread", "naan"],
+        "keywords": ["butter naan", "naan bread", "tandoor bread", "bread"]
+      },
+      {
+        "name": "Garlic Naan",
+        "description": "Naan topped with fresh garlic and butter",
+        "price": 89,
+        "vegType": "veg",
+        "tags": ["bread", "naan", "garlic"],
+        "keywords": ["garlic naan", "naan", "garlic bread", "tandoor bread"]
+      },
+      {
+        "name": "Kashmiri Naan",
+        "description": "Sweet stuffed naan with dry fruits",
+        "price": 99,
+        "vegType": "veg",
+        "tags": ["bread", "naan", "special"],
+        "keywords": ["kashmiri naan", "stuffed naan", "sweet naan", "naan"]
+      },
+      {
+        "name": "Aloo Kulcha",
+        "description": "Stuffed kulcha filled with spiced potatoes",
+        "price": 120,
+        "vegType": "veg",
+        "tags": ["bread", "kulcha"],
+        "keywords": ["aloo kulcha", "potato kulcha", "stuffed kulcha", "bread"]
+      },
+      {
+        "name": "Onion Kulcha",
+        "description": "Stuffed kulcha with onion filling",
+        "price": 120,
+        "vegType": "veg",
+        "tags": ["bread", "kulcha"],
+        "keywords": ["onion kulcha", "stuffed kulcha", "bread", "kulcha"]
+      },
+      {
+        "name": "Amritsari Kulcha",
+        "description": "Authentic Amritsari style stuffed kulcha",
+        "price": 130,
+        "vegType": "veg",
+        "tags": ["bread", "kulcha"],
+        "keywords": ["amritsari kulcha", "kulcha", "stuffed bread", "punjabi"]
+      },
+      {
+        "name": "Mix Veg Kulcha",
+        "description": "Kulcha stuffed with mixed vegetables",
+        "price": 130,
+        "vegType": "veg",
+        "tags": ["bread", "kulcha"],
+        "keywords": [
+          "mix veg kulcha",
+          "vegetable kulcha",
+          "stuffed bread",
+          "kulcha"
+        ]
+      },
+      {
+        "name": "Paneer Kulcha",
+        "description": "Kulcha stuffed with paneer filling",
+        "price": 140,
+        "vegType": "veg",
+        "tags": ["bread", "paneer"],
+        "keywords": [
+          "paneer kulcha",
+          "stuffed kulcha",
+          "paneer bread",
+          "kulcha"
+        ]
+      },
+      {
+        "name": "Tandoori Paratha",
+        "description": "Paratha baked in traditional tandoor",
+        "price": 120,
+        "vegType": "veg",
+        "tags": ["bread", "paratha"],
+        "keywords": ["tandoori paratha", "paratha", "bread", "north indian"]
+      },
+      {
+        "name": "Tandoori Paratha (Gobhi)",
+        "description": "Tandoori paratha stuffed with cauliflower",
+        "price": 130,
+        "vegType": "veg",
+        "tags": ["bread", "paratha"],
+        "keywords": [
+          "gobhi paratha",
+          "cauliflower paratha",
+          "stuffed paratha",
+          "bread"
+        ]
+      },
+      {
+        "name": "Tandoori Paratha (Mix Veg)",
+        "description": "Tandoori paratha stuffed with mixed vegetables",
+        "price": 130,
+        "vegType": "veg",
+        "tags": ["bread", "paratha"],
+        "keywords": [
+          "mix veg paratha",
+          "stuffed paratha",
+          "vegetable paratha",
+          "bread"
+        ]
+      },
+      {
+        "name": "Tandoori Paratha (Paneer)",
+        "description": "Tandoori paratha stuffed with paneer",
+        "price": 150,
+        "vegType": "veg",
+        "tags": ["bread", "paneer"],
+        "keywords": [
+          "paneer paratha",
+          "stuffed paratha",
+          "paneer bread",
+          "paratha"
+        ]
+      },
+      {
+        "name": "Boondi Raita",
+        "description": "Refreshing yogurt with crispy boondi",
+        "price": 169,
+        "vegType": "veg",
+        "tags": ["raita", "yogurt"],
+        "keywords": ["boondi raita", "raita", "curd", "yogurt side"]
+      },
+      {
+        "name": "Mix Veg Raita",
+        "description": "Yogurt mixed with fresh vegetables",
+        "price": 169,
+        "vegType": "veg",
+        "tags": ["raita", "yogurt"],
+        "keywords": ["mix veg raita", "vegetable raita", "curd", "yogurt"]
+      },
+      {
+        "name": "Aloo Jeera Raita",
+        "description": "Potato and cumin flavored yogurt",
+        "price": 169,
+        "vegType": "veg",
+        "tags": ["raita", "potato"],
+        "keywords": ["aloo raita", "jeera raita", "potato yogurt", "curd"]
+      },
+      {
+        "name": "Mint Raita",
+        "description": "Cooling mint flavored yogurt",
+        "price": 169,
+        "vegType": "veg",
+        "tags": ["raita", "mint"],
+        "keywords": ["mint raita", "mint yogurt", "curd", "cooling side"]
+      },
+      {
+        "name": "Kheera Raita",
+        "description": "Fresh cucumber yogurt accompaniment",
+        "price": 169,
+        "vegType": "veg",
+        "tags": ["raita", "cucumber"],
+        "keywords": ["kheera raita", "cucumber raita", "curd", "yogurt"]
+      },
+      {
+        "name": "Fruit Raita",
+        "description": "Sweet yogurt mixed with seasonal fruits",
+        "price": 239,
+        "vegType": "veg",
+        "tags": ["raita", "fruit"],
+        "keywords": ["fruit raita", "sweet raita", "fruit yogurt", "curd"]
+      }
+    ]
+  },
+  {
+    "categoryName": "Nidhi Ki Meethai",
+    "items": [
+      {
+        "name": "Gulab Jamun",
+        "description": "Soft deep-fried milk dumplings soaked in sugar syrup",
+        "price": 120,
+        "vegType": "veg",
+        "tags": ["dessert", "sweet", "gulab jamun", "indian sweet", "meethai"]
+      },
+      {
+        "name": "Jalebi (Sugar)",
+        "description": "Traditional crispy jalebi prepared with sugar syrup",
+        "price": 225,
+        "vegType": "veg",
+        "tags": ["dessert", "sweet", "jalebi", "indian sweet", "sugar"]
+      },
+      {
+        "name": "Jalebi (Jaggery)",
+        "description": "Traditional jalebi prepared using jaggery syrup",
+        "price": 235,
+        "vegType": "veg",
+        "tags": ["dessert", "sweet", "jalebi", "jaggery", "gur", "indian sweet"]
+      },
+      {
+        "name": "Gajar Halwa (Seasonal)",
+        "description": "Traditional carrot pudding prepared with milk and dry fruits",
+        "price": 250,
+        "vegType": "veg",
+        "tags": ["dessert", "sweet", "gajar halwa", "carrot halwa", "seasonal"]
+      },
+      {
+        "name": "Moong Dal Halwa",
+        "description": "Rich and aromatic moong dal halwa cooked with ghee",
+        "price": 225,
+        "vegType": "veg",
+        "tags": ["dessert", "sweet", "halwa", "moong dal", "indian sweet"]
+      },
+      {
+        "name": "Choose Your Flavor Ice Cream",
+        "description": "Ice cream available in multiple flavors",
+        "price": 160,
+        "vegType": "veg",
+        "tags": ["dessert", "ice cream", "cold dessert", "sweet"]
+      },
+      {
+        "name": "Banarasi Balushahi Tikki",
+        "description": "Traditional Banarasi style balushahi sweet",
+        "price": 160,
+        "vegType": "veg",
+        "tags": [
+          "dessert",
+          "sweet",
+          "balushahi",
+          "banarasi sweet",
+          "indian sweet"
+        ]
+      }
+    ]
+  },
+  {
+    "categoryName": "Breakfast, Chaat & Snacks",
+    "items": [
+      {
+        "name": "Puri And Sabji",
+        "description": "Traditional puris served with flavorful vegetable curry",
+        "price": 225,
+        "vegType": "veg",
+        "tags": ["breakfast", "puri", "sabji", "north indian", "snack"]
+      },
+      {
+        "name": "Chole Bhature",
+        "description": "Punjabi style spicy chole served with fluffy bhature",
+        "price": 240,
+        "vegType": "veg",
+        "tags": [
+          "breakfast",
+          "chole bhature",
+          "punjabi",
+          "north indian",
+          "popular"
+        ]
+      },
+      {
+        "name": "Poha",
+        "description": "Light and healthy flattened rice breakfast",
+        "price": 200,
+        "vegType": "veg",
+        "tags": ["breakfast", "poha", "healthy", "indian breakfast"]
+      },
+      {
+        "name": "Bread Pakoda",
+        "description": "Crispy bread fritters stuffed with savory filling",
+        "price": 199,
+        "vegType": "veg",
+        "tags": ["snack", "bread pakoda", "fried", "tea time"]
+      },
+      {
+        "name": "Paneer Pakoda",
+        "description": "Paneer slices coated and deep fried to perfection",
+        "price": 299,
+        "vegType": "veg",
+        "tags": ["snack", "paneer", "pakoda", "fried"]
+      },
+      {
+        "name": "Bread Cutlet",
+        "description": "Crispy bread cutlets filled with vegetables",
+        "price": 250,
+        "vegType": "veg",
+        "tags": ["snack", "bread", "cutlet", "crispy"]
+      },
+      {
+        "name": "Samosa (4 Nos)",
+        "description": "Four crispy samosas served hot",
+        "price": 160,
+        "vegType": "veg",
+        "tags": ["snack", "samosa", "fried", "popular"]
+      },
+      {
+        "name": "Khasta Kachori (4 Nos)",
+        "description": "Four flaky and crispy khasta kachoris",
+        "price": 160,
+        "vegType": "veg",
+        "tags": ["snack", "kachori", "khasta", "rajasthani"]
+      },
+      {
+        "name": "Samosa Chaat",
+        "description": "Crushed samosa topped with chutneys and spices",
+        "price": 120,
+        "vegType": "veg",
+        "tags": ["chaat", "samosa", "street food", "popular"]
+      },
+      {
+        "name": "Dahi Puri",
+        "description": "Crispy puris filled with yogurt and chutneys",
+        "price": 160,
+        "vegType": "veg",
+        "tags": ["chaat", "dahi puri", "street food", "yogurt"]
+      },
+      {
+        "name": "Dahi Papdi",
+        "description": "Papdi chaat topped with yogurt and chutneys",
+        "price": 120,
+        "vegType": "veg",
+        "tags": ["chaat", "papdi chaat", "street food", "yogurt"]
+      },
+      {
+        "name": "Dahi Bhalla",
+        "description": "Soft lentil dumplings served with yogurt",
+        "price": 120,
+        "vegType": "veg",
+        "tags": ["chaat", "dahi bhalla", "street food", "yogurt"]
+      },
+      {
+        "name": "Bread Rolls",
+        "description": "Stuffed and crispy fried bread rolls",
+        "price": 199,
+        "vegType": "veg",
+        "tags": ["snack", "bread roll", "fried", "tea time"]
+      },
+      {
+        "name": "Khasta Kachori (2 Nos) With Alu Sabji",
+        "description": "Two khasta kachoris served with spicy potato curry",
+        "price": 199,
+        "vegType": "veg",
+        "tags": ["breakfast", "kachori", "alu sabji", "combo"]
+      },
+      {
+        "name": "Chole With Puris",
+        "description": "Spicy chole served with freshly made puris",
+        "price": 225,
+        "vegType": "veg",
+        "tags": ["breakfast", "chole", "puri", "combo"]
+      },
+      {
+        "name": "Mix Veg Paratha",
+        "description": "Stuffed paratha filled with mixed vegetables",
+        "price": 150,
+        "vegType": "veg",
+        "tags": ["breakfast", "paratha", "stuffed", "north indian"]
+      },
+      {
+        "name": "Paneer Paratha",
+        "description": "Stuffed paratha filled with paneer",
+        "price": 199,
+        "vegType": "veg",
+        "tags": ["breakfast", "paneer", "paratha", "stuffed"]
+      },
+      {
+        "name": "Gobhi Paratha",
+        "description": "Traditional stuffed cauliflower paratha",
+        "price": 189,
+        "vegType": "veg",
+        "tags": ["breakfast", "gobhi", "paratha", "stuffed"]
+      },
+      {
+        "name": "Alu Paratha",
+        "description": "Classic stuffed potato paratha",
+        "price": 160,
+        "vegType": "veg",
+        "tags": ["breakfast", "alu", "paratha", "popular"]
+      },
+      {
+        "name": "Alu Curry & 2 Plain Parathas",
+        "description": "Potato curry served with two plain parathas",
+        "price": 199,
+        "vegType": "veg",
+        "tags": ["breakfast", "paratha", "alu curry", "combo"]
+      }
+    ]
+  }
+]
