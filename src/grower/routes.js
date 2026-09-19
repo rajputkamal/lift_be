@@ -11,14 +11,15 @@ import {
   updateProduct,
   deleteProduct,
 } from "./crudController.js";
+import { uploadGrowerImages, uploadProductImages } from "./cloudinaryUpload.js";
 
 const router = express.Router();
-router.post("/growers", createGrower);
+router.post("/growers", uploadGrowerImages, createGrower);
 router.get("/growers", listGrowers);
 router.get("/growers/:id", getGrower);
 router.patch("/growers/:id", updateGrower);
 router.delete("/growers/:id", deleteGrower);
-router.post("/products", createProduct);
+router.post("/products", uploadProductImages, createProduct);
 router.get("/products", listProducts);
 router.get("/products/:id", getProduct);
 router.patch("/products/:id", updateProduct);

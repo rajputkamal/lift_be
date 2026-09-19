@@ -10,7 +10,7 @@ Base path: `/api/v1`. The catalogue now exposes direct CRUD routes on `/growers`
 Example response from `GET /products/:id`:
 
 ```json
-{"success":true,"data":{"id":"507f1f77bcf86cd799439011","growerId":"507f191e810c19729de860ea","name":"Radish Microgreens","slug":"greenleaf-radish-microgreens","shortDescription":"Crisp and spicy","description":"Fresh radish microgreens.","price":99,"weight":"50g","thumbnail":"https://example.com/radish.webp","images":["https://example.com/radish.webp"],"category":"Radish","cultivationDate":null,"harvestDate":null,"bestBefore":null,"storage":"Keep refrigerated","stock":20,"isActive":true}}}
+{"success":true,"data":{"id":"507f1f77bcf86cd799439011","growerId":"507f191e810c19729de860ea","name":"Radish Microgreens","slug":"greenleaf-radish-microgreens","shortDescription":"Crisp and spicy","description":"Fresh radish microgreens.","price":99,"weight":"50g","thumbnail":"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/radish.jpg","images":["https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/radish.jpg"],"category":"Radish","cultivationDate":null,"harvestDate":null,"bestBefore":null,"storage":"Keep refrigerated","stock":20,"isActive":true}}}
 ```
 
 Unwrap `data` from the response envelope. Render grower `logo` as an image URL with an initials fallback when null. Hide `rating` while it is null. Only format batch dates when present; do not render invalid placeholders. `thumbnail` comes from `images[0]`. Keep active products with `stock: 0` visible as “Sold out.”

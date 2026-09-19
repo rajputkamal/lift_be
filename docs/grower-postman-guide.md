@@ -22,8 +22,8 @@ Run these in order. Replace the sample slug/email if a previous run already crea
 {
   "name": "GreenLeaf Microgreens Demo",
   "slug": "greenleaf-microgreens-demo",
-  "logo": "https://example.com/greenleaf-logo.webp",
-  "coverImage": "https://example.com/greenleaf-cover.webp",
+  "logo": "https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg",
+  "coverImage": "https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg",
   "shortDescription": "Fresh microgreens grown in Hyderabad",
   "description": "Small batches of locally grown microgreens.",
   "city": "Hyderabad",
@@ -63,8 +63,8 @@ Create the grower first. An active product needs at least one valid HTTP(S) imag
   "price": 99,
   "weight": "50g",
   "images": [
-    "https://example.com/radish-1.webp",
-    "https://example.com/radish-2.webp"
+    "https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/radish.jpg",
+    "https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg"
   ],
   "category": "Radish",
   "cultivationDate": null,

@@ -17,6 +17,7 @@ import {
 } from "./catalogue.js";
 import DayReservation from "./models/dayReservationModel.js";
 import { transaction } from "./checkout/reservations.js";
+import { cleanupCloudinaryUploads } from "./cloudinaryUpload.js";
 
 const validation = (res, fields) =>
   fail(
@@ -43,12 +44,16 @@ const checkedFilter = (req, res) => {
 
 export async function createGrower(req, res) {
   const { errors, value } = validate("grower", req.body);
-  if (Object.keys(errors).length) return validation(res, errors);
+  if (Object.keys(errors).length) {
+    await cleanupCloudinaryUploads(req);
+    return validation(res, errors);
+  }
   try {
     return res
       .status(201)
       .json({ success: true, data: crudGrower(await Grower.create(value)) });
   } catch (err) {
+    await cleanupCloudinaryUploads(req);
     return isDuplicate(err) ? conflict(res) : serverError(res, err);
   }
 }
@@ -128,14 +133,20 @@ export async function deleteGrower(req, res) {
 
 export async function createProduct(req, res) {
   const { errors, value } = validate("product", req.body);
-  if (Object.keys(errors).length) return validation(res, errors);
+  if (Object.keys(errors).length) {
+    await cleanupCloudinaryUploads(req);
+    return validation(res, errors);
+  }
   try {
-    if (!(await Grower.exists({ _id: value.growerId })))
+    if (!(await Grower.exists({ _id: value.growerId }))) {
+      await cleanupCloudinaryUploads(req);
       return validation(res, { growerId: "Grower does not exist." });
+    }
     return res
       .status(201)
       .json({ success: true, data: crudProduct(await Product.create(value)) });
   } catch (err) {
+    await cleanupCloudinaryUploads(req);
     return isDuplicate(err) ? conflict(res) : serverError(res, err);
   }
 }

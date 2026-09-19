@@ -88,7 +88,7 @@
         "url": "{{baseUrl}}/growers",
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"name\": \"GreenLeaf Microgreens Demo\",\n  \"slug\": \"greenleaf-microgreens-demo\",\n  \"logo\": \"https://example.com/greenleaf-logo.webp\",\n  \"coverImage\": \"https://example.com/greenleaf-cover.webp\",\n  \"shortDescription\": \"Fresh microgreens grown in Hyderabad\",\n  \"description\": \"Small batches of locally grown microgreens.\",\n  \"city\": \"Hyderabad\",\n  \"area\": \"Gachibowli\",\n  \"pincode\": \"500032\",\n  \"phone\": \"9876543210\",\n  \"email\": \"greenleaf-demo@example.com\",\n  \"deliveryText\": \"Delivery by arrangement\",\n  \"deliveryFee\": 20,\n  \"deliveryPincodes\": [\n    \"500032\"\n  ],\n  \"pickupDetails\": \"Collect at the farm counter, 9 AM–5 PM\",\n  \"isActive\": true\n}",
+          "raw": "{\n  \"name\": \"GreenLeaf Microgreens Demo\",\n  \"slug\": \"greenleaf-microgreens-demo\",\n  \"logo\": \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg\",\n  \"coverImage\": \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg\",\n  \"shortDescription\": \"Fresh microgreens grown in Hyderabad\",\n  \"description\": \"Small batches of locally grown microgreens.\",\n  \"city\": \"Hyderabad\",\n  \"area\": \"Gachibowli\",\n  \"pincode\": \"500032\",\n  \"phone\": \"9876543210\",\n  \"email\": \"greenleaf-demo@example.com\",\n  \"deliveryText\": \"Delivery by arrangement\",\n  \"deliveryFee\": 20,\n  \"deliveryPincodes\": [\n    \"500032\"\n  ],\n  \"pickupDetails\": \"Collect at the farm counter, 9 AM–5 PM\",\n  \"isActive\": true\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -166,7 +166,7 @@
         "url": "{{baseUrl}}/products",
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"growerId\": \"{{growerId}}\",\n  \"name\": \"Radish Microgreens Demo\",\n  \"slug\": \"greenleaf-radish-demo\",\n  \"shortDescription\": \"Crisp and slightly spicy.\",\n  \"description\": \"Fresh radish microgreens with a crisp texture.\",\n  \"price\": 99,\n  \"weight\": \"50g\",\n  \"images\": [\n    \"https://example.com/radish-1.webp\",\n    \"https://example.com/radish-2.webp\"\n  ],\n  \"category\": \"Radish\",\n  \"cultivationDate\": null,\n  \"harvestDate\": null,\n  \"bestBefore\": null,\n  \"storage\": \"Keep refrigerated\",\n  \"stock\": 20,\n  \"isActive\": true\n}",
+          "raw": "{\n  \"growerId\": \"{{growerId}}\",\n  \"name\": \"Radish Microgreens Demo\",\n  \"slug\": \"greenleaf-radish-demo\",\n  \"shortDescription\": \"Crisp and slightly spicy.\",\n  \"description\": \"Fresh radish microgreens with a crisp texture.\",\n  \"price\": 99,\n  \"weight\": \"50g\",\n  \"images\": [\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/radish.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg\"\n  ],\n  \"category\": \"Radish\",\n  \"cultivationDate\": null,\n  \"harvestDate\": null,\n  \"bestBefore\": null,\n  \"storage\": \"Keep refrigerated\",\n  \"stock\": 20,\n  \"isActive\": true\n}",
           "options": {
             "raw": {
               "language": "json"

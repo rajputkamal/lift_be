@@ -148,15 +148,20 @@ paths:
         { "200": { description: Success envelope with data and pagination } }
     post:
       summary: Create grower
+      description: Accepts JSON image URLs or multipart image files named logo and coverImage. Multipart array fields are JSON strings.
       requestBody:
-        {
-          required: true,
-          content:
-            {
-              application/json:
-                { schema: { $ref: "#/components/schemas/GrowerInput" } },
-            },
-        }
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/GrowerInput" }
+          multipart/form-data:
+            schema:
+              allOf:
+                - { $ref: "#/components/schemas/GrowerInput" }
+                - type: object
+                  properties:
+                    logo: { type: string, format: binary }
+                    coverImage: { type: string, format: binary }
       responses:
         {
           "201": { description: Created grower },
@@ -203,15 +208,22 @@ paths:
         { "200": { description: Success envelope with data and pagination } }
     post:
       summary: Create product
+      description: Accepts JSON image URLs or multipart image files named images, repeated in display order.
       requestBody:
-        {
-          required: true,
-          content:
-            {
-              application/json:
-                { schema: { $ref: "#/components/schemas/ProductInput" } },
-            },
-        }
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ProductInput" }
+          multipart/form-data:
+            schema:
+              allOf:
+                - { $ref: "#/components/schemas/ProductInput" }
+                - type: object
+                  properties:
+                    images:
+                      type: array
+                      maxItems: 8
+                      items: { type: string, format: binary }
       responses:
         {
           "201": { description: Created product },
