@@ -30,6 +30,16 @@ const restaurantSchema = new mongoose.Schema(
       required: true,
     },
 
+    isEmailServiceOpted: {
+      type: Boolean,
+      default: false,
+    },
+
+    isPhoneServiceOpted: {
+      type: Boolean,
+      default: false,
+    },
+
     vegType: {
       type: String,
       enum: ["veg", "non-veg", "egg", "both"],

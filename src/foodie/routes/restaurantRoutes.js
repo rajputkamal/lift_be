@@ -5,7 +5,7 @@ import {
   attachCategories,
   getRestaurantDetails,
   getMenuItemsByCategory,
-  getAllRestaurants
+  getAllRestaurants,
 } from "../controllers/restaurantController.js";
 import { protect } from "../../middleware/authMiddleware.js";
 

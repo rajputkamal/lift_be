@@ -80,7 +80,7 @@ export const verifyOtp = async (req, res) => {
     const result = await validateMessageCentralOtp(
       phoneNumber,
       otp,
-      verificationId
+      verificationId,
     );
 
     if (!result || result.responseCode !== 200) {

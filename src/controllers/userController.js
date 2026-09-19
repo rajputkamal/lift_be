@@ -32,7 +32,7 @@ export const updateProfile = async (req, res) => {
           userName: user.name,
           vehicleNumber: user.vehicleNumber,
         },
-      }
+      },
     );
 
     res.status(200).json({

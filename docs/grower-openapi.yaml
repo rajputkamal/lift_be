@@ -1,0 +1,333 @@
+openapi: 3.0.3
+info:
+  title: Grower MVP API
+  version: 2.0.0
+  description: Direct grower/product CRUD and guest checkout. Catalogue CRUD has no authentication in this MVP. Payments require Razorpay Test Mode.
+servers:
+  - url: http://localhost:8080/api/v1
+components:
+  parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      schema: { type: string, example: 507f191e810c19729de860ea }
+    page:
+      name: page
+      in: query
+      schema: { type: integer, minimum: 1, default: 1 }
+    limit:
+      name: limit
+      in: query
+      schema: { type: integer, minimum: 1, maximum: 100, default: 12 }
+  schemas:
+    Error:
+      type: object
+      properties:
+        success: { type: boolean, example: false }
+        error:
+          type: object
+          properties:
+            code: { type: string }
+            message: { type: string }
+            fields: { type: object, additionalProperties: { type: string } }
+    GrowerInput:
+      type: object
+      required:
+        [
+          name,
+          slug,
+          shortDescription,
+          description,
+          city,
+          area,
+          pincode,
+          phone,
+          email,
+        ]
+      properties:
+        name: { type: string, maxLength: 100 }
+        slug: { type: string, maxLength: 100 }
+        logo: { type: string, format: uri, nullable: true }
+        coverImage: { type: string, format: uri, nullable: true }
+        shortDescription: { type: string, maxLength: 240 }
+        description: { type: string, maxLength: 5000 }
+        city: { type: string, maxLength: 100 }
+        area: { type: string, maxLength: 100 }
+        pincode: { type: string, pattern: '^\\d{6}$' }
+        phone: { type: string }
+        email: { type: string, format: email }
+        deliveryText: { type: string, maxLength: 500 }
+        deliveryFee: { type: number, minimum: 0, description: INR }
+        deliveryPincodes: { type: array, items: { type: string } }
+        pickupDetails: { type: string, maxLength: 500 }
+        isActive: { type: boolean, default: false }
+    ProductInput:
+      type: object
+      required:
+        [
+          growerId,
+          name,
+          slug,
+          shortDescription,
+          description,
+          price,
+          weight,
+          category,
+          storage,
+          stock,
+        ]
+      properties:
+        growerId: { type: string }
+        name: { type: string, maxLength: 120 }
+        slug: { type: string, maxLength: 120 }
+        shortDescription: { type: string, maxLength: 240 }
+        description: { type: string, maxLength: 5000 }
+        price:
+          {
+            type: number,
+            exclusiveMinimum: 0,
+            description: INR with at most two decimal places,
+          }
+        weight: { type: string, maxLength: 50 }
+        images:
+          {
+            type: array,
+            minItems: 1,
+            maxItems: 8,
+            items: { type: string, format: uri },
+          }
+        category: { type: string, maxLength: 100 }
+        cultivationDate: { type: string, format: date, nullable: true }
+        harvestDate: { type: string, format: date, nullable: true }
+        bestBefore: { type: string, format: date, nullable: true }
+        storage: { type: string, maxLength: 500 }
+        stock: { type: integer, minimum: 0 }
+        isActive: { type: boolean, default: false }
+    Shipping:
+      type: object
+      required: [name, phone]
+      properties:
+        name: { type: string }
+        phone: { type: string }
+        email: { type: string }
+        house: { type: string }
+        building: { type: string }
+        street: { type: string }
+        landmark: { type: string }
+        city: { type: string }
+        state: { type: string }
+        pincode: { type: string }
+    OrderInput:
+      type: object
+      required: [growerId, items, purchaseType, fulfilment, firstDate, shipping]
+      properties:
+        growerId: { type: string }
+        items:
+          type: array
+          items:
+            type: object
+            required: [productId, quantity]
+            properties:
+              productId: { type: string }
+              quantity: { type: integer, minimum: 1, maximum: 100 }
+        purchaseType: { type: string, enum: [one-time, subscription] }
+        fulfilment: { type: string, enum: [delivery, pickup] }
+        firstDate: { type: string, format: date }
+        shipping: { $ref: "#/components/schemas/Shipping" }
+paths:
+  /growers:
+    get:
+      summary: List growers, including inactive drafts
+      parameters:
+        - { $ref: "#/components/parameters/page" }
+        - { $ref: "#/components/parameters/limit" }
+        - { name: search, in: query, schema: { type: string } }
+        - { name: isActive, in: query, schema: { type: boolean } }
+      responses:
+        { "200": { description: Success envelope with data and pagination } }
+    post:
+      summary: Create grower
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/GrowerInput" } },
+            },
+        }
+      responses:
+        {
+          "201": { description: Created grower },
+          "400": { description: Validation error },
+          "409": { description: Duplicate slug },
+        }
+  /growers/{id}:
+    parameters: [{ $ref: "#/components/parameters/id" }]
+    get:
+      summary: Get grower by ID
+      responses:
+        { "200": { description: Grower }, "404": { description: Not found } }
+    patch:
+      summary: Partially update grower
+      requestBody:
+        {
+          required: true,
+          content: { application/json: { schema: { type: object } } },
+        }
+      responses:
+        {
+          "200": { description: Updated grower },
+          "400": { description: Validation error },
+          "404": { description: Not found },
+          "409": { description: Duplicate slug },
+        }
+    delete:
+      summary: Set isActive false
+      responses:
+        {
+          "200": { description: ID and isActive false },
+          "404": { description: Not found },
+        }
+  /products:
+    get:
+      summary: List products, including inactive drafts
+      parameters:
+        - { $ref: "#/components/parameters/page" }
+        - { $ref: "#/components/parameters/limit" }
+        - { name: search, in: query, schema: { type: string } }
+        - { name: growerId, in: query, schema: { type: string } }
+        - { name: isActive, in: query, schema: { type: boolean } }
+      responses:
+        { "200": { description: Success envelope with data and pagination } }
+    post:
+      summary: Create product
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/ProductInput" } },
+            },
+        }
+      responses:
+        {
+          "201": { description: Created product },
+          "400": { description: Validation error },
+          "409": { description: Duplicate slug },
+        }
+  /products/{id}:
+    parameters: [{ $ref: "#/components/parameters/id" }]
+    get:
+      summary: Get product by ID
+      responses:
+        { "200": { description: Product }, "404": { description: Not found } }
+    patch:
+      summary: Partially update product; growerId cannot change
+      requestBody:
+        {
+          required: true,
+          content: { application/json: { schema: { type: object } } },
+        }
+      responses:
+        {
+          "200": { description: Updated product },
+          "400": { description: Validation error },
+          "404": { description: Not found },
+          "409": { description: Stock conflict or duplicate slug },
+        }
+    delete:
+      summary: Set isActive false
+      responses:
+        {
+          "200": { description: ID and isActive false },
+          "404": { description: Not found },
+        }
+  /orders:
+    get:
+      summary: List orders for guest cookie
+      parameters:
+        - { $ref: "#/components/parameters/page" }
+        - { $ref: "#/components/parameters/limit" }
+      responses:
+        {
+          "200": { description: Paginated guest orders },
+          "401": { description: Missing guest cookie },
+        }
+    post:
+      summary: Create pending order and Razorpay Test Mode payment order
+      parameters:
+        - {
+            name: Idempotency-Key,
+            in: header,
+            required: true,
+            schema: { type: string },
+          }
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/OrderInput" } },
+            },
+        }
+      responses:
+        {
+          "201": { description: Order and payment config; sets guest cookie },
+          "202": { description: Gateway creation uncertain; payment null },
+          "400": { description: Validation error },
+          "409": { description: Capacity or idempotency conflict },
+        }
+  /orders/{id}:
+    parameters: [{ $ref: "#/components/parameters/id" }]
+    get:
+      summary: Get guest-owned order and payment status
+      responses:
+        {
+          "200": { description: Order },
+          "401": { description: Missing guest cookie },
+          "404": { description: Not found or not owned },
+        }
+  /orders/{id}/payment/verify:
+    parameters: [{ $ref: "#/components/parameters/id" }]
+    post:
+      summary: Verify Razorpay Checkout callback and fetched captured payment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                [razorpay_payment_id, razorpay_order_id, razorpay_signature]
+              properties:
+                razorpay_payment_id: { type: string }
+                razorpay_order_id: { type: string }
+                razorpay_signature: { type: string }
+      responses:
+        {
+          "200": { description: Updated order },
+          "400": { description: Invalid signature },
+          "404": { description: Not found },
+        }
+  /orders/{id}/payment/reconcile:
+    parameters: [{ $ref: "#/components/parameters/id" }]
+    post:
+      summary: Fetch gateway status without charging again
+      responses:
+        {
+          "200": { description: Current order and payment status },
+          "404": { description: Not found },
+        }
+  /webhooks/razorpay:
+    post:
+      summary: Razorpay server-to-server webhook
+      description: Requires raw JSON body, X-Razorpay-Signature and X-Razorpay-Event-Id headers.
+      responses:
+        {
+          "200": { description: Event processed or duplicate },
+          "403": { description: Invalid signature },
+        }

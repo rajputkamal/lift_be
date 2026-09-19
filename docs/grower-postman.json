@@ -1,0 +1,453 @@
+{
+  "info": {
+    "name": "Grower MVP — CRUD, guest orders and Razorpay Test Mode",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Run requests in number order. Read docs/grower-postman-guide.md. The collection stores IDs and uses the Postman cookie jar for guest orders."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/api/v1"
+    },
+    {
+      "key": "growerId",
+      "value": ""
+    },
+    {
+      "key": "productId",
+      "value": ""
+    },
+    {
+      "key": "growerSlug",
+      "value": ""
+    },
+    {
+      "key": "productSlug",
+      "value": ""
+    },
+    {
+      "key": "orderId",
+      "value": ""
+    },
+    {
+      "key": "firstDate",
+      "value": ""
+    },
+    {
+      "key": "oneTimeKey",
+      "value": ""
+    },
+    {
+      "key": "subscriptionKey",
+      "value": ""
+    },
+    {
+      "key": "razorpayOrderId",
+      "value": ""
+    },
+    {
+      "key": "razorpayPaymentId",
+      "value": ""
+    },
+    {
+      "key": "razorpaySignature",
+      "value": ""
+    },
+    {
+      "key": "webhookSignature",
+      "value": ""
+    },
+    {
+      "key": "webhookEventId",
+      "value": "evt_demo"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "const tomorrow = new Date(Date.now() + 86400000);",
+          "pm.collectionVariables.set(\"firstDate\", tomorrow.toISOString().slice(0, 10));"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "01 Create grower",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/growers",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"GreenLeaf Microgreens Demo\",\n  \"slug\": \"greenleaf-microgreens-demo\",\n  \"logo\": \"https://example.com/greenleaf-logo.webp\",\n  \"coverImage\": \"https://example.com/greenleaf-cover.webp\",\n  \"shortDescription\": \"Fresh microgreens grown in Hyderabad\",\n  \"description\": \"Small batches of locally grown microgreens.\",\n  \"city\": \"Hyderabad\",\n  \"area\": \"Gachibowli\",\n  \"pincode\": \"500032\",\n  \"phone\": \"9876543210\",\n  \"email\": \"greenleaf-demo@example.com\",\n  \"deliveryText\": \"Delivery by arrangement\",\n  \"deliveryFee\": 20,\n  \"deliveryPincodes\": [\n    \"500032\"\n  ],\n  \"pickupDetails\": \"Collect at the farm counter, 9 AM–5 PM\",\n  \"isActive\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "description": "If this slug already exists, change slug and email for another demo run.",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (pm.response.code >= 200 && pm.response.code < 300) {",
+              "  const body = pm.response.json();",
+              "  if (body.success && body.data) {",
+              "    if (body.data.id) pm.collectionVariables.set(\"growerId\", body.data.id);",
+              "    if (body.data.slug) pm.collectionVariables.set(\"growerSlug\", body.data.slug);",
+              "  }",
+              "}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 List growers",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/growers?page=1&limit=12"
+      }
+    },
+    {
+      "name": "03 Get grower",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/growers/{{growerId}}"
+      }
+    },
+    {
+      "name": "04 Update grower",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/growers/{{growerId}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"isActive\": true,\n  \"deliveryFee\": 20,\n  \"deliveryPincodes\": [\n    \"500032\"\n  ],\n  \"pickupDetails\": \"Collect at the farm counter, 9 AM–5 PM\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "05 Create product",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/products",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"growerId\": \"{{growerId}}\",\n  \"name\": \"Radish Microgreens Demo\",\n  \"slug\": \"greenleaf-radish-demo\",\n  \"shortDescription\": \"Crisp and slightly spicy.\",\n  \"description\": \"Fresh radish microgreens with a crisp texture.\",\n  \"price\": 99,\n  \"weight\": \"50g\",\n  \"images\": [\n    \"https://example.com/radish-1.webp\",\n    \"https://example.com/radish-2.webp\"\n  ],\n  \"category\": \"Radish\",\n  \"cultivationDate\": null,\n  \"harvestDate\": null,\n  \"bestBefore\": null,\n  \"storage\": \"Keep refrigerated\",\n  \"stock\": 20,\n  \"isActive\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (pm.response.code >= 200 && pm.response.code < 300) {",
+              "  const body = pm.response.json();",
+              "  if (body.success && body.data) {",
+              "    if (body.data.id) pm.collectionVariables.set(\"productId\", body.data.id);",
+              "    if (body.data.slug) pm.collectionVariables.set(\"productSlug\", body.data.slug);",
+              "  }",
+              "}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "06 List products",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/products?growerId={{growerId}}&page=1&limit=12"
+      }
+    },
+    {
+      "name": "07 Get product",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/products/{{productId}}"
+      }
+    },
+    {
+      "name": "08 Update product",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/products/{{productId}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"price\": 109.5,\n  \"stock\": 20\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "09 Create one-time delivery order",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Idempotency-Key",
+            "value": "{{oneTimeKey}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/orders",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"growerId\": \"{{growerId}}\",\n  \"items\": [\n    {\n      \"productId\": \"{{productId}}\",\n      \"quantity\": 2\n    }\n  ],\n  \"purchaseType\": \"one-time\",\n  \"fulfilment\": \"delivery\",\n  \"firstDate\": \"{{firstDate}}\",\n  \"shipping\": {\n    \"name\": \"Test Customer\",\n    \"phone\": \"9999999999\",\n    \"email\": \"\",\n    \"house\": \"101\",\n    \"building\": \"\",\n    \"street\": \"Sample Street\",\n    \"landmark\": \"\",\n    \"city\": \"Hyderabad\",\n    \"state\": \"Telangana\",\n    \"pincode\": \"500032\"\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "description": "Reusing the same idempotency key retries the same order. Clear oneTimeKey to create another.",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (!pm.collectionVariables.get(\"oneTimeKey\")) pm.collectionVariables.set(\"oneTimeKey\", pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (pm.response.code >= 200 && pm.response.code < 300) {",
+              "  const body = pm.response.json();",
+              "  if (body.success && body.data) {",
+              "    if (body.data.order && body.data.order.id) pm.collectionVariables.set(\"orderId\", body.data.order && body.data.order.id);",
+              "    if (body.data.payment && body.data.payment.razorpayOrderId) pm.collectionVariables.set(\"razorpayOrderId\", body.data.payment && body.data.payment.razorpayOrderId);",
+              "  }",
+              "}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "10 Create four-week pickup subscription",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Idempotency-Key",
+            "value": "{{subscriptionKey}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/orders",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"growerId\": \"{{growerId}}\",\n  \"items\": [\n    {\n      \"productId\": \"{{productId}}\",\n      \"quantity\": 2\n    }\n  ],\n  \"purchaseType\": \"subscription\",\n  \"fulfilment\": \"pickup\",\n  \"firstDate\": \"{{firstDate}}\",\n  \"shipping\": {\n    \"name\": \"Test Customer\",\n    \"phone\": \"9999999999\",\n    \"email\": \"\"\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "description": "Four weekly dates; one upfront Test Mode payment. This request replaces orderId with the subscription order ID.",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (!pm.collectionVariables.get(\"subscriptionKey\")) pm.collectionVariables.set(\"subscriptionKey\", pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (pm.response.code >= 200 && pm.response.code < 300) {",
+              "  const body = pm.response.json();",
+              "  if (body.success && body.data) {",
+              "    if (body.data.order && body.data.order.id) pm.collectionVariables.set(\"orderId\", body.data.order && body.data.order.id);",
+              "    if (body.data.payment && body.data.payment.razorpayOrderId) pm.collectionVariables.set(\"razorpayOrderId\", body.data.payment && body.data.payment.razorpayOrderId);",
+              "  }",
+              "}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "11 List my guest orders",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/orders?page=1&limit=12"
+      },
+      "description": "Uses the grower_guest cookie stored automatically by Postman from request 09 or 10."
+    },
+    {
+      "name": "12 Get my order",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/orders/{{orderId}}"
+      },
+      "description": "Requires the same Postman cookie jar."
+    },
+    {
+      "name": "13 Verify Test Mode payment",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/orders/{{orderId}}/payment/verify",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"razorpay_payment_id\": \"{{razorpayPaymentId}}\",\n  \"razorpay_order_id\": \"{{razorpayOrderId}}\",\n  \"razorpay_signature\": \"{{razorpaySignature}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "description": "Paste real Razorpay Checkout callback values into collection variables after a Test Mode payment. Fake values return 400."
+    },
+    {
+      "name": "14 Reconcile Test Mode payment",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/orders/{{orderId}}/payment/reconcile",
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "description": "Read-only recovery of a Test Mode payment; does not charge again."
+    },
+    {
+      "name": "15 Razorpay webhook (signed events only)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-razorpay-signature",
+            "value": "{{webhookSignature}}"
+          },
+          {
+            "key": "x-razorpay-event-id",
+            "value": "{{webhookEventId}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/webhooks/razorpay",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"event\": \"payment.captured\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "description": "Use Razorpay Test Mode dashboard to deliver a genuine signed webhook. This Postman placeholder returns 403 unless its raw body is correctly signed; do not put webhook secrets in Postman."
+    },
+    {
+      "name": "16 Delete product (last)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{baseUrl}}/products/{{productId}}"
+      },
+      "description": "Soft-deletes product. Run after order tests."
+    },
+    {
+      "name": "17 Delete grower (last)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{baseUrl}}/growers/{{growerId}}"
+      },
+      "description": "Soft-deletes grower. Run after order tests."
+    }
+  ]
+}

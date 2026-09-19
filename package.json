@@ -7,7 +7,13 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
-    "create:restaurant": "node src/foodie/createRestaurant.js"
+    "create:restaurant": "node src/foodie/createRestaurant.js",
+    "migrate:grower": "node scripts/migrateGrowerCatalogue.js",
+    "test:grower": "node --test src/grower/*.test.js src/grower/checkout/*.test.js",
+    "cleanup:grower-orders": "node scripts/expireGrowerOrders.js",
+    "seed:grower-demo": "bash scripts/seedGrowerDemo.sh",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "engines": {
     "node": "18.x"
@@ -26,6 +32,7 @@
     "node-cache": "^5.1.2"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "prettier": "^3.9.8"
   }
 }

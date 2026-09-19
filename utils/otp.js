@@ -33,7 +33,7 @@ export const sendMessageCentralOtp = async (phoneNumber) => {
         authToken,
         accept: "*/*",
       },
-    }
+    },
   );
 
   const data = await response.json();
@@ -43,7 +43,7 @@ export const sendMessageCentralOtp = async (phoneNumber) => {
 export const validateMessageCentralOtp = async (
   phoneNumber,
   otp,
-  verificationId
+  verificationId,
 ) => {
   const authToken = getCachedMcToken();
   const response = await fetch(
@@ -53,7 +53,7 @@ export const validateMessageCentralOtp = async (
         authToken,
         accept: "*/*",
       },
-    }
+    },
   );
 
   const data = await response.json();
