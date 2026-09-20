@@ -11,6 +11,7 @@ import DayReservation from "../models/dayReservationModel.js";
 import { reserve, StockConflict } from "./reservations.js";
 import { getOrder, createOrder } from "./controller.js";
 import { razorpayWebhook } from "./webhook.js";
+import { guestForCreate } from "./guest.js";
 
 const growerId = "507f191e810c19729de860ea";
 const productId = "507f1f77bcf86cd799439011";
@@ -25,6 +26,7 @@ const body = {
     name: "Test",
     phone: "9999999999",
     house: "101",
+    building: "Test Building",
     street: "Street",
     city: "Hyderabad",
     state: "Telangana",
@@ -45,6 +47,35 @@ const response = () => ({
     return this;
   },
 });
+
+test("guest cookie is scoped to the checkout API", () => {
+  let cookie = "";
+  const req = { headers: {} };
+  const res = {
+    append(name, value) {
+      if (name === "Set-Cookie") cookie = value;
+    },
+  };
+  guestForCreate(req, res);
+  assert.match(cookie, /Path=\/api\/grower-checkout\/v1(?:;|$)/);
+  assert.match(cookie, /SameSite=Lax/);
+});
+
+test("guest cookie supports the allowed HTTPS frontend without environment configuration", () => {
+  let cookie = "";
+  const req = {
+    headers: { origin: "https://green-sprout-store.vercel.app" },
+  };
+  const res = {
+    append(name, value) {
+      if (name === "Set-Cookie") cookie = value;
+    },
+  };
+  guestForCreate(req, res);
+  assert.match(cookie, /SameSite=None/);
+  assert.match(cookie, /; Secure/);
+});
+
 async function stub(patches, fn) {
   const originals = patches.map(([obj, name, value]) => {
     const old = obj[name];
@@ -72,7 +103,7 @@ test("checkout validation rejects tampered totals, bad dates and duplicate items
   assert.equal(schedule(day, "subscription").length, 4);
 });
 
-test("backend calculates price and four-week delivery fees", async () => {
+test("backend calculates free listed-pincode subscription delivery", async () => {
   await stub(
     [
       [
@@ -106,13 +137,100 @@ test("backend calculates price and four-week delivery fees", async () => {
     ],
     async () => {
       const priced = await buildOrder(body);
-      assert.equal(priced.basketPaise, 19800);
-      assert.equal(priced.totalPaise, 4 * (19800 + 5000));
+      assert.equal(priced.basketPaise, 4 * 19800);
+      assert.equal(priced.deliveryFeePaise, 0);
+      assert.equal(priced.totalPaise, 4 * 19800);
       await assert.rejects(
         () => buildOrder({ ...body, items: [{ productId, quantity: 6 }] }),
         { code: "OUT_OF_STOCK" },
       );
     },
+  );
+});
+
+test("backend charges outside-area delivery per scheduled fulfilment", async () => {
+  await stub(
+    [
+      [
+        Grower,
+        "findOne",
+        () => ({
+          lean: async () => ({
+            _id: growerId,
+            name: "Grower",
+            deliveryPincodes: [],
+            deliveryFeePaise: 2000,
+            pickupDetails: "Farm gate",
+          }),
+        }),
+      ],
+      [
+        Product,
+        "find",
+        () => ({
+          lean: async () => [
+            {
+              _id: productId,
+              name: "Radish",
+              slug: "radish",
+              pricePaise: 9900,
+              stock: 5,
+              images: [],
+            },
+          ],
+        }),
+      ],
+    ],
+    async () => {
+      const outside = {
+        ...body,
+        shipping: { ...body.shipping, pincode: "500033" },
+      };
+      const subscription = await buildOrder(outside);
+      assert.equal(subscription.basketPaise, 79200);
+      assert.equal(subscription.deliveryFeePaise, 8000);
+      assert.equal(subscription.totalPaise, 87200);
+
+      const oneTime = await buildOrder({
+        ...outside,
+        purchaseType: "one-time",
+      });
+      assert.equal(oneTime.basketPaise, 19800);
+      assert.equal(oneTime.deliveryFeePaise, 2000);
+      assert.equal(oneTime.totalPaise, 21800);
+
+      const pickup = await buildOrder({
+        ...outside,
+        fulfilment: "pickup",
+        shipping: { name: "Test", phone: "9999999999" },
+      });
+      assert.equal(pickup.basketPaise, 79200);
+      assert.equal(pickup.deliveryFeePaise, 0);
+      assert.equal(pickup.totalPaise, 79200);
+    },
+  );
+});
+
+test("collection has no delivery fee and delivery requires a complete address", async () => {
+  assert.ok(
+    validateOrder({
+      ...body,
+      shipping: { ...body.shipping, building: " " },
+    })["shipping.building"],
+  );
+  assert.ok(
+    validateOrder({
+      ...body,
+      shipping: { ...body.shipping, pincode: "000000" },
+    })["shipping.pincode"],
+  );
+  assert.deepEqual(
+    validateOrder({
+      ...body,
+      fulfilment: "pickup",
+      shipping: { name: " Test ", phone: "9999999999", email: "" },
+    }),
+    {},
   );
 });
 

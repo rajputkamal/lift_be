@@ -1,6 +1,6 @@
 # Postman demo: Growers, products, orders and payments
 
-All examples use `{{baseUrl}} = http://localhost:8080/api/v1`. Import [the Postman collection](grower-postman.json); it contains these requests, example bodies, and scripts that save returned IDs. Start the backend with a MongoDB replica set/Atlas connection, run `npm run migrate:grower`, and configure **Razorpay Test Mode** keys as shown in [the environment example](grower-checkout.env.example). The collection needs no admin key or JWT.
+Catalogue examples use `{{catalogueBaseUrl}} = http://localhost:8080/api/grower/v1`; order and payment examples use `{{checkoutBaseUrl}} = http://localhost:8080/api/grower-checkout/v1`. Import [the Postman collection](grower-postman.json); it contains these requests, example bodies, and scripts that save returned IDs. Start the backend with a MongoDB replica set/Atlas connection, run `npm run migrate:grower`, and configure **Razorpay Test Mode** keys as shown in [the environment example](grower-checkout.env.example). The collection needs no admin key or JWT.
 
 The simplified catalogue CRUD routes are currently open to callers who can reach the API. Use this MVP setup in a controlled environment. Grower phone, email and pincode are stored for checkout but omitted from catalogue responses.
 
@@ -78,7 +78,7 @@ Create the grower first. An active product needs at least one valid HTTP(S) imag
 
 ## 3. Submit and retrieve orders
 
-Use `{{firstDate}}`, which the collection sets to tomorrow. The grower and product must both be active. For delivery, the shipping pincode must appear in `deliveryPincodes`. Postman saves the `grower_guest` HttpOnly cookie automatically for the same host. Keep using the same Postman cookie jar for `GET`, verify, and reconcile; another browser/session cannot see this order.
+Use `{{firstDate}}`, which the collection sets to tomorrow. The grower and product must both be active. A shipping pincode in `deliveryPincodes` is free; any other valid six-digit pincode uses the grower's delivery fee. Postman saves the `grower_guest` HttpOnly cookie automatically for the same host. Keep using the same Postman cookie jar for `GET`, verify, and reconcile; another browser/session cannot see this order.
 
 | Request                              | Example                                                                                                             | Expected result                                                                                          |
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
@@ -101,7 +101,7 @@ Delivery order JSON:
     "phone": "9999999999",
     "email": "",
     "house": "101",
-    "building": "",
+    "building": "Example Apartments",
     "street": "Sample Street",
     "landmark": "",
     "city": "Hyderabad",
@@ -111,7 +111,7 @@ Delivery order JSON:
 }
 ```
 
-With two ₹99 products and ₹20 delivery, this example is ₹218 (`payment.amount: 21800` paise). The collection's product PATCH changes the price to ₹109.50, so if you run that first the actual amount is ₹239 (`23900` paise). Always use the amount returned by the API. A subscription charges the same basket and fee four times upfront.
+Because `500032` is listed in this example grower's `deliveryPincodes`, delivery is free. Two ₹99 products therefore total ₹198 (`payment.amount: 19800` paise). With an outside pincode such as `500033`, the ₹20 fee makes the total ₹218 (`21800` paise). Always use the amount returned by the API. A subscription charges four baskets and four applicable delivery fees upfront.
 
 The `Idempotency-Key` remains the same when retrying an uncertain request. Clear the collection's `oneTimeKey` or `subscriptionKey` variable to start a **new** order. A `202` response with `payment:null` means gateway creation needs operator review; it is not ready for Checkout.
 
@@ -141,6 +141,6 @@ To exercise `verify` successfully, complete a Test Mode payment through Razorpay
 
 - Try `POST /products` with `price: 1.234` → `400 VALIDATION_ERROR`.
 - Try `POST /orders` with a client `total: 1` → `400 VALIDATION_ERROR`; totals are computed server side.
-- Try an unsupported delivery pincode → `400 DELIVERY_UNAVAILABLE`.
+- Try a malformed delivery pincode such as `000000` → `400 VALIDATION_ERROR` with `shipping.pincode`.
 - Retry an order with the same idempotency key and changed items → `409 IDEMPOTENCY_CONFLICT`.
 - Clear the Postman guest cookie and call `GET /orders/{{orderId}}` → `401 GUEST_SESSION_REQUIRED`.

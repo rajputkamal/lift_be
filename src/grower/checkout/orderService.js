@@ -25,14 +25,6 @@ export async function buildOrder(body) {
       "Grower is unavailable.",
       404,
     );
-  if (
-    body.fulfilment === "delivery" &&
-    !(grower.deliveryPincodes || []).includes(body.shipping.pincode.trim())
-  )
-    throw new CheckoutError(
-      "DELIVERY_UNAVAILABLE",
-      "Delivery is unavailable for this pincode.",
-    );
   if (body.fulfilment === "pickup" && !grower.pickupDetails)
     throw new CheckoutError(
       "PICKUP_UNAVAILABLE",
@@ -69,14 +61,21 @@ export async function buildOrder(body) {
       stock: p.stock,
     };
   });
-  const basketPaise = items.reduce(
+  const basketPerFulfilmentPaise = items.reduce(
     (sum, item) => sum + item.unitPricePaise * item.quantity,
     0,
   );
-  const deliveryFeePaise =
-    body.fulfilment === "delivery" ? grower.deliveryFeePaise || 0 : 0;
   const repeats = body.purchaseType === "subscription" ? 4 : 1;
-  const totalPaise = (basketPaise + deliveryFeePaise) * repeats;
+  const isFreeDelivery =
+    body.fulfilment === "delivery" &&
+    (grower.deliveryPincodes || []).includes(body.shipping.pincode.trim());
+  const deliveryFeePerFulfilmentPaise =
+    body.fulfilment === "delivery" && !isFreeDelivery
+      ? grower.deliveryFeePaise || 0
+      : 0;
+  const basketPaise = basketPerFulfilmentPaise * repeats;
+  const deliveryFeePaise = deliveryFeePerFulfilmentPaise * repeats;
+  const totalPaise = basketPaise + deliveryFeePaise;
   if (!Number.isSafeInteger(totalPaise) || totalPaise < 100)
     throw new CheckoutError("INVALID_AMOUNT", "Order amount is invalid.");
   return { grower, items, basketPaise, deliveryFeePaise, totalPaise };

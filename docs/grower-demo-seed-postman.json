@@ -6,8 +6,8 @@
   },
   "variable": [
     {
-      "key": "baseUrl",
-      "value": "http://localhost:8080/api/v1"
+      "key": "catalogueBaseUrl",
+      "value": "http://localhost:8080/api/grower/v1"
     },
     {
       "key": "growerId1",
@@ -40,7 +40,7 @@
                 "value": "application/json"
               }
             ],
-            "url": "{{baseUrl}}/growers",
+            "url": "{{catalogueBaseUrl}}/growers",
             "body": {
               "mode": "raw",
               "raw": "{\n  \"name\": \"GreenLeaf Microgreens\",\n  \"slug\": \"greenleaf-microgreens\",\n  \"logo\": null,\n  \"coverImage\": \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg\",\n  \"shortDescription\": \"Fresh pesticide-free microgreens, lovingly grown and harvested in small batches.\",\n  \"description\": \"Fresh pesticide-free microgreens, lovingly grown and harvested in small batches. We grow close to home, using careful cultivation and small-batch harvesting. Meet your new neighbourhood grower.\",\n  \"city\": \"Hyderabad\",\n  \"area\": \"Gachibowli\",\n  \"pincode\": \"500032\",\n  \"phone\": \"9876543210\",\n  \"email\": \"greenleaf-microgreens@example.com\",\n  \"deliveryText\": \"Delivery in 24–48 hours\",\n  \"deliveryFee\": 20,\n  \"deliveryPincodes\": [\n    \"500032\"\n  ],\n  \"pickupDetails\": \"Pickup from Gachibowli, Hyderabad, between 9 AM and 5 PM\",\n  \"isActive\": true\n}",
@@ -78,7 +78,7 @@
                 "value": "application/json"
               }
             ],
-            "url": "{{baseUrl}}/growers",
+            "url": "{{catalogueBaseUrl}}/growers",
             "body": {
               "mode": "raw",
               "raw": "{\n  \"name\": \"Urban Harvest\",\n  \"slug\": \"urban-harvest\",\n  \"logo\": null,\n  \"coverImage\": \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/sunflower.jpg\",\n  \"shortDescription\": \"A little urban farm with a big love for clean, sustainable growing.\",\n  \"description\": \"A little urban farm with a big love for clean, sustainable growing. We grow close to home, using careful cultivation and small-batch harvesting. Meet your new neighbourhood grower.\",\n  \"city\": \"Hyderabad\",\n  \"area\": \"Kondapur\",\n  \"pincode\": \"500032\",\n  \"phone\": \"9876543211\",\n  \"email\": \"urban-harvest@example.com\",\n  \"deliveryText\": \"Delivery in 24–48 hours\",\n  \"deliveryFee\": 20,\n  \"deliveryPincodes\": [\n    \"500032\"\n  ],\n  \"pickupDetails\": \"Pickup from Kondapur, Hyderabad, between 9 AM and 5 PM\",\n  \"isActive\": true\n}",
@@ -116,7 +116,7 @@
                 "value": "application/json"
               }
             ],
-            "url": "{{baseUrl}}/growers",
+            "url": "{{catalogueBaseUrl}}/growers",
             "body": {
               "mode": "raw",
               "raw": "{\n  \"name\": \"Fresh Roots Farm\",\n  \"slug\": \"fresh-roots-farm\",\n  \"logo\": null,\n  \"coverImage\": \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/pea-shoots.jpg\",\n  \"shortDescription\": \"Family-grown greens. Honest practices. Freshness you can taste.\",\n  \"description\": \"Family-grown greens. Honest practices. Freshness you can taste. We grow close to home, using careful cultivation and small-batch harvesting. Meet your new neighbourhood grower.\",\n  \"city\": \"Hyderabad\",\n  \"area\": \"Tellapur\",\n  \"pincode\": \"500032\",\n  \"phone\": \"9876543212\",\n  \"email\": \"fresh-roots-farm@example.com\",\n  \"deliveryText\": \"Delivery in 24–48 hours\",\n  \"deliveryFee\": 20,\n  \"deliveryPincodes\": [\n    \"500032\"\n  ],\n  \"pickupDetails\": \"Pickup from Tellapur, Hyderabad, between 9 AM and 5 PM\",\n  \"isActive\": true\n}",
@@ -154,7 +154,7 @@
                 "value": "application/json"
               }
             ],
-            "url": "{{baseUrl}}/growers",
+            "url": "{{catalogueBaseUrl}}/growers",
             "body": {
               "mode": "raw",
               "raw": "{\n  \"name\": \"Sprout Valley\",\n  \"slug\": \"sprout-valley\",\n  \"logo\": null,\n  \"coverImage\": \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810113/broccoli.jpg\",\n  \"shortDescription\": \"Thoughtfully grown little greens for your everyday feel-good meals.\",\n  \"description\": \"Thoughtfully grown little greens for your everyday feel-good meals. We grow close to home, using careful cultivation and small-batch harvesting. Meet your new neighbourhood grower.\",\n  \"city\": \"Hyderabad\",\n  \"area\": \"Manikonda\",\n  \"pincode\": \"500032\",\n  \"phone\": \"9876543213\",\n  \"email\": \"sprout-valley@example.com\",\n  \"deliveryText\": \"Delivery in 24–48 hours\",\n  \"deliveryFee\": 20,\n  \"deliveryPincodes\": [\n    \"500032\"\n  ],\n  \"pickupDetails\": \"Pickup from Manikonda, Hyderabad, between 9 AM and 5 PM\",\n  \"isActive\": true\n}",
@@ -197,7 +197,7 @@
                 "value": "application/json"
               }
             ],
-            "url": "{{baseUrl}}/products",
+            "url": "{{catalogueBaseUrl}}/products",
             "body": {
               "mode": "raw",
               "raw": "{\n  \"growerId\": \"{{growerId1}}\",\n  \"name\": \"Radish Microgreens\",\n  \"slug\": \"radish-microgreens-1\",\n  \"shortDescription\": \"Peppery, vibrant and full of character.\",\n  \"description\": \"Peppery, vibrant and full of character. Grown locally in small batches and carefully packed to keep every leaf fresh. Perfect for salads, sandwiches, wraps and finishing your favourite dishes.\",\n  \"price\": 99,\n  \"category\": \"Radish\",\n  \"weight\": \"50g\",\n  \"images\": [\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/radish.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/radish.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg\"\n  ],\n  \"cultivationDate\": \"2026-09-05\",\n  \"harvestDate\": \"2026-09-12\",\n  \"bestBefore\": \"2026-09-15\",\n  \"storage\": \"Keep refrigerated at 2–5°C. Rinse before use.\",\n  \"stock\": 20,\n  \"isActive\": true\n}",
@@ -219,7 +219,7 @@
                 "value": "application/json"
               }
             ],
-            "url": "{{baseUrl}}/products",
+            "url": "{{catalogueBaseUrl}}/products",
             "body": {
               "mode": "raw",
               "raw": "{\n  \"growerId\": \"{{growerId1}}\",\n  \"name\": \"Sunflower Microgreens\",\n  \"slug\": \"sunflower-microgreens-1\",\n  \"shortDescription\": \"A nutty crunch for your everyday bowl.\",\n  \"description\": \"A nutty crunch for your everyday bowl. Grown locally in small batches and carefully packed to keep every leaf fresh. Perfect for salads, sandwiches, wraps and finishing your favourite dishes.\",\n  \"price\": 119,\n  \"category\": \"Sunflower\",\n  \"weight\": \"50g\",\n  \"images\": [\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/sunflower.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/sunflower.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg\"\n  ],\n  \"cultivationDate\": \"2026-09-05\",\n  \"harvestDate\": \"2026-09-12\",\n  \"bestBefore\": \"2026-09-15\",\n  \"storage\": \"Keep refrigerated at 2–5°C. Rinse before use.\",\n  \"stock\": 20,\n  \"isActive\": true\n}",
@@ -241,7 +241,7 @@
                 "value": "application/json"
               }
             ],
-            "url": "{{baseUrl}}/products",
+            "url": "{{catalogueBaseUrl}}/products",
             "body": {
               "mode": "raw",
               "raw": "{\n  \"growerId\": \"{{growerId1}}\",\n  \"name\": \"Mustard Microgreens\",\n  \"slug\": \"mustard-microgreens-1\",\n  \"shortDescription\": \"A little green with a delicious kick.\",\n  \"description\": \"A little green with a delicious kick. Grown locally in small batches and carefully packed to keep every leaf fresh. Perfect for salads, sandwiches, wraps and finishing your favourite dishes.\",\n  \"price\": 99,\n  \"category\": \"Mustard\",\n  \"weight\": \"50g\",\n  \"images\": [\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/mustard.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/mustard.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg\"\n  ],\n  \"cultivationDate\": \"2026-09-05\",\n  \"harvestDate\": \"2026-09-12\",\n  \"bestBefore\": \"2026-09-15\",\n  \"storage\": \"Keep refrigerated at 2–5°C. Rinse before use.\",\n  \"stock\": 20,\n  \"isActive\": true\n}",
@@ -263,7 +263,7 @@
                 "value": "application/json"
               }
             ],
-            "url": "{{baseUrl}}/products",
+            "url": "{{catalogueBaseUrl}}/products",
             "body": {
               "mode": "raw",
               "raw": "{\n  \"growerId\": \"{{growerId1}}\",\n  \"name\": \"Pea Shoots\",\n  \"slug\": \"pea-shoots-1\",\n  \"shortDescription\": \"Sweet, tender and freshly picked.\",\n  \"description\": \"Sweet, tender and freshly picked. Grown locally in small batches and carefully packed to keep every leaf fresh. Perfect for salads, sandwiches, wraps and finishing your favourite dishes.\",\n  \"price\": 119,\n  \"category\": \"Pea Shoots\",\n  \"weight\": \"50g\",\n  \"images\": [\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/pea-shoots.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/pea-shoots.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg\"\n  ],\n  \"cultivationDate\": \"2026-09-05\",\n  \"harvestDate\": \"2026-09-12\",\n  \"bestBefore\": \"2026-09-15\",\n  \"storage\": \"Keep refrigerated at 2–5°C. Rinse before use.\",\n  \"stock\": 20,\n  \"isActive\": true\n}",
@@ -285,7 +285,7 @@
                 "value": "application/json"
               }
             ],
-            "url": "{{baseUrl}}/products",
+            "url": "{{catalogueBaseUrl}}/products",
             "body": {
               "mode": "raw",
               "raw": "{\n  \"growerId\": \"{{growerId1}}\",\n  \"name\": \"Broccoli Microgreens\",\n  \"slug\": \"broccoli-microgreens-1\",\n  \"shortDescription\": \"Mild, delicate greens for everyday goodness.\",\n  \"description\": \"Mild, delicate greens for everyday goodness. Grown locally in small batches and carefully packed to keep every leaf fresh. Perfect for salads, sandwiches, wraps and finishing your favourite dishes.\",\n  \"price\": 129,\n  \"category\": \"Broccoli\",\n  \"weight\": \"50g\",\n  \"images\": [\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810113/broccoli.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810113/broccoli.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg\"\n  ],\n  \"cultivationDate\": \"2026-09-05\",\n  \"harvestDate\": \"2026-09-12\",\n  \"bestBefore\": \"2026-09-15\",\n  \"storage\": \"Keep refrigerated at 2–5°C. Rinse before use.\",\n  \"stock\": 20,\n  \"isActive\": true\n}",
@@ -307,7 +307,7 @@
                 "value": "application/json"
               }
             ],
-            "url": "{{baseUrl}}/products",
+            "url": "{{catalogueBaseUrl}}/products",
             "body": {
               "mode": "raw",
               "raw": "{\n  \"growerId\": \"{{growerId2}}\",\n  \"name\": \"Red Radish\",\n  \"slug\": \"red-radish-2\",\n  \"shortDescription\": \"Bright stems with a peppery finish.\",\n  \"description\": \"Bright stems with a peppery finish. Grown locally in small batches and carefully packed to keep every leaf fresh. Perfect for salads, sandwiches, wraps and finishing your favourite dishes.\",\n  \"price\": 109,\n  \"category\": \"Radish\",\n  \"weight\": \"50g\",\n  \"images\": [\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/radish.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/radish.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg\"\n  ],\n  \"cultivationDate\": \"2026-09-05\",\n  \"harvestDate\": \"2026-09-12\",\n  \"bestBefore\": \"2026-09-15\",\n  \"storage\": \"Keep refrigerated at 2–5°C. Rinse before use.\",\n  \"stock\": 20,\n  \"isActive\": true\n}",
@@ -329,7 +329,7 @@
                 "value": "application/json"
               }
             ],
-            "url": "{{baseUrl}}/products",
+            "url": "{{catalogueBaseUrl}}/products",
             "body": {
               "mode": "raw",
               "raw": "{\n  \"growerId\": \"{{growerId2}}\",\n  \"name\": \"Fenugreek Microgreens\",\n  \"slug\": \"fenugreek-microgreens-2\",\n  \"shortDescription\": \"Familiar methi flavour, tender little leaves.\",\n  \"description\": \"Familiar methi flavour, tender little leaves. Grown locally in small batches and carefully packed to keep every leaf fresh. Perfect for salads, sandwiches, wraps and finishing your favourite dishes.\",\n  \"price\": 89,\n  \"category\": \"Fenugreek\",\n  \"weight\": \"50g\",\n  \"images\": [\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/fenugreek.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/fenugreek.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg\"\n  ],\n  \"cultivationDate\": \"2026-09-05\",\n  \"harvestDate\": \"2026-09-12\",\n  \"bestBefore\": \"2026-09-15\",\n  \"storage\": \"Keep refrigerated at 2–5°C. Rinse before use.\",\n  \"stock\": 20,\n  \"isActive\": true\n}",
@@ -351,7 +351,7 @@
                 "value": "application/json"
               }
             ],
-            "url": "{{baseUrl}}/products",
+            "url": "{{catalogueBaseUrl}}/products",
             "body": {
               "mode": "raw",
               "raw": "{\n  \"growerId\": \"{{growerId2}}\",\n  \"name\": \"Amaranth Microgreens\",\n  \"slug\": \"amaranth-microgreens-2\",\n  \"shortDescription\": \"Beautiful crimson leaves, earthy flavour.\",\n  \"description\": \"Beautiful crimson leaves, earthy flavour. Grown locally in small batches and carefully packed to keep every leaf fresh. Perfect for salads, sandwiches, wraps and finishing your favourite dishes.\",\n  \"price\": 119,\n  \"category\": \"Amaranth\",\n  \"weight\": \"50g\",\n  \"images\": [\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789809494/amaranth.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789809494/amaranth.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg\"\n  ],\n  \"cultivationDate\": \"2026-09-05\",\n  \"harvestDate\": \"2026-09-12\",\n  \"bestBefore\": \"2026-09-15\",\n  \"storage\": \"Keep refrigerated at 2–5°C. Rinse before use.\",\n  \"stock\": 20,\n  \"isActive\": true\n}",
@@ -373,7 +373,7 @@
                 "value": "application/json"
               }
             ],
-            "url": "{{baseUrl}}/products",
+            "url": "{{catalogueBaseUrl}}/products",
             "body": {
               "mode": "raw",
               "raw": "{\n  \"growerId\": \"{{growerId2}}\",\n  \"name\": \"Mixed Greens Box\",\n  \"slug\": \"mixed-greens-box-2\",\n  \"shortDescription\": \"A colourful selection of our daily harvest.\",\n  \"description\": \"A colourful selection of our daily harvest. Grown locally in small batches and carefully packed to keep every leaf fresh. Perfect for salads, sandwiches, wraps and finishing your favourite dishes.\",\n  \"price\": 249,\n  \"category\": \"Mixed Greens\",\n  \"weight\": \"150g\",\n  \"images\": [\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg\"\n  ],\n  \"cultivationDate\": \"2026-09-05\",\n  \"harvestDate\": \"2026-09-12\",\n  \"bestBefore\": \"2026-09-15\",\n  \"storage\": \"Keep refrigerated at 2–5°C. Rinse before use.\",\n  \"stock\": 20,\n  \"isActive\": true\n}",
@@ -395,7 +395,7 @@
                 "value": "application/json"
               }
             ],
-            "url": "{{baseUrl}}/products",
+            "url": "{{catalogueBaseUrl}}/products",
             "body": {
               "mode": "raw",
               "raw": "{\n  \"growerId\": \"{{growerId3}}\",\n  \"name\": \"Sunflower Shoots\",\n  \"slug\": \"sunflower-shoots-3\",\n  \"shortDescription\": \"Fresh, nutty and satisfyingly crunchy.\",\n  \"description\": \"Fresh, nutty and satisfyingly crunchy. Grown locally in small batches and carefully packed to keep every leaf fresh. Perfect for salads, sandwiches, wraps and finishing your favourite dishes.\",\n  \"price\": 119,\n  \"category\": \"Sunflower\",\n  \"weight\": \"50g\",\n  \"images\": [\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/sunflower.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/sunflower.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg\"\n  ],\n  \"cultivationDate\": \"2026-09-05\",\n  \"harvestDate\": \"2026-09-12\",\n  \"bestBefore\": \"2026-09-15\",\n  \"storage\": \"Keep refrigerated at 2–5°C. Rinse before use.\",\n  \"stock\": 20,\n  \"isActive\": true\n}",
@@ -417,7 +417,7 @@
                 "value": "application/json"
               }
             ],
-            "url": "{{baseUrl}}/products",
+            "url": "{{catalogueBaseUrl}}/products",
             "body": {
               "mode": "raw",
               "raw": "{\n  \"growerId\": \"{{growerId3}}\",\n  \"name\": \"Pea Shoots\",\n  \"slug\": \"pea-shoots-3\",\n  \"shortDescription\": \"Naturally sweet, tender shoots.\",\n  \"description\": \"Naturally sweet, tender shoots. Grown locally in small batches and carefully packed to keep every leaf fresh. Perfect for salads, sandwiches, wraps and finishing your favourite dishes.\",\n  \"price\": 119,\n  \"category\": \"Pea Shoots\",\n  \"weight\": \"50g\",\n  \"images\": [\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/pea-shoots.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/pea-shoots.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg\"\n  ],\n  \"cultivationDate\": \"2026-09-05\",\n  \"harvestDate\": \"2026-09-12\",\n  \"bestBefore\": \"2026-09-15\",\n  \"storage\": \"Keep refrigerated at 2–5°C. Rinse before use.\",\n  \"stock\": 20,\n  \"isActive\": true\n}",
@@ -439,7 +439,7 @@
                 "value": "application/json"
               }
             ],
-            "url": "{{baseUrl}}/products",
+            "url": "{{catalogueBaseUrl}}/products",
             "body": {
               "mode": "raw",
               "raw": "{\n  \"growerId\": \"{{growerId3}}\",\n  \"name\": \"Mustard Greens\",\n  \"slug\": \"mustard-greens-3\",\n  \"shortDescription\": \"Bring a little heat to your next meal.\",\n  \"description\": \"Bring a little heat to your next meal. Grown locally in small batches and carefully packed to keep every leaf fresh. Perfect for salads, sandwiches, wraps and finishing your favourite dishes.\",\n  \"price\": 99,\n  \"category\": \"Mustard\",\n  \"weight\": \"50g\",\n  \"images\": [\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/mustard.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/mustard.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg\"\n  ],\n  \"cultivationDate\": \"2026-09-05\",\n  \"harvestDate\": \"2026-09-12\",\n  \"bestBefore\": \"2026-09-15\",\n  \"storage\": \"Keep refrigerated at 2–5°C. Rinse before use.\",\n  \"stock\": 20,\n  \"isActive\": true\n}",
@@ -461,7 +461,7 @@
                 "value": "application/json"
               }
             ],
-            "url": "{{baseUrl}}/products",
+            "url": "{{catalogueBaseUrl}}/products",
             "body": {
               "mode": "raw",
               "raw": "{\n  \"growerId\": \"{{growerId3}}\",\n  \"name\": \"Wellness Mix\",\n  \"slug\": \"wellness-mix-3\",\n  \"shortDescription\": \"A fresh mix for a brighter daily bowl.\",\n  \"description\": \"A fresh mix for a brighter daily bowl. Grown locally in small batches and carefully packed to keep every leaf fresh. Perfect for salads, sandwiches, wraps and finishing your favourite dishes.\",\n  \"price\": 229,\n  \"category\": \"Mixed Greens\",\n  \"weight\": \"150g\",\n  \"images\": [\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810113/broccoli.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810113/broccoli.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg\"\n  ],\n  \"cultivationDate\": \"2026-09-05\",\n  \"harvestDate\": \"2026-09-12\",\n  \"bestBefore\": \"2026-09-15\",\n  \"storage\": \"Keep refrigerated at 2–5°C. Rinse before use.\",\n  \"stock\": 20,\n  \"isActive\": true\n}",
@@ -483,7 +483,7 @@
                 "value": "application/json"
               }
             ],
-            "url": "{{baseUrl}}/products",
+            "url": "{{catalogueBaseUrl}}/products",
             "body": {
               "mode": "raw",
               "raw": "{\n  \"growerId\": \"{{growerId4}}\",\n  \"name\": \"Basil Microgreens\",\n  \"slug\": \"basil-microgreens-4\",\n  \"shortDescription\": \"Tiny leaves with a beautifully bold aroma.\",\n  \"description\": \"Tiny leaves with a beautifully bold aroma. Grown locally in small batches and carefully packed to keep every leaf fresh. Perfect for salads, sandwiches, wraps and finishing your favourite dishes.\",\n  \"price\": 149,\n  \"category\": \"Basil\",\n  \"weight\": \"50g\",\n  \"images\": [\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810093/basil.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810093/basil.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg\"\n  ],\n  \"cultivationDate\": \"2026-09-05\",\n  \"harvestDate\": \"2026-09-12\",\n  \"bestBefore\": \"2026-09-15\",\n  \"storage\": \"Keep refrigerated at 2–5°C. Rinse before use.\",\n  \"stock\": 20,\n  \"isActive\": true\n}",
@@ -505,7 +505,7 @@
                 "value": "application/json"
               }
             ],
-            "url": "{{baseUrl}}/products",
+            "url": "{{catalogueBaseUrl}}/products",
             "body": {
               "mode": "raw",
               "raw": "{\n  \"growerId\": \"{{growerId4}}\",\n  \"name\": \"Beetroot Microgreens\",\n  \"slug\": \"beetroot-microgreens-4\",\n  \"shortDescription\": \"Earthy sweetness and pretty pink stems.\",\n  \"description\": \"Earthy sweetness and pretty pink stems. Grown locally in small batches and carefully packed to keep every leaf fresh. Perfect for salads, sandwiches, wraps and finishing your favourite dishes.\",\n  \"price\": 139,\n  \"category\": \"Beetroot\",\n  \"weight\": \"50g\",\n  \"images\": [\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810113/beet.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810113/beet.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg\"\n  ],\n  \"cultivationDate\": \"2026-09-05\",\n  \"harvestDate\": \"2026-09-12\",\n  \"bestBefore\": \"2026-09-15\",\n  \"storage\": \"Keep refrigerated at 2–5°C. Rinse before use.\",\n  \"stock\": 0,\n  \"isActive\": true\n}",
@@ -527,7 +527,7 @@
                 "value": "application/json"
               }
             ],
-            "url": "{{baseUrl}}/products",
+            "url": "{{catalogueBaseUrl}}/products",
             "body": {
               "mode": "raw",
               "raw": "{\n  \"growerId\": \"{{growerId4}}\",\n  \"name\": \"Pea Shoots\",\n  \"slug\": \"pea-shoots-4\",\n  \"shortDescription\": \"Sweet, tender and full of freshness.\",\n  \"description\": \"Sweet, tender and full of freshness. Grown locally in small batches and carefully packed to keep every leaf fresh. Perfect for salads, sandwiches, wraps and finishing your favourite dishes.\",\n  \"price\": 119,\n  \"category\": \"Pea Shoots\",\n  \"weight\": \"50g\",\n  \"images\": [\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/pea-shoots.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/pea-shoots.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg\"\n  ],\n  \"cultivationDate\": \"2026-09-05\",\n  \"harvestDate\": \"2026-09-12\",\n  \"bestBefore\": \"2026-09-15\",\n  \"storage\": \"Keep refrigerated at 2–5°C. Rinse before use.\",\n  \"stock\": 20,\n  \"isActive\": true\n}",

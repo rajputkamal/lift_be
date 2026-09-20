@@ -4,7 +4,7 @@ info:
   version: 2.0.0
   description: Direct grower/product CRUD and guest checkout. Catalogue CRUD has no authentication in this MVP. Payments require Razorpay Test Mode.
 servers:
-  - url: http://localhost:8080/api/v1
+  - url: http://localhost:8080
 components:
   parameters:
     id:
@@ -54,7 +54,7 @@ components:
         description: { type: string, maxLength: 5000 }
         city: { type: string, maxLength: 100 }
         area: { type: string, maxLength: 100 }
-        pincode: { type: string, pattern: '^\\d{6}$' }
+        pincode: { type: string, pattern: "^[1-9][0-9]{5}$" }
         phone: { type: string }
         email: { type: string, format: email }
         deliveryText: { type: string, maxLength: 500 }
@@ -107,6 +107,7 @@ components:
     Shipping:
       type: object
       required: [name, phone]
+      description: For delivery, house, building, street, city, state, and pincode are also required. Listed grower pincodes are free; other valid pincodes use the grower's per-delivery fee.
       properties:
         name: { type: string }
         phone: { type: string }
@@ -117,7 +118,7 @@ components:
         landmark: { type: string }
         city: { type: string }
         state: { type: string }
-        pincode: { type: string }
+        pincode: { type: string, pattern: "^[1-9][0-9]{5}$" }
     OrderInput:
       type: object
       required: [growerId, items, purchaseType, fulfilment, firstDate, shipping]
@@ -136,7 +137,7 @@ components:
         firstDate: { type: string, format: date }
         shipping: { $ref: "#/components/schemas/Shipping" }
 paths:
-  /growers:
+  /api/grower/v1/growers:
     get:
       summary: List growers, including inactive drafts
       parameters:
@@ -168,7 +169,7 @@ paths:
           "400": { description: Validation error },
           "409": { description: Duplicate slug },
         }
-  /growers/{id}:
+  /api/grower/v1/growers/{id}:
     parameters: [{ $ref: "#/components/parameters/id" }]
     get:
       summary: Get grower by ID
@@ -195,7 +196,7 @@ paths:
           "200": { description: ID and isActive false },
           "404": { description: Not found },
         }
-  /products:
+  /api/grower/v1/products:
     get:
       summary: List products, including inactive drafts
       parameters:
@@ -230,7 +231,7 @@ paths:
           "400": { description: Validation error },
           "409": { description: Duplicate slug },
         }
-  /products/{id}:
+  /api/grower/v1/products/{id}:
     parameters: [{ $ref: "#/components/parameters/id" }]
     get:
       summary: Get product by ID
@@ -257,7 +258,7 @@ paths:
           "200": { description: ID and isActive false },
           "404": { description: Not found },
         }
-  /orders:
+  /api/grower-checkout/v1/orders:
     get:
       summary: List orders for guest cookie
       parameters:
@@ -293,7 +294,7 @@ paths:
           "400": { description: Validation error },
           "409": { description: Capacity or idempotency conflict },
         }
-  /orders/{id}:
+  /api/grower-checkout/v1/orders/{id}:
     parameters: [{ $ref: "#/components/parameters/id" }]
     get:
       summary: Get guest-owned order and payment status
@@ -303,7 +304,7 @@ paths:
           "401": { description: Missing guest cookie },
           "404": { description: Not found or not owned },
         }
-  /orders/{id}/payment/verify:
+  /api/grower-checkout/v1/orders/{id}/payment/verify:
     parameters: [{ $ref: "#/components/parameters/id" }]
     post:
       summary: Verify Razorpay Checkout callback and fetched captured payment
@@ -325,7 +326,7 @@ paths:
           "400": { description: Invalid signature },
           "404": { description: Not found },
         }
-  /orders/{id}/payment/reconcile:
+  /api/grower-checkout/v1/orders/{id}/payment/reconcile:
     parameters: [{ $ref: "#/components/parameters/id" }]
     post:
       summary: Fetch gateway status without charging again
@@ -334,7 +335,7 @@ paths:
           "200": { description: Current order and payment status },
           "404": { description: Not found },
         }
-  /webhooks/razorpay:
+  /api/grower-checkout/v1/webhooks/razorpay:
     post:
       summary: Razorpay server-to-server webhook
       description: Requires raw JSON body, X-Razorpay-Signature and X-Razorpay-Event-Id headers.

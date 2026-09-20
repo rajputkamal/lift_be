@@ -88,10 +88,7 @@ export function validateOrder(body) {
       if (!fields.has(key)) errors[`shipping.${key}`] = "Unknown field.";
     if (!text(s.name, 100))
       errors["shipping.name"] = "Name is required (max 100).";
-    if (
-      typeof s.phone !== "string" ||
-      !/^(?:\+91[ -]?)?[6-9]\d{9}$/.test(s.phone.trim())
-    )
+    if (typeof s.phone !== "string" || !/^[6-9]\d{9}$/.test(s.phone.trim()))
       errors["shipping.phone"] = "Valid Indian mobile number required.";
     if (
       !optional(s.email, 254) ||
@@ -99,12 +96,15 @@ export function validateOrder(body) {
     )
       errors["shipping.email"] = "Invalid email.";
     if (body.fulfilment === "delivery") {
-      for (const key of ["house", "street", "city", "state"])
+      for (const key of ["house", "building", "street", "city", "state"])
         if (!text(s[key], 120))
           errors[`shipping.${key}`] = "Required for delivery (max 120).";
-      if (typeof s.pincode !== "string" || !/^\d{6}$/.test(s.pincode.trim()))
+      if (
+        typeof s.pincode !== "string" ||
+        !/^[1-9]\d{5}$/.test(s.pincode.trim())
+      )
         errors["shipping.pincode"] = "Six-digit pincode required.";
-      for (const key of ["building", "landmark"])
+      for (const key of ["landmark"])
         if (!optional(s[key], 120))
           errors[`shipping.${key}`] = "Maximum 120 characters.";
     }
@@ -121,7 +121,7 @@ export function shippingSnapshot(s, fulfilment) {
   return {
     ...basic,
     house: s.house.trim(),
-    building: s.building?.trim() || "",
+    building: s.building.trim(),
     street: s.street.trim(),
     landmark: s.landmark?.trim() || "",
     city: s.city.trim(),

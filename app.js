@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import path from "path";
 
 import connectDB from "./src/config/db.js";
+import { corsOptions } from "./src/config/cors.js";
 import authRoutes from "./src/routes/authRoutes.js";
 import userRoute from "./src/routes/userRoutes.js";
 import ridesRoutes from "./src/routes/ridesRoutes.js";
@@ -27,16 +28,9 @@ app.use(
   "/uploads",
   express.static(path.join(process.cwd(), "src/foodie/uploads/logos")),
 );
-const allowedOrigins = process.env.ALLOWED_FRONTEND_ORIGINS?.split(",")
-  .map((origin) => origin.trim())
-  .filter(Boolean);
-app.use(
-  cors(
-    allowedOrigins?.length ? { origin: allowedOrigins, credentials: true } : {},
-  ),
-);
+app.use(cors(corsOptions));
 app.post(
-  "/api/v1/webhooks/razorpay",
+  "/api/grower-checkout/v1/webhooks/razorpay",
   express.raw({ type: "application/json", limit: "1mb" }),
   razorpayWebhook,
 );
@@ -52,7 +46,7 @@ app.use("/api/foodie", categoryRoutes);
 app.use("/api/foodie", menuItemRoutes);
 app.use("/api/foodie", orderRoutes);
 app.use("/api/foodie", analyticsRoutes);
-app.use("/api/v1", growerRoutes);
-app.use("/api/v1", checkoutRoutes);
+app.use("/api/grower/v1", growerRoutes);
+app.use("/api/grower-checkout/v1", checkoutRoutes);
 
 export default app;

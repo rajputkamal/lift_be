@@ -12,8 +12,8 @@ Existing JSON requests remain supported. Send `logo`, `coverImage`, or `images` 
 
 For a future dashboard, use `multipart/form-data`:
 
-- `POST /api/v1/growers`: optional file fields `logo` and `coverImage`, one file each.
-- `POST /api/v1/products`: file field `images`, repeated in the desired display order, with 1–8 files required when the product is active.
+- `POST /api/grower/v1/growers`: optional file fields `logo` and `coverImage`, one file each.
+- `POST /api/grower/v1/products`: file field `images`, repeated in the desired display order, with 1–8 files required when the product is active.
 - All remaining properties are text form fields. Send `deliveryPincodes` and URL-based `images` as JSON array strings. Send `isActive` as `true` or `false`.
 - Accepted formats are JPEG, PNG, WebP, and AVIF, with a 5 MB limit per file.
 - A request must use either uploaded files or URL values for the same image field, not both.
@@ -21,7 +21,7 @@ For a future dashboard, use `multipart/form-data`:
 Example product upload:
 
 ```bash
-curl --request POST "http://localhost:5100/api/v1/products" \
+curl --request POST "http://localhost:5100/api/grower/v1/products" \
   --form "growerId=YOUR_GROWER_ID" \
   --form "name=Radish Microgreens" \
   --form "slug=radish-microgreens-upload" \

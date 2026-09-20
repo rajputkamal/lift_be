@@ -1,5 +1,5 @@
 const apiBaseUrl = (
-  process.env.API_BASE_URL || "http://localhost:5100/api/v1"
+  process.env.API_BASE_URL || "http://localhost:5100/api/grower/v1"
 ).replace(/\/$/, "");
 const cdn = "https://res.cloudinary.com/mwxiqdif/image/upload";
 const image = {

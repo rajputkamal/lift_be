@@ -1,17 +1,17 @@
 # Guest checkout API (Razorpay Test Mode)
 
-Base URL: `/api/v1`. Uses the existing Express/Mongoose backend. Razorpay test keys only. The local order is saved before the gateway order is requested. All money is integer paise in storage and gateway calls; the order response exposes INR totals and the `payment.amount` field is paise.
+Checkout base URL: `/api/grower-checkout/v1`. Catalogue base URL: `/api/grower/v1`. Uses the existing Express/Mongoose backend. Razorpay test keys only. The local order is saved before the gateway order is requested. All money is integer paise in storage and gateway calls; the order response exposes INR totals and the `payment.amount` field is paise.
 
 ## Setup
 
-1. Set the values in [`grower-checkout.env.example`](grower-checkout.env.example) in an untracked `.env` or deployment environment. Use only a `rzp_test_` key. Set explicit `ALLOWED_FRONTEND_ORIGINS` for a browser frontend. For cross-site HTTPS deployments, set `GUEST_COOKIE_CROSS_SITE=true` so the cookie uses `SameSite=None; Secure`.
-2. Configure each grower through `PATCH /api/v1/growers/:id` with `deliveryFee` (INR), `deliveryPincodes` (array of six-digit strings), and `pickupDetails` (text). Delivery is disabled for unlisted pincodes; pickup is disabled until details exist.
+1. Set the values in [`grower-checkout.env.example`](grower-checkout.env.example) in an untracked `.env` or deployment environment. Use only a `rzp_test_` key. The MVP code allows `http://localhost:3000` and `https://green-sprout-store.vercel.app`; an allowed HTTPS origin automatically receives a `SameSite=None; Secure` guest cookie. `ALLOWED_FRONTEND_ORIGINS` can add exact origins without paths or trailing slashes later.
+2. Configure each grower through `PATCH /api/grower/v1/growers/:id` with `deliveryFee` (INR per delivery), `deliveryPincodes` (the exact free-delivery pincode list), and `pickupDetails` (text). Delivery outside the list uses the configured fee; an empty list means all delivery pincodes are paid. Pickup is disabled until pickup details exist.
 3. Run `npm run migrate:grower` to create indexes. Transactions require a MongoDB replica set or Atlas cluster. Run `npm run cleanup:grower-orders` periodically (for example each minute) to release unpaid reservations after 15 minutes. The script processes up to 500 orders per run; repeat until backlog clears.
-4. In the Razorpay **Test Mode** dashboard, enable automatic capture and configure the webhook URL `/api/v1/webhooks/razorpay` with events `payment.captured` and `refund.processed`. Set the webhook secret separately. Card, netbanking and UPI method availability follows the Test Mode account/Checkout configuration.
+4. In the Razorpay **Test Mode** dashboard, enable automatic capture and configure the webhook URL `/api/grower-checkout/v1/webhooks/razorpay` with events `payment.captured` and `refund.processed`. Set the webhook secret separately. Card, netbanking and UPI method availability follows the Test Mode account/Checkout configuration.
 
 ## Browser flow
 
-The frontend sends requests with `credentials: 'include'`. `POST /orders` requires a unique `Idempotency-Key` header (reuse the same key when retrying the same request). The response sets an unpredictable `HttpOnly` guest cookie. Subsequent list, detail, verify and reconcile calls require that cookie. A different browser or cleared cookies cannot recover orders in this minimal version. For pickup, send `shipping.name` and `shipping.phone`; email is optional. For delivery, provide the full address and a supported pincode. Do not send totals.
+The frontend sends requests with `credentials: 'include'`. `POST /orders` requires a unique `Idempotency-Key` header (reuse the same key when retrying the same request). The response sets an unpredictable `HttpOnly` guest cookie. Subsequent list, detail, verify and reconcile calls require that cookie. A different browser or cleared cookies cannot recover orders in this minimal version. For pickup, send `shipping.name` and `shipping.phone`; email is optional. For delivery, provide name, phone, house, building, street, city, state, and a six-digit pincode; email and landmark are optional. Do not send totals.
 
 ```json
 {
@@ -25,7 +25,7 @@ The frontend sends requests with `credentials: 'include'`. `POST /orders` requir
     "phone": "9999999999",
     "email": "",
     "house": "101",
-    "building": "",
+    "building": "Example Apartments",
     "street": "Sample Street",
     "landmark": "",
     "city": "Hyderabad",
@@ -37,7 +37,7 @@ The frontend sends requests with `credentials: 'include'`. `POST /orders` requir
 
 A successful `201` returns `{ "success": true, "data": { "order": { ... }, "payment": { "keyId": "rzp_test_...", "razorpayOrderId": "order_...", "amount": 27800, "currency": "INR" } } }`. Pass these payment fields to Razorpay Checkout. The frontend should support card, netbanking and UPI using Checkout; do not restrict methods in the API. After Checkout returns `razorpay_payment_id`, `razorpay_order_id`, and `razorpay_signature`, send them to `POST /orders/:id/payment/verify`. The server checks the HMAC and fetches the payment from Razorpay, requiring a captured INR payment of the expected amount. If the callback is lost, call `POST /orders/:id/payment/reconcile`; it only fetches payment status and cannot collect again.
 
-A `202` create response with `payment: null` means gateway creation is uncertain or still in progress. Reusing the same idempotency key will not create a second gateway order. This state requires operator investigation; do not generate a new key automatically. `GET /orders` is paginated and `GET /orders/:id` gives payment status and schedule. A four-week subscription has four weekly schedule entries and a single upfront payment; no renewal engine is present.
+A listed delivery pincode has no fee. An outside pincode is accepted and uses the grower's delivery fee for each scheduled delivery. A four-week subscription multiplies both the basket and applicable delivery fee by four and charges the resulting total upfront. A `202` create response with `payment: null` means gateway creation is uncertain or still in progress. Reusing the same idempotency key will not create a second gateway order. This state requires operator investigation; do not generate a new key automatically. `GET /orders` is paginated and `GET /orders/:id` gives payment status and schedule. No renewal engine is present.
 
 ## Endpoints
 

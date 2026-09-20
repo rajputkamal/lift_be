@@ -6,8 +6,12 @@
   },
   "variable": [
     {
-      "key": "baseUrl",
-      "value": "http://localhost:8080/api/v1"
+      "key": "catalogueBaseUrl",
+      "value": "http://localhost:8080/api/grower/v1"
+    },
+    {
+      "key": "checkoutBaseUrl",
+      "value": "http://localhost:8080/api/grower-checkout/v1"
     },
     {
       "key": "growerId",
@@ -85,7 +89,7 @@
             "value": "application/json"
           }
         ],
-        "url": "{{baseUrl}}/growers",
+        "url": "{{catalogueBaseUrl}}/growers",
         "body": {
           "mode": "raw",
           "raw": "{\n  \"name\": \"GreenLeaf Microgreens Demo\",\n  \"slug\": \"greenleaf-microgreens-demo\",\n  \"logo\": \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg\",\n  \"coverImage\": \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg\",\n  \"shortDescription\": \"Fresh microgreens grown in Hyderabad\",\n  \"description\": \"Small batches of locally grown microgreens.\",\n  \"city\": \"Hyderabad\",\n  \"area\": \"Gachibowli\",\n  \"pincode\": \"500032\",\n  \"phone\": \"9876543210\",\n  \"email\": \"greenleaf-demo@example.com\",\n  \"deliveryText\": \"Delivery by arrangement\",\n  \"deliveryFee\": 20,\n  \"deliveryPincodes\": [\n    \"500032\"\n  ],\n  \"pickupDetails\": \"Collect at the farm counter, 9 AM–5 PM\",\n  \"isActive\": true\n}",
@@ -120,7 +124,7 @@
       "request": {
         "method": "GET",
         "header": [],
-        "url": "{{baseUrl}}/growers?page=1&limit=12"
+        "url": "{{catalogueBaseUrl}}/growers?page=1&limit=12"
       }
     },
     {
@@ -128,7 +132,7 @@
       "request": {
         "method": "GET",
         "header": [],
-        "url": "{{baseUrl}}/growers/{{growerId}}"
+        "url": "{{catalogueBaseUrl}}/growers/{{growerId}}"
       }
     },
     {
@@ -141,7 +145,7 @@
             "value": "application/json"
           }
         ],
-        "url": "{{baseUrl}}/growers/{{growerId}}",
+        "url": "{{catalogueBaseUrl}}/growers/{{growerId}}",
         "body": {
           "mode": "raw",
           "raw": "{\n  \"isActive\": true,\n  \"deliveryFee\": 20,\n  \"deliveryPincodes\": [\n    \"500032\"\n  ],\n  \"pickupDetails\": \"Collect at the farm counter, 9 AM–5 PM\"\n}",
@@ -163,7 +167,7 @@
             "value": "application/json"
           }
         ],
-        "url": "{{baseUrl}}/products",
+        "url": "{{catalogueBaseUrl}}/products",
         "body": {
           "mode": "raw",
           "raw": "{\n  \"growerId\": \"{{growerId}}\",\n  \"name\": \"Radish Microgreens Demo\",\n  \"slug\": \"greenleaf-radish-demo\",\n  \"shortDescription\": \"Crisp and slightly spicy.\",\n  \"description\": \"Fresh radish microgreens with a crisp texture.\",\n  \"price\": 99,\n  \"weight\": \"50g\",\n  \"images\": [\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/radish.jpg\",\n    \"https://res.cloudinary.com/mwxiqdif/image/upload/v1789810114/hero.jpg\"\n  ],\n  \"category\": \"Radish\",\n  \"cultivationDate\": null,\n  \"harvestDate\": null,\n  \"bestBefore\": null,\n  \"storage\": \"Keep refrigerated\",\n  \"stock\": 20,\n  \"isActive\": true\n}",
@@ -197,7 +201,7 @@
       "request": {
         "method": "GET",
         "header": [],
-        "url": "{{baseUrl}}/products?growerId={{growerId}}&page=1&limit=12"
+        "url": "{{catalogueBaseUrl}}/products?growerId={{growerId}}&page=1&limit=12"
       }
     },
     {
@@ -205,7 +209,7 @@
       "request": {
         "method": "GET",
         "header": [],
-        "url": "{{baseUrl}}/products/{{productId}}"
+        "url": "{{catalogueBaseUrl}}/products/{{productId}}"
       }
     },
     {
@@ -218,7 +222,7 @@
             "value": "application/json"
           }
         ],
-        "url": "{{baseUrl}}/products/{{productId}}",
+        "url": "{{catalogueBaseUrl}}/products/{{productId}}",
         "body": {
           "mode": "raw",
           "raw": "{\n  \"price\": 109.5,\n  \"stock\": 20\n}",
@@ -244,10 +248,10 @@
             "value": "application/json"
           }
         ],
-        "url": "{{baseUrl}}/orders",
+        "url": "{{checkoutBaseUrl}}/orders",
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"growerId\": \"{{growerId}}\",\n  \"items\": [\n    {\n      \"productId\": \"{{productId}}\",\n      \"quantity\": 2\n    }\n  ],\n  \"purchaseType\": \"one-time\",\n  \"fulfilment\": \"delivery\",\n  \"firstDate\": \"{{firstDate}}\",\n  \"shipping\": {\n    \"name\": \"Test Customer\",\n    \"phone\": \"9999999999\",\n    \"email\": \"\",\n    \"house\": \"101\",\n    \"building\": \"\",\n    \"street\": \"Sample Street\",\n    \"landmark\": \"\",\n    \"city\": \"Hyderabad\",\n    \"state\": \"Telangana\",\n    \"pincode\": \"500032\"\n  }\n}",
+          "raw": "{\n  \"growerId\": \"{{growerId}}\",\n  \"items\": [\n    {\n      \"productId\": \"{{productId}}\",\n      \"quantity\": 2\n    }\n  ],\n  \"purchaseType\": \"one-time\",\n  \"fulfilment\": \"delivery\",\n  \"firstDate\": \"{{firstDate}}\",\n  \"shipping\": {\n    \"name\": \"Test Customer\",\n    \"phone\": \"9999999999\",\n    \"email\": \"\",\n    \"house\": \"101\",\n    \"building\": \"Example Apartments\",\n    \"street\": \"Sample Street\",\n    \"landmark\": \"\",\n    \"city\": \"Hyderabad\",\n    \"state\": \"Telangana\",\n    \"pincode\": \"500032\"\n  }\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -297,7 +301,7 @@
             "value": "application/json"
           }
         ],
-        "url": "{{baseUrl}}/orders",
+        "url": "{{checkoutBaseUrl}}/orders",
         "body": {
           "mode": "raw",
           "raw": "{\n  \"growerId\": \"{{growerId}}\",\n  \"items\": [\n    {\n      \"productId\": \"{{productId}}\",\n      \"quantity\": 2\n    }\n  ],\n  \"purchaseType\": \"subscription\",\n  \"fulfilment\": \"pickup\",\n  \"firstDate\": \"{{firstDate}}\",\n  \"shipping\": {\n    \"name\": \"Test Customer\",\n    \"phone\": \"9999999999\",\n    \"email\": \"\"\n  }\n}",
@@ -341,7 +345,7 @@
       "request": {
         "method": "GET",
         "header": [],
-        "url": "{{baseUrl}}/orders?page=1&limit=12"
+        "url": "{{checkoutBaseUrl}}/orders?page=1&limit=12"
       },
       "description": "Uses the grower_guest cookie stored automatically by Postman from request 09 or 10."
     },
@@ -350,7 +354,7 @@
       "request": {
         "method": "GET",
         "header": [],
-        "url": "{{baseUrl}}/orders/{{orderId}}"
+        "url": "{{checkoutBaseUrl}}/orders/{{orderId}}"
       },
       "description": "Requires the same Postman cookie jar."
     },
@@ -364,7 +368,7 @@
             "value": "application/json"
           }
         ],
-        "url": "{{baseUrl}}/orders/{{orderId}}/payment/verify",
+        "url": "{{checkoutBaseUrl}}/orders/{{orderId}}/payment/verify",
         "body": {
           "mode": "raw",
           "raw": "{\n  \"razorpay_payment_id\": \"{{razorpayPaymentId}}\",\n  \"razorpay_order_id\": \"{{razorpayOrderId}}\",\n  \"razorpay_signature\": \"{{razorpaySignature}}\"\n}",
@@ -387,7 +391,7 @@
             "value": "application/json"
           }
         ],
-        "url": "{{baseUrl}}/orders/{{orderId}}/payment/reconcile",
+        "url": "{{checkoutBaseUrl}}/orders/{{orderId}}/payment/reconcile",
         "body": {
           "mode": "raw",
           "raw": "{}",
@@ -418,7 +422,7 @@
             "value": "application/json"
           }
         ],
-        "url": "{{baseUrl}}/webhooks/razorpay",
+        "url": "{{checkoutBaseUrl}}/webhooks/razorpay",
         "body": {
           "mode": "raw",
           "raw": "{\n  \"event\": \"payment.captured\"\n}",
@@ -436,7 +440,7 @@
       "request": {
         "method": "DELETE",
         "header": [],
-        "url": "{{baseUrl}}/products/{{productId}}"
+        "url": "{{catalogueBaseUrl}}/products/{{productId}}"
       },
       "description": "Soft-deletes product. Run after order tests."
     },
@@ -445,7 +449,7 @@
       "request": {
         "method": "DELETE",
         "header": [],
-        "url": "{{baseUrl}}/growers/{{growerId}}"
+        "url": "{{catalogueBaseUrl}}/growers/{{growerId}}"
       },
       "description": "Soft-deletes grower. Run after order tests."
     }

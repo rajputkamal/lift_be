@@ -204,7 +204,7 @@ export function validate(kind, body, current = null) {
       if (
         !Array.isArray(raw) ||
         raw.length > 100 ||
-        raw.some((p) => typeof p !== "string" || !/^\d{6}$/.test(p))
+        raw.some((p) => typeof p !== "string" || !/^[1-9]\d{5}$/.test(p))
       )
         errors[key] = "Use up to 100 six-digit pincodes.";
       else out.deliveryPincodes = [...new Set(raw)];
@@ -258,7 +258,7 @@ export function validate(kind, body, current = null) {
       if (!(key in body)) errors[key] = `${key} is required.`;
   const merged = { ...current, ...out };
   if (kind === "grower") {
-    if (merged.pincode && !/^\d{6}$/.test(merged.pincode))
+    if (merged.pincode && !/^[1-9]\d{5}$/.test(merged.pincode))
       errors.pincode = "Use a six-digit Indian pincode.";
     if (merged.phone && !/^(?:\+91[ -]?)?[6-9]\d{9}$/.test(merged.phone))
       errors.phone = "Use a valid Indian mobile number.";
