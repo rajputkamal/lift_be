@@ -1,10 +1,12 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 
 export function config() {
-  const keyId = process.env.RAZORPAY_KEY_ID;
-  const keySecret = process.env.RAZORPAY_KEY_SECRET;
-  if (!keyId?.startsWith("rzp_test_") || !keySecret)
-    throw new Error("Razorpay Test Mode is not configured");
+  const keyId = process.env.RAZORPAY_KEY_ID?.trim();
+  const keySecret = process.env.RAZORPAY_KEY_SECRET?.trim();
+  if (!keyId) throw new Error("RAZORPAY_KEY_ID is missing or blank");
+  if (!keyId.startsWith("rzp_test_"))
+    throw new Error("RAZORPAY_KEY_ID must be a Test Mode key (rzp_test_)");
+  if (!keySecret) throw new Error("RAZORPAY_KEY_SECRET is missing or blank");
   return { keyId, keySecret };
 }
 export function signatureValid(payload, signature, secret) {

@@ -108,7 +108,9 @@ export async function createOrder(req, res) {
     );
   try {
     config();
-  } catch {
+  } catch (err) {
+    // config() emits only fixed diagnostics, never credential values.
+    console.error("Grower checkout payment configuration:", err.message);
     return fail(
       res,
       503,

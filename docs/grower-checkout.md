@@ -57,3 +57,9 @@ Inventory uses each product's `stock` as capacity **per date**. Reservations are
 ## References
 
 Implementation follows Razorpay's [order creation](https://razorpay.com/docs/api/orders/create/), [signature verification](https://razorpay.com/docs/payments/server-integration/nodejs/integration-steps/), [payment fetch](https://razorpay.com/docs/api/payments/fetch-with-id/), [order payment fetch](https://razorpay.com/docs/api/payments/fetch-payments-orders/), and [webhook verification and deduplication](https://razorpay.com/docs/webhooks/validate-test/) documentation.
+
+## Troubleshooting `503 PAYMENT_NOT_CONFIGURED`
+
+This response comes from the local credential check before any guest session, database order, or Razorpay request is created. It is independent of the frontend origin. The running backend requires exactly `RAZORPAY_KEY_ID` (starting with `rzp_test_`) and `RAZORPAY_KEY_SECRET` (nonblank). Surrounding whitespace is trimmed. Live keys remain unsupported.
+
+For Cloud Run, check these variables on the revision actually receiving traffic, including any traffic split. Local `.env` values do not establish what is configured in that revision. Deploy a new revision after correcting configuration. In Cloud Run logs, search for `Grower checkout payment configuration:` to see which check failed; the diagnostic contains no credential values. Do not paste secrets into logs or frontend settings. An incorrect but nonblank secret passes this check and instead fails when calling Razorpay.
