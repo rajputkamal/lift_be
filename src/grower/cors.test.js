@@ -10,6 +10,7 @@ test("CORS includes the MVP frontend origins and parses configured origins", () 
   assert.deepEqual(allowedFrontendOrigins(""), [
     "http://localhost:3000",
     "https://green-sprout-store.vercel.app",
+    "https://micro-greens.foodieai.in",
   ]);
   assert.deepEqual(
     allowedFrontendOrigins(
@@ -18,6 +19,7 @@ test("CORS includes the MVP frontend origins and parses configured origins", () 
     [
       "http://localhost:3000",
       "https://green-sprout-store.vercel.app",
+      "https://micro-greens.foodieai.in",
       "https://growers.example.com",
     ],
   );
@@ -31,6 +33,10 @@ test("guest origin checks use the same CORS allowlist", () => {
     assert.equal(isAllowedFrontendOrigin(undefined), true);
     assert.equal(isAllowedFrontendOrigin("http://localhost:3000"), true);
     assert.equal(isAllowedFrontendOrigin("https://growers.example.com"), true);
+    assert.equal(
+      isAllowedFrontendOrigin("https://micro-greens.foodieai.in"),
+      true,
+    );
     assert.equal(isAllowedFrontendOrigin("https://attacker.example"), false);
   } finally {
     if (previous === undefined) delete process.env.ALLOWED_FRONTEND_ORIGINS;

@@ -1,6 +1,7 @@
 const defaultFrontendOrigins = [
   "http://localhost:3000",
   "https://green-sprout-store.vercel.app",
+  "https://micro-greens.foodieai.in",
 ];
 
 export function allowedFrontendOrigins(

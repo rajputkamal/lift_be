@@ -57,7 +57,7 @@ resource.labels.service_name="lift-be"
 
 The grower catalogue uses the existing Express and MongoDB service. See [OpenAPI](docs/grower-openapi.yaml), [Postman collection](docs/grower-postman.json), and [frontend integration notes](docs/grower-frontend.md).
 
-1. Set `MONGO_URI` in `.env` as for the rest of this project. The MVP CORS allowlist includes `http://localhost:3000` and `https://green-sprout-store.vercel.app`. `ALLOWED_FRONTEND_ORIGINS` may add more exact comma-separated browser origins later. CORS reflects an allowed origin and returns `Access-Control-Allow-Credentials: true`; it never combines credentialed requests with a wildcard origin.
+1. Set `MONGO_URI` in `.env` as for the rest of this project. The MVP CORS allowlist includes `http://localhost:3000`, `https://green-sprout-store.vercel.app`, and `https://micro-greens.foodieai.in`. `ALLOWED_FRONTEND_ORIGINS` may add more exact comma-separated browser origins later. CORS reflects an allowed origin and returns `Access-Control-Allow-Credentials: true`; it never combines credentialed requests with a wildcard origin.
 2. Run `npm install`, then `npm run migrate:grower` to create catalogue indexes. Mongoose also builds indexes on startup, but the migration makes deployment explicit. No existing collection data is rewritten.
 3. Run `npm run dev` (or `npm start`). The catalogue is under `/api/grower/v1`; guest checkout and payment routes are under `/api/grower-checkout/v1`.
 4. Run `npm run test:grower` for validation and checkout checks. No development seed data is required; use the [Postman demo guide](docs/grower-postman-guide.md) to create a grower and product.
