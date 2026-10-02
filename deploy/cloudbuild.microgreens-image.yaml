@@ -1,0 +1,18 @@
+# Builds/tests the isolated image without deploying any service.
+substitutions:
+  _REGION: asia-south1
+  _REPOSITORY: microgreens
+steps:
+  - name: node:18-alpine
+    entrypoint: sh
+    args: ["-c", "npm ci && npm run test:grower"]
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -t
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/microgreens-api:$BUILD_ID
+      - .
+images:
+  - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/microgreens-api:$BUILD_ID
+options:
+  logging: CLOUD_LOGGING_ONLY

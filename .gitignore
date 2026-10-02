@@ -37,3 +37,7 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# Firebase local deployment state
+.firebase/
+firebase-debug.log*

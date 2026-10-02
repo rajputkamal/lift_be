@@ -1,3 +1,5 @@
+import { microgreensEnvironment } from "./microgreens.js";
+
 const defaultFrontendOrigins = [
   "http://localhost:3000",
   "https://green-sprout-store.vercel.app",
@@ -11,7 +13,31 @@ export function allowedFrontendOrigins(
     ?.split(",")
     .map((origin) => origin.trim())
     .filter(Boolean);
-  return [...new Set([...defaultFrontendOrigins, ...(origins || [])])];
+  const microgreens = process.env.SERVICE_MODE === "microgreens";
+  const defaults = microgreens
+    ? microgreensEnvironment() === "test"
+      ? ["https://test.microgreenskart.in"]
+      : [
+          ...defaultFrontendOrigins,
+          "https://microgreenskart.in",
+          "https://www.microgreenskart.in",
+        ]
+    : defaultFrontendOrigins;
+  return [...new Set([...defaults, ...(origins || [])])].filter((origin) => {
+    if (origin === "*" || origin === "null") return false;
+    try {
+      const url = new URL(origin);
+      if (url.origin !== origin) return false;
+      if (microgreens && process.env.NODE_ENV === "production")
+        return (
+          url.protocol === "https:" &&
+          !["localhost", "127.0.0.1", "[::1]"].includes(url.hostname)
+        );
+      return ["http:", "https:"].includes(url.protocol);
+    } catch {
+      return false;
+    }
+  });
 }
 
 export function isAllowedFrontendOrigin(origin) {

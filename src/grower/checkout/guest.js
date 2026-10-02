@@ -2,9 +2,15 @@ import { randomBytes, createHash, timingSafeEqual } from "node:crypto";
 import { fail } from "../catalogue.js";
 import { isAllowedFrontendOrigin } from "../../config/cors.js";
 
-const cookieName = "grower_guest";
+export function guestCookieName() {
+  const name = process.env.GUEST_COOKIE_NAME || "grower_guest";
+  if (!["grower_guest", "__session"].includes(name))
+    throw new Error("GUEST_COOKIE_NAME must be grower_guest or __session");
+  return name;
+}
 export const hash = (value) => createHash("sha256").update(value).digest("hex");
 export function parseCookie(req) {
+  const cookieName = guestCookieName();
   const entry = (req.headers.cookie || "")
     .split(";")
     .map((s) => s.trim())
@@ -13,6 +19,7 @@ export function parseCookie(req) {
   return token && /^[a-f0-9]{64}$/.test(token) ? token : null;
 }
 export function guestForCreate(req, res) {
+  const cookieName = guestCookieName();
   const existing = parseCookie(req);
   if (existing) return hash(existing);
   const token = randomBytes(32).toString("hex");
@@ -24,7 +31,7 @@ export function guestForCreate(req, res) {
   const sameSite = crossSite ? "None" : "Lax";
   res.append(
     "Set-Cookie",
-    `${cookieName}=${token}; HttpOnly; Path=/api/grower-checkout/v1; Max-Age=2592000; SameSite=${sameSite}${secure ? "; Secure" : ""}`,
+    `${cookieName}=${token}; HttpOnly; Path=${req.baseUrl || "/api/grower-checkout/v1"}; Max-Age=2592000; SameSite=${sameSite}${secure ? "; Secure" : ""}`,
   );
   return hash(token);
 }

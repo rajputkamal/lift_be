@@ -1,0 +1,57 @@
+# Independent manual/approved trigger; never targets lift-be.
+substitutions:
+  _REGION: asia-south1
+  _REPOSITORY: microgreens
+  _RUNTIME_SERVICE_ACCOUNT: microgreens-api
+  _MONGO_SECRET: microgreens-mongo-uri
+  _RAZORPAY_KEY_ID_SECRET: microgreens-razorpay-test-key-id
+  _RAZORPAY_KEY_SECRET: microgreens-razorpay-test-key-secret
+  _WEBHOOK_SECRET: microgreens-razorpay-webhook-secret
+  _CLOUDINARY_SECRET: microgreens-cloudinary-url
+  _MONGO_VERSION: "1"
+  _RAZORPAY_KEY_ID_VERSION: "1"
+  _RAZORPAY_KEY_SECRET_VERSION: "1"
+  _WEBHOOK_VERSION: "1"
+  _CLOUDINARY_VERSION: "1"
+steps:
+  - name: node:18-alpine
+    entrypoint: sh
+    args: ["-c", "npm ci && npm run test:grower"]
+  - name: gcr.io/cloud-builders/docker
+    args:
+      [
+        "build",
+        "-t",
+        "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/microgreens-api:$BUILD_ID",
+        ".",
+      ]
+  - name: gcr.io/cloud-builders/docker
+    args:
+      [
+        "push",
+        "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/microgreens-api:$BUILD_ID",
+      ]
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - microgreens-api
+      - --project=$PROJECT_ID
+      - --region=${_REGION}
+      - --image=${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/microgreens-api:$BUILD_ID
+      - --service-account=${_RUNTIME_SERVICE_ACCOUNT}@$PROJECT_ID.iam.gserviceaccount.com
+      - --set-env-vars=SERVICE_MODE=microgreens,MICROGREENS_ENVIRONMENT=production,NODE_ENV=production,MICROGREENS_API_PREFIX=/v1,PUBLIC_API_URL=https://api.microgreenskart.in/v1,FRONTEND_URL=https://microgreenskart.in,GUEST_COOKIE_NAME=__session,MICROGREENS_CATALOGUE_WRITES=disabled
+      - --set-secrets=MONGO_URI=${_MONGO_SECRET}:${_MONGO_VERSION},RAZORPAY_KEY_ID=${_RAZORPAY_KEY_ID_SECRET}:${_RAZORPAY_KEY_ID_VERSION},RAZORPAY_KEY_SECRET=${_RAZORPAY_KEY_SECRET}:${_RAZORPAY_KEY_SECRET_VERSION},RAZORPAY_WEBHOOK_SECRET=${_WEBHOOK_SECRET}:${_WEBHOOK_VERSION},CLOUDINARY_URL=${_CLOUDINARY_SECRET}:${_CLOUDINARY_VERSION}
+      - --min-instances=0
+      - --max-instances=3
+      - --memory=512Mi
+      - --cpu=1
+      - --port=8080
+      - --timeout=60s
+      - --allow-unauthenticated
+      - --ingress=all
+images:
+  - "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/microgreens-api:$BUILD_ID"
+options:
+  logging: CLOUD_LOGGING_ONLY

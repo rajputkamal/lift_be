@@ -13,7 +13,8 @@
     "cleanup:grower-orders": "node scripts/expireGrowerOrders.js",
     "seed:grower-demo": "bash scripts/seedGrowerDemo.sh",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "start:microgreens": "SERVICE_MODE=microgreens node src/server.js"
   },
   "engines": {
     "node": "18.x"

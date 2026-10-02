@@ -1,0 +1,13 @@
+.gcloudignore
+.git
+.gitignore
+#!include:.gitignore
+.env
+.env.*
+node_modules/
+.codex/
+.agents/
+.aws/
+.firebase/
+**/.DS_Store
+firebase-debug.log*

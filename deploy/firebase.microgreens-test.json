@@ -1,0 +1,55 @@
+{
+  "hosting": {
+    "target": "microgreens-api-test",
+    "public": "firebase-public",
+    "ignore": ["firebase.microgreens-test.json", "**/.*", "**/node_modules/**"],
+    "headers": [
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "private, no-store"
+          }
+        ]
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "/v1/**",
+        "run": {
+          "serviceId": "microgreens-api-test",
+          "region": "asia-south1"
+        }
+      },
+      {
+        "source": "/api/grower/**",
+        "run": {
+          "serviceId": "microgreens-api-test",
+          "region": "asia-south1"
+        }
+      },
+      {
+        "source": "/api/grower-checkout/**",
+        "run": {
+          "serviceId": "microgreens-api-test",
+          "region": "asia-south1"
+        }
+      },
+      {
+        "source": "/health",
+        "run": {
+          "serviceId": "microgreens-api-test",
+          "region": "asia-south1"
+        }
+      },
+      {
+        "source": "/ready",
+        "run": {
+          "serviceId": "microgreens-api-test",
+          "region": "asia-south1"
+        }
+      }
+    ]
+  }
+}
