@@ -73,3 +73,43 @@ Order item fields are backend snapshots captured when the order is created. `uni
   }
 }
 ```
+
+## Grower delivery and website fields
+
+Grower list and detail responses now include:
+
+```json
+{
+  "deliveryDays": ["saturday", "sunday"],
+  "isCitywideDelivery": false,
+  "serviceablePincodes": ["500032", "500033"],
+  "websiteUrl": null
+}
+```
+
+Weekday enum: monday, tuesday, wednesday, thursday, friday, saturday, sunday.
+An empty deliveryDays list means delivery is unavailable; pickup is unaffected.
+Filter the delivery date picker using the selected grower's weekdays. Four-week
+subscriptions repeat that weekday weekly. The backend returns
+DELIVERY_DAY_UNAVAILABLE if the selected delivery date is unsupported.
+
+For isCitywideDelivery=true, the submitted shipping city must match the grower's
+city (case-insensitive); this flag is not nationwide service or free delivery.
+For false, shipping pincode must be in serviceablePincodes; an empty list means
+no delivery coverage. DELIVERY_AREA_UNAVAILABLE rejects unsupported locations.
+The existing deliveryPincodes list still means **free-delivery pincodes** and
+existing deliveryFee calculation remains unchanged. Never treat this fee list
+as the new coverage list. No new phone/email contact fields are exposed.
+
+websiteUrl is optional and null when absent. Display is a frontend choice. When
+opening externally use an HTTPS link with target=_blank and rel=noopener noreferrer.
+Do not invent a URL for a grower. New create/PATCH fields receive validation and
+omitted PATCH fields retain their values. New growers default to weekend delivery,
+non-citywide coverage with an empty serviceable list and null website.
+
+For existing records missing delivery configuration, checkout retains legacy
+availability until configured; serializers supply weekend/false/empty/null defaults.
+The test migration adds explicit configuration to rides only and preserves existing
+values. All test growers use weekends; the first unconfigured test grower illustrates
+citywide delivery and the others use their existing free-delivery pincodes plus their
+own pincode as coverage. These are dummy settings to review before real launch.

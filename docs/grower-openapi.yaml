@@ -60,6 +60,31 @@ components:
         deliveryText: { type: string, maxLength: 500 }
         deliveryFee: { type: number, minimum: 0, description: INR }
         deliveryPincodes: { type: array, items: { type: string } }
+        deliveryDays:
+          type: array
+          maxItems: 7
+          uniqueItems: true
+          default: [saturday, sunday]
+          description: Delivery weekdays; empty disables delivery. Pickup scheduling is unchanged.
+          items:
+            type: string
+            enum:
+              [monday, tuesday, wednesday, thursday, friday, saturday, sunday]
+        isCitywideDelivery:
+          type: boolean
+          default: false
+          description: Covers all pincodes within the grower city, without changing delivery fees.
+        serviceablePincodes:
+          type: array
+          maxItems: 100
+          description: Delivery coverage when isCitywideDelivery is false. Distinct from free-delivery pincodes.
+          items: { type: string, pattern: "^[1-9][0-9]{5}$" }
+        websiteUrl:
+          type: string
+          format: uri
+          nullable: true
+          maxLength: 2048
+          description: Optional HTTPS website URL without embedded credentials.
         pickupDetails: { type: string, maxLength: 500 }
         isActive: { type: boolean, default: false }
     ProductInput:

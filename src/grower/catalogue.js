@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import Grower from "./models/growerModel.js";
 import Product from "./models/productModel.js";
+import { DELIVERY_DAYS, DEFAULT_DELIVERY_DAYS } from "./delivery.js";
 
 const reserved = new Set([
   "api",
@@ -42,6 +43,10 @@ const growerKeys = new Set([
   ...Object.keys(growerFields),
   "deliveryFee",
   "deliveryPincodes",
+  "deliveryDays",
+  "isCitywideDelivery",
+  "serviceablePincodes",
+  "websiteUrl",
   "isActive",
 ]);
 const productKeys = new Set([
@@ -200,19 +205,39 @@ export function validate(kind, body, current = null) {
         errors[key] =
           "Delivery fee must be non-negative with at most two decimal places.";
       else out.deliveryFeePaise = raw === 0 ? 0 : paise;
-    } else if (key === "deliveryPincodes") {
+    } else if (key === "websiteUrl") {
+      const value = typeof raw === "string" ? raw.trim() : raw;
+      let valid = value === null;
+      if (typeof value === "string" && value.length <= 2048 && url(value)) {
+        const parsed = new URL(value);
+        valid =
+          parsed.protocol === "https:" && !parsed.username && !parsed.password;
+      }
+      if (!valid)
+        errors[key] = "Use an HTTPS website URL without credentials or null.";
+      else out[key] = value;
+    } else if (key === "deliveryDays") {
+      if (
+        !Array.isArray(raw) ||
+        raw.length > 7 ||
+        raw.some((day) => !DELIVERY_DAYS.includes(day))
+      )
+        errors[key] =
+          "Use weekday names monday through sunday; an empty array disables delivery.";
+      else out[key] = DELIVERY_DAYS.filter((day) => raw.includes(day));
+    } else if (key === "deliveryPincodes" || key === "serviceablePincodes") {
       if (
         !Array.isArray(raw) ||
         raw.length > 100 ||
         raw.some((p) => typeof p !== "string" || !/^[1-9]\d{5}$/.test(p))
       )
         errors[key] = "Use up to 100 six-digit pincodes.";
-      else out.deliveryPincodes = [...new Set(raw)];
+      else out[key] = [...new Set(raw)];
     } else if (key === "stock") {
       if (!Number.isSafeInteger(raw) || raw < 0)
         errors[key] = "Stock must be a non-negative integer.";
       else out[key] = raw;
-    } else if (key === "isActive") {
+    } else if (key === "isActive" || key === "isCitywideDelivery") {
       if (typeof raw !== "boolean") errors[key] = "Must be true or false.";
       else out[key] = raw;
     } else if (key === "images") {
@@ -294,6 +319,10 @@ export const publicGrower = (g) => ({
   area: g.area,
   rating: null,
   deliveryText: g.deliveryText || "",
+  deliveryDays: g.deliveryDays ?? [...DEFAULT_DELIVERY_DAYS],
+  isCitywideDelivery: g.isCitywideDelivery ?? false,
+  serviceablePincodes: g.serviceablePincodes ?? [],
+  websiteUrl: g.websiteUrl ?? null,
   isActive: g.isActive,
 });
 export const crudGrower = (g) => ({

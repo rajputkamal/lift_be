@@ -14,9 +14,14 @@ export function allowedFrontendOrigins(
     .map((origin) => origin.trim())
     .filter(Boolean);
   const microgreens = process.env.SERVICE_MODE === "microgreens";
+  const testEnvironment = microgreens && microgreensEnvironment() === "test";
   const defaults = microgreens
-    ? microgreensEnvironment() === "test"
-      ? ["https://test.microgreenskart.in"]
+    ? testEnvironment
+      ? [
+          "https://test.microgreenskart.in",
+          "http://localhost:3000",
+          "http://127.0.0.1:3000",
+        ]
       : [
           ...defaultFrontendOrigins,
           "https://microgreenskart.in",
@@ -28,11 +33,17 @@ export function allowedFrontendOrigins(
     try {
       const url = new URL(origin);
       if (url.origin !== origin) return false;
-      if (microgreens && process.env.NODE_ENV === "production")
-        return (
-          url.protocol === "https:" &&
-          !["localhost", "127.0.0.1", "[::1]"].includes(url.hostname)
+      if (microgreens && process.env.NODE_ENV === "production") {
+        const loopback = ["localhost", "127.0.0.1", "[::1]"].includes(
+          url.hostname,
         );
+        return (
+          (testEnvironment &&
+            loopback &&
+            ["http:", "https:"].includes(url.protocol)) ||
+          (url.protocol === "https:" && !loopback)
+        );
+      }
       return ["http:", "https:"].includes(url.protocol);
     } catch {
       return false;

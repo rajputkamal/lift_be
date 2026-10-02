@@ -1,5 +1,6 @@
 import { Grower, Product } from "../catalogue.js";
 import GuestOrder from "../models/guestOrderModel.js";
+import { deliveryError } from "../delivery.js";
 import {
   reserve,
   release,
@@ -30,6 +31,9 @@ export async function buildOrder(body) {
       "PICKUP_UNAVAILABLE",
       "Pickup is unavailable for this grower.",
     );
+  const unavailable = deliveryError(grower, body);
+  if (unavailable)
+    throw new CheckoutError(unavailable.code, unavailable.message);
   const ids = body.items.map((item) => item.productId);
   const products = await Product.find({
     _id: { $in: ids },

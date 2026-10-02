@@ -297,7 +297,8 @@ frontend code. No catalogue or user data is copied to production. Grower guest c
 does not expose Lift user accounts. Catalogue writes are disabled in both services;
 test checkout stores test orders in rides, while production orders use microgreenskart.
 
-Test allows https://test.microgreenskart.in by default; production allows the production
+Test allows https://test.microgreenskart.in, http://localhost:3000 and
+http://127.0.0.1:3000 by default; production allows the production
 frontend origins and excludes test.microgreenskart.in. Host-only guest cookies are scoped
 to /v1 on their respective API hosts, using Firebase's __session cookie. Test max instances
 is 1; production is 3; both scale to zero. Manual deployments only: build the image with
@@ -334,3 +335,25 @@ Generated test API DNS records:
 The test API custom hostname awaits DNS/certificate verification. Re-read Firebase
 requirements before later retries because challenge values can change. Test immediately
 via https://microgreens-api-test-lift-475112.web.app/v1/growers.
+
+Local development CORS: the test API permits the exact localhost/127.0.0.1 origins
+on port 3000 with credentials. Other local ports require an explicit test-only
+ALLOWED_FRONTEND_ORIGINS entry. Production continues to exclude all loopback origins.
+Firebase has discovered both test DNS records; HTTPS certificate validation is pending.
+Until ready, use https://microgreens-api-test-lift-475112.web.app/v1 as both local
+frontend API bases. Cross-site browser cookie blocking can affect guest checkout even
+when catalogue CORS works; verify guest sessions separately.
+
+Localhost CORS fix deployed to test revision microgreens-api-test-00002-8h2,
+image sha256:3e3ae3d0c9e4d30b3352f101f5ebdc179e1a2b4469ebf48d6e9ef9e424b1deb9.
+The production revision was not updated for this fix. All 36 backend tests passed.
+
+Grower delivery metadata update: build 645bf865-531b-4d7f-9bc7-2906d4c6872e,
+image sha256:4ddb70731af10688affc506cce2f33b64c820371432d70441c412d47706cb453.
+Test revision microgreens-api-test-00003-f7t; production microgreens-api-00005-xs6.
+All 39 tests passed. Four rides growers were backfilled only for missing deliveryDays,
+isCitywideDelivery, serviceablePincodes and websiteUrl; repeat dry run affects zero.
+GreenLeaf demonstrates citywide delivery; three others cover pincode 500032.
+All use weekend delivery and null website URLs until configured by their owners.
+Live test list/detail fields and localhost CORS were verified. Production readiness
+passed and production growers remain empty. No commits or pushes were performed.

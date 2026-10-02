@@ -40,11 +40,16 @@ test("test API allows test frontend and excludes production origin by default", 
     process.env.NODE_ENV = "production";
     process.env.MICROGREENS_ENVIRONMENT = "test";
     const testOrigins = allowedFrontendOrigins("");
-    assert.deepEqual(testOrigins, ["https://test.microgreenskart.in"]);
+    assert.deepEqual(testOrigins, [
+      "https://test.microgreenskart.in",
+      "http://localhost:3000",
+      "http://127.0.0.1:3000",
+    ]);
     process.env.MICROGREENS_ENVIRONMENT = "production";
     const prodOrigins = allowedFrontendOrigins("");
     assert.ok(prodOrigins.includes("https://microgreenskart.in"));
     assert.ok(!prodOrigins.includes("https://test.microgreenskart.in"));
+    assert.ok(!prodOrigins.includes("http://localhost:3000"));
   } finally {
     for (const key of ["SERVICE_MODE", "NODE_ENV", "MICROGREENS_ENVIRONMENT"])
       if (saved[key] === undefined) delete process.env[key];

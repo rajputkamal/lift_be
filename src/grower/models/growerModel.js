@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { DELIVERY_DAYS, DEFAULT_DELIVERY_DAYS } from "../delivery.js";
 
 const growerSchema = new mongoose.Schema(
   {
@@ -16,6 +17,13 @@ const growerSchema = new mongoose.Schema(
     deliveryText: { type: String, default: "" },
     deliveryFeePaise: { type: Number, default: 0, min: 0 },
     deliveryPincodes: { type: [String], default: [] },
+    deliveryDays: {
+      type: [{ type: String, enum: DELIVERY_DAYS }],
+      default: () => [...DEFAULT_DELIVERY_DAYS],
+    },
+    isCitywideDelivery: { type: Boolean, default: false },
+    serviceablePincodes: { type: [String], default: [] },
+    websiteUrl: { type: String, default: null },
     pickupDetails: { type: String, default: "" },
     isActive: { type: Boolean, default: false },
     inventoryVersion: { type: Number, default: 0 },
