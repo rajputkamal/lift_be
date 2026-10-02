@@ -32,6 +32,7 @@ subprocess.run([
         "NODE_ENV=production", "MICROGREENS_API_PREFIX=/v1",
         "PUBLIC_API_URL=https://" + host + "/v1", "FRONTEND_URL=https://" + frontend,
         "GUEST_COOKIE_NAME=__session", "MICROGREENS_CATALOGUE_WRITES=disabled",
+        "GUEST_COOKIE_CROSS_SITE=" + ("true" if environment == "test" else "false"),
     ]),
     "--set-secrets=" + ",".join(key + "=" + secret + ":1" for key, secret in secrets.items()),
     "--min-instances=0", "--max-instances=" + ("1" if environment == "test" else "3"),

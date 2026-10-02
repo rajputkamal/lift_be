@@ -357,3 +357,12 @@ GreenLeaf demonstrates citywide delivery; three others cover pincode 500032.
 All use weekend delivery and null website URLs until configured by their owners.
 Live test list/detail fields and localhost CORS were verified. Production readiness
 passed and production growers remain empty. No commits or pushes were performed.
+
+Localhost checkout cookie fix: test service now sets GUEST_COOKIE_CROSS_SITE=true,
+so localhost-origin order creation issues __session with SameSite=None; Secure;
+HttpOnly; Path=/v1. Keep credentials: include on creation, verify, reconcile and
+order history. Existing Lax cookies are not automatically rewritten by this setting;
+third-party-cookie blocking may still require testing on test.microgreenskart.in.
+Never remove guest ownership checks to address missing cookies. Existing paid orders
+must be reconciled through their original session or trusted payment webhook; do not
+create a duplicate payment merely to work around a missing guest session.
