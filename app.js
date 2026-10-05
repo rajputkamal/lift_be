@@ -52,6 +52,11 @@ export async function createApp({
       express.raw({ type: "application/json", limit: "1mb" }),
       razorpayWebhook,
     );
+  if (mode === "microgreens") {
+    const { default: emailRoutes } =
+      await import("./src/grower/email/routes.js");
+    app.use(prefix, emailRoutes);
+  }
   app.use(express.json());
   if (mode === "default") {
     const { default: authRoutes } = await import("./src/routes/authRoutes.js");

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { notificationSchema } from "../email/schema.js";
 
 const item = new mongoose.Schema(
   {
@@ -31,6 +32,9 @@ const orderSchema = new mongoose.Schema(
       index: true,
     },
     growerName: String,
+    deliveryDays: [String],
+    emailEligible: { type: Boolean, default: false },
+    emailNotification: notificationSchema,
     purchaseType: {
       type: String,
       enum: ["one-time", "subscription"],
@@ -64,4 +68,12 @@ const orderSchema = new mongoose.Schema(
 );
 orderSchema.index({ guestHash: 1, idempotencyKey: 1 }, { unique: true });
 orderSchema.index({ paymentStatus: 1, reservationExpiresAt: 1 });
+orderSchema.index({
+  "emailNotification.status": 1,
+  "emailNotification.nextAttemptAt": 1,
+});
+orderSchema.index({
+  "emailNotification.status": 1,
+  "emailNotification.leaseUntil": 1,
+});
 export default mongoose.model("GuestOrder", orderSchema);

@@ -1,5 +1,6 @@
 import { Grower, Product } from "../catalogue.js";
 import GuestOrder from "../models/guestOrderModel.js";
+import { notification } from "../email/service.js";
 import { deliveryError } from "../delivery.js";
 import {
   reserve,
@@ -189,6 +190,12 @@ export async function applyCapturedPayment(orderId, payment) {
       }
       order.paymentStatus = "paid";
       order.razorpayPaymentId = payment.id;
+      if (order.emailEligible && !order.emailNotification)
+        order.emailNotification = notification(
+          "order-confirmation",
+          order._id,
+          order.shipping?.email,
+        );
       await order.save({ session });
       return order;
     });

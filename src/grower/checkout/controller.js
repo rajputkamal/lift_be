@@ -144,6 +144,8 @@ export async function createOrder(req, res) {
         requestHash: fingerprint,
         growerId: priced.grower._id,
         growerName: priced.grower.name,
+        deliveryDays: priced.grower.deliveryDays || [],
+        emailEligible: req.app?.locals?.serviceMode === "microgreens",
         purchaseType: req.body.purchaseType,
         fulfilment: req.body.fulfilment,
         shipping: shippingSnapshot(req.body.shipping, req.body.fulfilment),
