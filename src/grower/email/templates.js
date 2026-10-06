@@ -1,21 +1,10 @@
-export const escapeHtml = (value) =>
-  String(value ?? "").replace(
-    /[&<>"']/g,
-    (c) =>
-      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[
-        c
-      ],
-  );
+import { paragraph, wrap, table } from "./layout.js";
+export { escapeHtml } from "./layout.js";
+
 const money = (value) =>
   new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR" }).format(
     value / 100,
   );
-const paragraph = (value) =>
-  `<p style="line-height:1.6;margin:12px 0">${escapeHtml(value)}</p>`;
-const wrap = (content) =>
-  `<!doctype html><html><head><meta name="viewport" content="width=device-width, initial-scale=1"></head><body style="margin:0;background:#f3f6f2;color:#183325;font-family:Arial,sans-serif"><main style="max-width:640px;margin:24px auto;padding:24px;background:white;border-radius:12px"><h1 style="font-size:24px">Micro Greens Kart</h1>${content}</main></body></html>`;
-const table = (head, rows) =>
-  `<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:14px">${head ? `<thead><tr>${head.map((v) => `<th style="text-align:left;padding:8px;border-bottom:2px solid #dce7dc">${escapeHtml(v)}</th>`).join("")}</tr></thead>` : ""}<tbody>${rows.map((row) => `<tr>${row.map((v) => `<td style="padding:8px;border-bottom:1px solid #dce7dc">${escapeHtml(v)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
 export function orderEmail(order) {
   const s = order.shipping || {};
   const date = order.createdAt

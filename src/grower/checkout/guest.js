@@ -1,4 +1,4 @@
-import { randomBytes, createHash, timingSafeEqual } from "node:crypto";
+import { randomBytes, createHash } from "node:crypto";
 import { fail } from "../catalogue.js";
 import { isAllowedFrontendOrigin } from "../../config/cors.js";
 

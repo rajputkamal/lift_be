@@ -104,7 +104,7 @@ export async function createReservedOrder(data, dates) {
         [
           {
             ...data.order,
-            items: data.items.map(({ stock, ...item }) => item),
+            items: data.items.map(({ stock: _stock, ...item }) => item),
             schedule: dates.map((date) => ({ date, status: "scheduled" })),
             reservationExpiresAt: new Date(Date.now() + 15 * 60 * 1000),
           },

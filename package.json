@@ -14,7 +14,12 @@
     "seed:grower-demo": "bash scripts/seedGrowerDemo.sh",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "start:microgreens": "SERVICE_MODE=microgreens node src/server.js"
+    "start:microgreens": "SERVICE_MODE=microgreens node src/server.js",
+    "lint:grower": "eslint src/grower src/config/microgreens.js scripts/*Grower*.js scripts/expireGrowerOrders.js",
+    "lint": "npm run lint:grower",
+    "format:grower": "prettier --ignore-unknown --write src/grower src/config/microgreens.js scripts/*Grower*.js scripts/expireGrowerOrders.js deploy READMe.md eslint.config.js package.json docs",
+    "format:grower:check": "prettier --ignore-unknown --check src/grower src/config/microgreens.js scripts/*Grower*.js scripts/expireGrowerOrders.js deploy READMe.md eslint.config.js package.json docs",
+    "check:grower": "npm run lint:grower && npm run format:grower:check && npm run test:grower"
   },
   "engines": {
     "node": "18.x"
@@ -35,6 +40,9 @@
     "node-cache": "^5.1.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "eslint": "^9.39.5",
+    "globals": "^16.5.0",
     "nodemon": "^3.1.10",
     "prettier": "^3.9.8"
   }

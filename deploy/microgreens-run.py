@@ -27,14 +27,14 @@ subprocess.run([
     "--project=lift-475112", "--region=asia-south1",
     "--image=asia-south1-docker.pkg.dev/lift-475112/microgreens/microgreens-api@" + digest,
     "--service-account=" + service + "@lift-475112.iam.gserviceaccount.com",
-    "--set-env-vars=" + ",".join([
+    "--update-env-vars=" + ",".join([
         "SERVICE_MODE=microgreens", "MICROGREENS_ENVIRONMENT=" + environment,
         "NODE_ENV=production", "MICROGREENS_API_PREFIX=/v1",
         "PUBLIC_API_URL=https://" + host + "/v1", "FRONTEND_URL=https://" + frontend,
         "GUEST_COOKIE_NAME=__session", "MICROGREENS_CATALOGUE_WRITES=disabled",
         "GUEST_COOKIE_CROSS_SITE=" + ("true" if environment == "test" else "false"),
     ]),
-    "--set-secrets=" + ",".join(key + "=" + secret + ":1" for key, secret in secrets.items()),
+    "--update-secrets=" + ",".join(key + "=" + secret + ":1" for key, secret in secrets.items()),
     "--min-instances=0", "--max-instances=" + ("1" if environment == "test" else "3"),
     "--memory=512Mi", "--cpu=1", "--port=8080", "--timeout=60s",
     "--allow-unauthenticated", "--ingress=all", "--quiet",

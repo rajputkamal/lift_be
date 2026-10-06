@@ -9,8 +9,8 @@ export function workerAuthorized(
   secret = process.env.EMAIL_WORKER_TOKEN,
 ) {
   if (!secret || secret.length < 32 || typeof header !== "string") return false;
-  const expected = Buffer.from(`Bearer ${secret}`),
-    actual = Buffer.from(header);
+  const expected = Buffer.from(`Bearer ${secret}`);
+  const actual = Buffer.from(header);
   return expected.length === actual.length && timingSafeEqual(expected, actual);
 }
 router.post("/internal/email-notifications/process", async (req, res) => {
@@ -25,15 +25,13 @@ router.post("/internal/email-notifications/process", async (req, res) => {
     const deadline = Date.now() + 35000;
     let processed = 0;
     for (let i = 0; i < 20 && Date.now() < deadline; i++) {
-      let found = false;
-      for (const [Model, field] of [[GuestOrder, "emailNotification"]]) {
-        if (Date.now() >= deadline) break;
-        if (await processNotification(Model, field, config)) {
-          found = true;
-          processed++;
-        }
-      }
+      const found = await processNotification(
+        GuestOrder,
+        "emailNotification",
+        config,
+      );
       if (!found) break;
+      processed++;
     }
     return res.json({ success: true, data: { enabled: true, processed } });
   } catch {

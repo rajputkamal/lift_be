@@ -1,6 +1,15 @@
 import { randomUUID } from "node:crypto";
 import { emailConfig, recipientAllowed } from "./config.js";
 import { orderEmail } from "./templates.js";
+import { sendEmail } from "./resend.js";
+
+export { sendEmail } from "./resend.js";
+
+const LEASE_DURATION_MS = 60_000;
+const IDEMPOTENCY_WINDOW_MS = 23 * 60 * 60 * 1_000;
+const MAX_RETRY_DELAY_MS = 60 * 60 * 1_000;
+const SAFE_PROVIDER_ERROR =
+  /^provider_(http_\d{3}|not_configured|outcome_unknown)$/;
 
 export function notification(type, id, recipient, config = emailConfig()) {
   const allowed = config.enabled && recipientAllowed(recipient, config);
@@ -13,50 +22,6 @@ export function notification(type, id, recipient, config = emailConfig()) {
     nextAttemptAt: new Date(),
     lastError: allowed ? undefined : "disabled_or_recipient_restricted",
   };
-}
-
-export async function sendEmail(payload, eventKey, config, fetchImpl = fetch) {
-  if (!config.enabled || !recipientAllowed(payload.to[0], config))
-    return { suppressed: true };
-  if (!config.apiKey)
-    throw Object.assign(new Error("provider_not_configured"), {
-      code: "provider_not_configured",
-    });
-  let response;
-  try {
-    response = await fetchImpl("https://api.resend.com/emails", {
-      method: "POST",
-      signal: AbortSignal.timeout(15000),
-      headers: {
-        Authorization: `Bearer ${config.apiKey}`,
-        "Content-Type": "application/json",
-        "Idempotency-Key": eventKey,
-      },
-      body: JSON.stringify(payload),
-    });
-  } catch {
-    throw Object.assign(new Error("provider_outcome_unknown"), {
-      code: "provider_outcome_unknown",
-    });
-  }
-  if (!response.ok) {
-    const code = `provider_http_${response.status}`;
-    throw Object.assign(new Error(code), {
-      code,
-      permanent: [400, 401, 403, 404, 422].includes(response.status),
-    });
-  }
-  let result;
-  try {
-    result = await response.json();
-  } catch {
-    /* Unknown acceptance; retry same key. */
-  }
-  if (typeof result?.id !== "string" || !result.id.length)
-    throw Object.assign(new Error("provider_outcome_unknown"), {
-      code: "provider_outcome_unknown",
-    });
-  return { id: result.id };
 }
 
 // Mongo atomically claims one embedded outbox. Permanent records retain stable event keys.
@@ -87,14 +52,14 @@ export async function processNotification(
       $set: {
         [`${field}.status`]: "sending",
         [`${field}.leaseToken`]: token,
-        [`${field}.leaseUntil`]: new Date(now.valueOf() + 60000),
+        [`${field}.leaseUntil`]: new Date(now.valueOf() + LEASE_DURATION_MS),
       },
       $inc: { [`${field}.attempts`]: 1 },
     },
     { new: true },
   );
   if (!row) return false;
-  const n = row[field];
+  const entry = row[field];
   const filter = {
     _id: row._id,
     [`${field}.leaseToken`]: token,
@@ -109,7 +74,7 @@ export async function processNotification(
         ]),
       ),
     });
-  if (!recipientAllowed(n.recipient, config)) {
+  if (!recipientAllowed(entry.recipient, config)) {
     await finish({ status: "suppressed", lastError: "recipient_restricted" });
     return true;
   }
@@ -119,21 +84,23 @@ export async function processNotification(
   }
   // A timeout/crash may have occurred after provider acceptance. Never replay outside
   // the provider's 24-hour dedup window; use a conservative 23-hour local cutoff.
-  if (n.firstAttemptAt && now - n.firstAttemptAt >= 23 * 3600000) {
+  if (
+    entry.firstAttemptAt &&
+    now - entry.firstAttemptAt >= IDEMPOTENCY_WINDOW_MS
+  ) {
     await finish({ status: "review", lastError: "idempotency_window_elapsed" });
     return true;
   }
-  const template = orderEmail(row);
-  const payload = n.payload || {
-    ...template,
-    to: [n.recipient],
+  const payload = entry.payload || {
+    ...orderEmail(row),
+    to: [entry.recipient],
     from: config.orderFrom,
     reply_to: config.orderReply,
   };
   // Freeze the exact payload before the first provider call, including sender config.
-  await finish({ payload, firstAttemptAt: n.firstAttemptAt || now });
+  await finish({ payload, firstAttemptAt: entry.firstAttemptAt || now });
   try {
-    const result = await sendEmail(payload, n.eventKey, config, fetchImpl);
+    const result = await sendEmail(payload, entry.eventKey, config, fetchImpl);
     await finish(
       result.suppressed
         ? { status: "suppressed" }
@@ -147,13 +114,15 @@ export async function processNotification(
   } catch (err) {
     await finish({
       status: err.permanent ? "failed" : "retry",
-      lastError: /^provider_(http_\d{3}|not_configured|outcome_unknown)$/.test(
-        err.code || "",
-      )
+      lastError: SAFE_PROVIDER_ERROR.test(err.code || "")
         ? err.code
         : "provider_outcome_unknown",
       nextAttemptAt: new Date(
-        Date.now() + Math.min(3600000, 60000 * 2 ** Math.min(n.attempts, 6)),
+        Date.now() +
+          Math.min(
+            MAX_RETRY_DELAY_MS,
+            LEASE_DURATION_MS * 2 ** Math.min(entry.attempts, 6),
+          ),
       ),
     });
   }

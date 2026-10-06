@@ -2,7 +2,7 @@
   "info": {
     "name": "Grower MVP — CRUD, guest orders and Razorpay Test Mode",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": "Run requests in number order. Read docs/grower-postman-guide.md. The collection stores IDs and uses the Postman cookie jar for guest orders."
+    "description": "Run requests in number order. Read READMe.md for setup and frontend integration. The collection stores IDs and uses the Postman cookie jar for guest orders."
   },
   "variable": [
     {
